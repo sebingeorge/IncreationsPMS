@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "EnquiryBooking";
+}
+
+
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Enquiry Booking</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Client</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Contact No</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Email</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Location</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <label>Enquiry Details</label>
+            <textarea class="form_input text-area"></textarea>
+        </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                <button type="button" class="form-button right">Save</button>
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+            </div>
+
+        </div>
+    </div>
+
+
+<script>
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+</script>

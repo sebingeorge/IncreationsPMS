@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewBag.Title = "PurchaseIndent";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Purchase Indent</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Indent No.</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+
+                <div class="col-md-6">
+                    <label>Requsted by</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+        </div>
+
+        
+
+
+    </div>
+
+
+    
+
+    <hr />
+
+
+    <div class="table-responsive scroll2">
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="7%">Item Code</th>
+                    <th width="20%">Item Name</th>
+                    <th width="20%">Category</th>
+                    <th width="30%">Description</th>
+                    <th width="7%" class="text-right">Qty</th>
+                    <th width="7%">UoM</th>
+                    <th width="9%">Required Date</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>10001</td>
+                    <td>Inerior Item</td>
+                    <td>Category</td>
+                    <td>Description</td>
+                    <td class="text-right">5</td>
+                    <td>Nos</td>
+                    <td>10-09-2016</td>
+
+
+
+                </tr>
+
+
+
+                <tr>
+
+                    <td>10002</td>
+                    <td>Inerior Item</td>
+                    <td>Category</td>
+                    <td>Description</td>
+                    <td class="text-right">16</td>
+                    <td>Nos</td>
+                    <td>11-11-2016</td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>10003</td>
+                    <td>Inerior Item</td>
+                    <td>Category</td>
+                    <td>Description</td>
+                    <td class="text-right">45</td>
+                    <td>Nos</td>
+                    <td>12-11-2016</td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>10004</td>
+                    <td>Inerior Item</td>
+                    <td>Category</td>
+                    <td>Description</td>
+                    <td class="text-right">45</td>
+                    <td>Nos</td>
+                    <td>11-11-2016</td>
+
+
+
+
+
+                </tr>
+
+
+
+
+            </tbody>
+
+        </table>
+        
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row form-group">
+
+
+
+                <div class="col-md-4">
+                    <label>Indent Type</label>
+                    <select class="form_input">
+                        <option value="">Emergency</option>
+                        <option value="">Normal</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Prefered Vendor</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+
+            </div>
+        </div>
+        
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label>Special Remarks</label>
+            <textarea class="form_input text-area"></textarea>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
+            <button type="button" class="form-button right">Print</button>
+            <button type="button" class="form-button right">Save</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+<script>
+    function Previous() {
+        var url = '@Url.Action("PreviousPurchaseIndent", "Purchase")'
+        window.location = url;
+    }
+
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+</script>

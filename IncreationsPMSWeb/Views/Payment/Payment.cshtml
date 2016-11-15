@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+}
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Payment</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>P No.</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+
+                <div class="col-md-12">
+                    <label>Supplier</label>
+                    <select class="form_input">
+                        <option value="">Select Supplier</option>
+                        <option value="">Supplier 1</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="row form-group">
+
+                <div class="col-md-6">
+                    <label>Product</label>
+                    <select class="form_input">
+                        <option value="">Product 1</option>
+                        <option value="">Product 2</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Type</label>
+                    <select class="form_input">
+                        <option value="">Type 1</option>
+                        <option value="">Type 2</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-3">
+
+            <div class="row form-group">
+
+                <div class="col-md-6">
+                    <label>Total Amount</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>Amount</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label>Special Remarks</label>
+            <textarea class="form_input text-area"></textarea>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
+            <button type="button" class="form-button right">Print</button>
+            <button type="button" class="form-button right">Save</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+<script>
+    function Previous() {
+        var url = '@Url.Action("PreviousPayment", "Payment")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+</script>
+
+
+

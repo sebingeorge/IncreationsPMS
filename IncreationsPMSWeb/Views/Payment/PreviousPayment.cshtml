@@ -1,0 +1,275 @@
+﻿
+@{
+    ViewBag.Title = "PreviousPayment";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Previous Payable</h1>
+    </div>
+
+    <div class="row">
+
+
+
+        <div class="col-md-3">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <label>Supplier</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr />
+
+
+
+    <div class="table-responsive scroll3">
+        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="2%">#</th>
+                    <th width="7%">Date</th>
+                    <th width="70%">Supplier</th>
+                    <th width="7%" class="text-right">Amount</th>
+                    <th width="7%" class="text-center">Edit</th>
+                    <th width="7%" class="text-center">Delete</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">2500</td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+
+
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">3500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">1500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">3200</td>
+                    <td></td>
+                    <td></td>
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">4500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">5500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">5500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">4500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">5500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">6500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">5900</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">8500</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">9000</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>01-10-2016</td>
+                    <td>United</td>
+                    <td class="text-right">8800</td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-8 col-md-4">
+            <button type="button" class="form-button right" onclick="Proceed()">Add</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+<script>
+    function Proceed() {
+        var url = '@Url.Action("Payment", "Payment")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>

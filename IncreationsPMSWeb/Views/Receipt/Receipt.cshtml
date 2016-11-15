@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "AdvanceCollecting";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Receipt</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Customer</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Rate</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>Amount</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        
+
+
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="table-responsive scroll2 col-md-6">
+            <table class="table table-bordered" id="tab_logic">
+                <thead>
+                    <tr class="grid_heading cheque">
+                        <th>Cheque No</th>
+                        <th>Cheque Date</th>
+                        <th>Bank Name</th>
+                        <th>Cheque Amount</th>
+                        <th>PDC Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+
+                        <td><input type="text" class="form_input" /></td>
+                        <td><input type="text" class="form_input" /></td>
+                        <td><input type="text" class="form_input" /></td>
+                        <td><input type="text" class="form_input" /></td>
+                        <td><input type="text" class="form_input" /></td>
+                        <td><img src="../Content/images/Plus.png" /></td>
+
+                    </tr>
+
+
+
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
+            <button type="button" class="form-button right">Save</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+</div>
+<script>
+    function Previous() {
+        var url = '@Url.Action("PreviousReceipt", "Receipt")'
+        window.location = url;
+    }
+
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+</script>

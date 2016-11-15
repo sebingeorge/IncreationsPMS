@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ItemGroup";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Item Group</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Name</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Short Name</label>
+                    <input type="text" class="form_input half" />
+                </div>
+
+                <div class="col-md-3">
+                    <label>Item Category</label>
+                    <select class="form_input">
+                        <option value="">Finished Goods</option>
+                        <option value="">Semi Finished</option>
+                        <option value="">Row Material</option>
+                        <option value="">Packing Materials</option>
+                        <option value="">Consumable</option>
+                        <option value="">Engineers</option>
+                        <option value="">Others</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button right">Save</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+</div>
+<script>
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>

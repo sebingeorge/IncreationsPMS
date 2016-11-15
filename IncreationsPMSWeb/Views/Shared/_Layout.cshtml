@@ -3,11 +3,64 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Increations ERP Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="nav nav-pills nav-stacked">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#first-level-1"><span><img src="~/Content/Images/icon/admin.png" /></span>Admin<span class="caret arrow"></span></a>
+                    <div id="first-level-1" class="collapse">
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Customer","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/customer.png" /></span>Customer</a>
+                                <a href="@Url.Action("SubContractor","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Sub Contractor</a>
+                                <a href="@Url.Action("Item","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/customer.png" /></span>Item</a>
+                                <a href="@Url.Action("ItemGroup","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Item Group</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="#" data-toggle="collapse" data-target="#first-level-2"><span><img src="~/Content/Images/icon/enquiry.png" /></span>Enquiry Booking<span class="caret arrow"></span></a>
+                    <div id="first-level-2" class="collapse">
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("EnquiryBooking", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/enquiry.png" /></span>Enquiry Booking</a>
+                                <a href="@Url.Action("PendingEnquiryStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/enquirystatus.png" /></span>Enquiry Status Update</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <a href="@Url.Action("BOQPreparing", "BOQ")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/boq.png" /></span>BOQ Preparing</a>
+                    <a href="@Url.Action("Purchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/purchaseindent.png" /></span>Purchase Indent</a>
+                    <a href="@Url.Action("PendingPurchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-5"><span><img src="~/Content/Images/icon/purchaseorder.png" /></span>Purchase Order</a>
+                    <a href="@Url.Action("PendingPurchaseOrder", "Purchase")" data-toggle="collapse" data-target="#first-level-6"><span><img src="~/Content/Images/icon/grn.png" /></span>GRN</a>
+                    <a href="@Url.Action("Invoice", "Invoice")" data-toggle="collapse" data-target="#first-level-7"><span><img src="~/Content/Images/icon/invoice.png" /></span>Invoice</a>
+                    <a href="@Url.Action("Receipt", "Receipt")" data-toggle="collapse" data-target="#first-level-8"><span><img src="~/Content/Images/icon/receivable.png" /></span>Receipt</a>
+                    <a href="@Url.Action("Payment", "Payment")" data-toggle="collapse" data-target="#first-level-9"><span><img src="~/Content/Images/icon/payable.png" /></span>Payment</a>
+                    <a href="@Url.Action("Estimate", "Estimate")" data-toggle="collapse" data-target="#first-level-10"><span><img src="~/Content/Images/icon/estimate.png" /></span>Estimate</a>
+                    <a href="@Url.Action("DailyActivityreport", "DailyActivityReport")" data-toggle="collapse" data-target="#first-level-11"><span><img src="~/Content/Images/icon/dailyactivityreport.png" /></span>Daily Activity Report</a>
+                    <a href="@Url.Action("ReceivableReport", "Receipt")" data-toggle="collapse" data-target="#first-level-12"><span><img src="~/Content/Images/icon/receivable.png" /></span>Receivable Report</a>
+                    <a href="@Url.Action("PayableReport", "Payment")" data-toggle="collapse" data-target="#first-level-13"><span><img src="~/Content/Images/icon/payable.png" /></span>Payable Report</a>
+
+
+
+            </ul>
+        </div>
+
+    </div>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -16,27 +69,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+            <a href="#menu-toggle" class="menu-icon" id="menu-toggle"></a>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index", "Home")"><img src="~/Content/images/logo.png" width="40" /></a></li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+            <p>&copy; @DateTime.Now.Year -  Increations Application</p>
+        </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </body>
 </html>

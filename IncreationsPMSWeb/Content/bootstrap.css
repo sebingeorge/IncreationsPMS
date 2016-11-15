@@ -383,10 +383,10 @@ img {
 }
 
 hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
   border: 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #8d8b8b;
 }
 
 .sr-only {
@@ -1103,6 +1103,7 @@ pre code {
   }
   .col-md-3 {
     width: 25%;
+    margin-bottom:-10px;
   }
   .col-md-4 {
     width: 33.33333333333333%;
@@ -1424,10 +1425,10 @@ th {
 .table thead > tr > td,
 .table tbody > tr > td,
 .table tfoot > tr > td {
-  padding: 8px;
+  /*padding: 8px;*/
   line-height: 1.428571429;
-  vertical-align: top;
-  border-top: 1px solid #dddddd;
+  vertical-align: /*top*/ initial;
+  /*border-top: 1px solid #dddddd;*/
 }
 
 .table thead > tr > th {
@@ -1654,7 +1655,9 @@ legend {
 label {
   display: inline-block;
   margin-bottom: 5px;
-  font-weight: bold;
+  width:100%;
+  display:inline-block;
+
 }
 
 input[type="search"] {
@@ -1753,7 +1756,7 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .radio,
@@ -4007,8 +4010,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav .caret {
-  border-top-color: #428bca;
-  border-bottom-color: #428bca;
+  border-top-color: /*#428bca*/#fff;
+  border-bottom-color: /*#428bca*/#fff;
 }
 
 .nav a:hover .caret {
@@ -4245,7 +4248,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
-  line-height: 20px;
+  line-height: 37px;
 }
 
 @media (max-width: 767px) {
@@ -4280,8 +4283,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    /*padding-top: 15px;
+    padding-bottom: 15px;*/
   }
 }
 

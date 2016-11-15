@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "Projects";
+}
+
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Projects</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Client</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Contact No</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Email</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Address 1</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Address 2</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Address 3</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+     </div>
+
+
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <label>Project Enquiry</label>
+                <textarea class="form_input text-area"></textarea>
+            </div>
+
+        </div>
+    <hr />
+    <div class="table-responsive scroll2">
+        <table class="table table-bordered lightblue" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="2%">#</th>
+                    <th width="35%">Milestone Name</th>
+                    <th width="7%">Start</th>
+                    <th width="7%">End</th>
+                    <th width="10%">Status</th>
+                    <th width="19%">Labour</th>
+                    <th width="10%" class="text-right">Material Budget</th>
+                    <th width="10%" class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+                <tr>
+                    <td>101</td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td class="text-right"><input type="text" class="form_input" /></td>
+                    <td class="text-right"><input type="text" class="form_input" /></td>
+                </tr>
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+        <hr />
+    <div class="table-responsive scroll2">
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="2%">#</th>
+                    <th width="57%">Task</th>
+                    <th width="7%">Start</th>
+                    <th width="7%">End</th>
+                    <th width="20%">Employee</th>
+                    <th width="7%" class="text-right">Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>101</td>
+                    <td>Kitchen</td>
+                    <td>20-11-2016</td>
+                    <td>02-01-2017</td>
+                    <td>Raj</td>
+                    <td class="text-right">8 Hours</td>
+
+
+
+                </tr>
+
+
+
+                <tr>
+                    <td>102</td>
+                    <td>Kitchen</td>
+                    <td>20-11-2016</td>
+                    <td>02-01-2017</td>
+                    <td>Raj</td>
+                    <td class="text-right">9 Hours</td>
+                </tr>
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+        
+
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+              
+                <button type="button" class="form-button right">Save</button>
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+
+            </div>
+
+        </div>
+    </div>
+
+<script>
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>

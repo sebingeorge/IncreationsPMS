@@ -1,8 +1,23 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background:/*url(../Content/images/Back.png) repeat-x #cdcdcd*/#f5ffcf;
+    font-family:Tahoma;
+    font-size:12px;
+    color:#231f20;
 }
-
+.body 
+{
+    background: url(../Content/images/Interior.jpg) no-repeat #f8f8f8; 
+    width:100%;
+    height:678px;
+}
+.body1 
+{
+    background: url(../Content/images/Interior1.jpg) repeat-x #f8f8f8; 
+    width:100%;
+    height:678px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -20,5 +35,582 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
+.outer-login 
+{
+    height:auto;
+    background-color:#ffffff;
+    color:#b8baba;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    position:absolute;
+    right:106px;
+    border:1px solid #cdcbcb;
+
+}
+    .outer-login h2 {
+        font-size:18px;
+        color:#585a59;
+        text-align:center;
+        height:52px;
+        line-height:52px;
+        background: url(../Content/images/login-head.png) repeat-x;
+        border-bottom:1px solid #c2c3c5; 
+        margin:0;
+        border-radius:4px 4px 0 0;
+        -moz-border-radius:4px 4px 0 0;
+        margin-bottom:20px;
+
+
+    }
+
+    .outer-login .form-control 
+    {
+        width:100%;
+        height:35px;
+        border-radius:3px;
+        -moz-border-radius:3px;
+    }
+
+    .outer-login input, select, textarea 
+    {
+        max-width:100%;
+    }
+.text-outer 
+{
+    border:3px solid #f1f5f8;
+}
+.outer-login .btn 
+{
+    background: url(../Content/images/btn.jpg) repeat-x;
+    height:29px;
+    line-height:15px;
+    font-size:14px;
+    color:#fff;
+    border-radius:15px;
+    -moz-border-radius:15px;
+    padding-left:15px;
+    padding-right:15px;
+    font-weight:bold;
+
+}
+    .outer-login .btn:hover 
+    {
+    border-radius:35px;
+    -moz-border-radius:35px
+    }
+    .menu-icon
+    {
+     background: url(../Content/images/icon_nav.png) no-repeat;
+     width:44px;
+     height:34px;
+     position:fixed;
+     left:34px;
+     top:13px;
+    }
+
+.content-in 
+{
+    border-radius:5px;
+    -moz-border-radius:5px;
+    background-color:#fff;
+    margin-top:30px;
+    /*border:1px solid #fc7da0;*/
+    box-shadow: 1px 0 3px #858383;
+    /*min-height:300px;*/
+}
+
+    .content-in h1 
+    {
+        background:/*#353737*/#ed1651;
+        width:100%;
+        height:40px;
+        line-height:40px;
+        border-radius:5px 5px 0 0;
+       -moz-border-radius:5px 5px 0 0;
+       font-weight:bold;
+       color:#fff;
+       text-transform:uppercase;
+       font-size:12px;
+       margin:0;
+       padding-left:15px;
+       margin-bottom:8px;
+    
+    }
+
+    .content-in h2
+    {
+       
+       color:#ed1651;
+       font-size:12px;
+       font-weight:bold;
+       margin-top:0;
+       margin-bottom:5px;
+       text-transform:uppercase;
+    }
+
+        .content-in h3
+    {
+       color:#000;
+       font-size:12px;
+       font-style:normal;
+       margin-bottom: 5px;
+       margin-top: 0;
+    }
+.navbar-nav img 
+{
+    margin:0;
+    padding:0;
+}
+
+.form_input 
+{
+    background: /*url(../Content/images/form-text.jpg) repeat-x*/#fff;
+    height:18px;
+    line-height:18px;
+    width:100%;
+    border:1px solid #a1b943;
+    color:#313c04;
+    margin-bottom:6px;
+    font-size:11px;
+    border-radius:2px;
+    -moz-border-radus:2px;
+}
+.text-area 
+{
+    height:40px;
+}
+.blue 
+{
+    font-weight:bold;
+    color:#10a4d4;
+}
+
+.form-button
+{
+    background: #231f20;
+    height:27px;
+    line-height:15px;
+    font-size:15px;
+    color:#fff;
+    border-radius:6px;
+    -moz-border-radius:6px;
+    padding-left:5px;
+    padding-right:5px;
+    border:0;
+    margin-left:10px;
+    min-width:80px;
+    margin-bottom:10px;
+
+}
+    .form-button .btn:hover 
+    {
+     color:#75d2f0;
+    }
+    .Select
+{
+    background: hsl(345, 6%, 13%) none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 3px;
+    color: hsl(0, 0%, 100%);
+    font-size: 12px;
+    height: 18px;
+    min-width: 60px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+    .Select .btn:hover 
+    {
+     color:#75d2f0;
+    }
+
+    .create
+{
+    background: url(../Content/images/btn.jpg) repeat-x;
+    height:18px;
+    font-size:12px;
+    color:#fff;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    padding-left:7px;
+    padding-right:7px;
+    border:0;
+
+}
+    .create .btn:hover 
+    {
+     color:#75d2f0;
+    }
+
+.right 
+{
+    float:right;
+}
+.main-check 
+{
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+.main-check1 
+{
+    margin-bottom:3px;
+    margin-top: 0;
+}
+.check 
+{
+    display:unset;
+    margin-right: 11px;
+
+}
+.check1 
+{
+    display:unset;
+    margin-right: 1px;
+
+}
+.nzero 
+{
+    width:88%;
+}
+.half 
+{
+    width:50%;
+}
+.half-h 
+{
+    width:25%;
+}
+.content-in .col-md-0
+{
+    margin:0;
+}
+.content-in .grid_heading
+{
+    /*background-color:#1da2cd !important;*/
+    /*height:20px;*/
+}
+table thead tr th
+{
+    height:18px;
+}
+
+.content-in .footer th 
+{
+     border-radius:0 !important;
+    -moz-border-radius:0 !important;
+}
+
+.content-in .grid_heading th 
+{
+    border-radius:5px 5px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    color:#fff;
+    background:#10a4d4;
+    height:18px;
+    padding-left:5px;
+    padding-right:5px;
+}
+    .content-in .grid_heading th table
+    {
+        margin:0;
+    }
+    .content-in .grid_heading td table,.table
+    {
+        margin:0;
+        margin-bottom:0px;
+    }
+        }
+    .content-in .grid_heading td td
+    {
+        border-bottom:0px;
+    }
+        .content-in .grid_heading th th,.content-in .grid_heading td th 
+    {
+
+        border-radius:0;
+    }
+        .content-in .grid_heading th.span{
+        padding-left:0px;
+        padding-right:0px;
+        font-size:11px;
+        font-style:normal;
+        }
+        .content-in td.span{
+        padding-left:0px;
+        padding-right:0px;
+        font-size:11px;
+        font-style:normal;
+        }
+
+.content-in td 
+{
+    padding-left:5px;
+    padding-right:5px;
+    color:#5a5c5c;
+}
+.photo 
+{
+    width:80px;
+    height:90px;
+    background-color:#696969;
+    border-radius: 5px;
+    height: 91px;
+    padding:1px;
+    width: 94px;
+}
+.photo img
+    {
+    border-radius:5px;
+    -moz-border-radius:5px;
+
+    }
+.mtop 
+{
+    margin-top:-20px;
+}
+.mtop1 
+{
+    margin-top:10px;
+}
+.scroll1 
+{
+    overflow:auto;
+    height:183px;
+}
+.scroll2 
+{
+    overflow:auto;
+    max-height:183px;
+}
+.scroll3 
+{
+    overflow:auto;
+    max-height:360px;
+}
+.rightscroll 
+{
+    max-width: 15%;
+    min-width: 100%;
+    overflow:scroll;
+}
+.cheque 
+{
+    font-size:11px;
+}
+
+
+.lightblue 
+{
+    background-color:#ade9fc;
+}
+
+.lightblue .grid_heading
+{
+    background-color:#ade9fc !important;
+}
+
+.table_in 
+{
+    width:100%;
+}
+.table_in tr 
+{
+    margin:0;
+    border-top:0px;
+}
+
+.filter 
+{
+   position: absolute;
+    right: 127px;
+    top: 125px;
+
+}
+    .filter img 
+    {
+    border-radius:5px;
+    -moz-border-radius:5px;
+    }
+
+    /*sidebar*/
+
+            .sidebar-nav li {
+            display: block;
+        }
+
+        .sidebar-nav ul {
+            padding-left: 15px;
+        }
+
+        /*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    margin-top:-39px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top:-15px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+     font-size: 12px;
+    font-weight: bold;
+      border-top: 1px solid;
+
+}
+.sidebar-nav li img {
+    padding-right: 10px;
+}
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .menu-icon
+    {
+        left:6px !important;
+    }
+        .body1 
+{
+    background: url(../Content/images/Interior1.jpg) repeat #f8f8f8 !important; 
+    width:100%;
+}
+}
+
+@media (min-width: 320px) and (max-width: 500px) {
+
+    .outer-login
+    {
+        left:14px !important;
+        right:14px !important;
+    }
+    .outer-login .btn 
+    {
+        float:right !important;
+     }
+    .body1 
+{
+    background: url(../Content/images/Interior1a.jpg) repeat-y #f8f8f8 !important; 
+    width:100%;
+}
+}
+

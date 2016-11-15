@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "EnquiryStatus";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Enquiry Updating Status</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Client</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Contact No</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Email</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Location</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <label>Enquiry Details</label>
+            <textarea class="form_input text-area"></textarea>
+        </div>
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="table-responsive  col-md-offset-7 col-md-5">
+            <table class="table table-bordered" id="tab_logic">
+
+                <tbody>
+
+                    <tr>
+
+                        <td><h2>Status Update</h2></td>
+                        <td class="main-check">
+                            <input type="checkbox" name="" value="" class="check"> Profile Sending
+                            <input type="checkbox" name="" value="" class="check"> Offer Sending
+                            <input type="checkbox" name="" value="" class="check"> Layout Receiving
+                        </td>
+
+
+
+                    </tr>
+
+
+
+
+                </tbody>
+
+            </table>
+        </div>
+
+        </div>
+
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                <button type="button" class="form-button right" onclick="Exit()">Cancel</button>
+                <button type="button" class="form-button right" onclick="Accept()">Accept Offer</button>
+
+            </div>
+
+        </div>
+    </div>
+<script>
+    function Accept() {
+        var url = '@Url.Action("Projects", "EnquiryBooking")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+</script>
+
+
+

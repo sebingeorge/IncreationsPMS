@@ -121,8 +121,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BOQController.cs" />
+    <Compile Include="Controllers\DailyActivityReportController.cs" />
+    <Compile Include="Controllers\EnquiryBookingController.cs" />
+    <Compile Include="Controllers\EstimateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -132,6 +141,44 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\back.png" />
+    <Content Include="Content\images\btn.jpg" />
+    <Content Include="Content\images\icon\admin.png" />
+    <Content Include="Content\images\icon\boq.png" />
+    <Content Include="Content\images\icon\customer.png" />
+    <Content Include="Content\images\icon\dailyactivityreport.png" />
+    <Content Include="Content\images\icon\endorsement.png" />
+    <Content Include="Content\images\icon\enquiry.png" />
+    <Content Include="Content\images\icon\enquirystatus.png" />
+    <Content Include="Content\images\icon\estimate.png" />
+    <Content Include="Content\images\icon\filter.png" />
+    <Content Include="Content\images\icon\finance.png" />
+    <Content Include="Content\images\icon\grn.png" />
+    <Content Include="Content\images\icon\insurancecompany.png" />
+    <Content Include="Content\images\icon\insuranceproduct.png" />
+    <Content Include="Content\images\icon\invoice.png" />
+    <Content Include="Content\images\icon\meetingschedule.png" />
+    <Content Include="Content\images\icon\mis.png" />
+    <Content Include="Content\images\icon\newpolicy.png" />
+    <Content Include="Content\images\icon\operation.png" />
+    <Content Include="Content\images\icon\payable.png" />
+    <Content Include="Content\images\icon\payablereport.png" />
+    <Content Include="Content\images\icon\policyrenewal.png" />
+    <Content Include="Content\images\icon\purchaseindent.png" />
+    <Content Include="Content\images\icon\purchaseorder.png" />
+    <Content Include="Content\images\icon\receivable.png" />
+    <Content Include="Content\images\icon\receivablereport.png" />
+    <Content Include="Content\images\icon\sales-Manager.png" />
+    <Content Include="Content\images\icon\salesachivementreport.png" />
+    <Content Include="Content\images\icon\salestarget.png" />
+    <Content Include="Content\images\icon\subcontractor.png" />
+    <Content Include="Content\images\icon_nav.png" />
+    <Content Include="Content\images\interior.jpg" />
+    <Content Include="Content\images\interior1.jpg" />
+    <Content Include="Content\images\interior1a.jpg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\photo.jpg" />
+    <Content Include="Content\images\plus.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -167,10 +214,39 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Admin\Customer.cshtml" />
+    <Content Include="Views\Admin\Item.cshtml" />
+    <Content Include="Views\Admin\ItemGroup.cshtml" />
+    <Content Include="Views\Admin\SubContractor.cshtml" />
+    <Content Include="Views\BOQ\BOQPreparing.cshtml" />
+    <Content Include="Views\DailyActivityReport\DailyActivityReport.cshtml" />
+    <Content Include="Views\DailyActivityReport\PreviousDailyActivityReport.cshtml" />
+    <Content Include="Views\EnquiryBooking\EnquiryBooking.cshtml" />
+    <Content Include="Views\EnquiryBooking\EnquiryStatus.cshtml" />
+    <Content Include="Views\EnquiryBooking\PendingEnquiryStatus.cshtml" />
+    <Content Include="Views\EnquiryBooking\Projects.cshtml" />
+    <Content Include="Views\Estimate\Estimate.cshtml" />
+    <Content Include="Views\Invoice\Invoice.cshtml" />
+    <Content Include="Views\Invoice\PreviousInvoice.cshtml" />
+    <Content Include="Views\Payment\PayableReport.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\Payment\PreviousPayment.cshtml" />
+    <Content Include="Views\Purchase\GRN.cshtml" />
+    <Content Include="Views\Purchase\PendingPurchaseIndent.cshtml" />
+    <Content Include="Views\Purchase\PendingPurchaseOrder.cshtml" />
+    <Content Include="Views\Purchase\PreviousGRN.cshtml" />
+    <Content Include="Views\Purchase\PreviousPurchaseIndent.cshtml" />
+    <Content Include="Views\Purchase\PreviousPurchaseOrder.cshtml" />
+    <Content Include="Views\Purchase\PurchaseIndent.cshtml" />
+    <Content Include="Views\Purchase\PurchaseOrder.cshtml" />
+    <Content Include="Views\Receipt\PreviousReceipt.cshtml" />
+    <Content Include="Views\Receipt\Receipt.cshtml" />
+    <Content Include="Views\Receipt\ReceivableReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Collecting\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
