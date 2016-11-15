@@ -10,7 +10,7 @@ namespace IncreationsPMSDAL
 {
     public class UserRepository: BaseRepository
     {
-        static string dataConnection = GetConnectionString("CibConnection");
+        static string dataConnection = GetConnectionString("InCreationsConnection");
         public int InsertUser(User user)
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
