@@ -1,0 +1,315 @@
+﻿@{
+    ViewBag.Title = "PreviousItem";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Previous Item</h1>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-md-2">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>From</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>To</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Item Name</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr />
+
+
+
+    <div class="table-responsive scroll3">
+        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="26%">Item</th>
+                    <th width="30%">Category</th>
+                    <th width="30%">Item Group</th>
+                    <th width="7%" class="text-center">Edit</th>
+                    <th width="7%" class="text-center">Delete</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+
+
+
+                <tr>
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>interiors item</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>wood</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+
+                <tr>
+
+
+                    <td>Table</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <td>Cair</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+
+
+
+                </tr>
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-8 col-md-4">
+            <button type="button" class="form-button right" onclick="Proceed()">Add</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+<script>
+    function Proceed() {
+        var url = '@Url.Action("Item", "Admin")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>

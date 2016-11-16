@@ -17,7 +17,15 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult PreviousCustomer()
+        {
+            return View();
+        }
         public ActionResult Item()
+        {
+            return View();
+        }
+        public ActionResult PreviousItem()
         {
             return View();
         }
@@ -25,7 +33,15 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult PreviousItemGroup()
+        {
+            return View();
+        }
         public ActionResult SubContractor()
+        {
+            return View();
+        }
+        public ActionResult PreviousSubContractor()
         {
             return View();
         }

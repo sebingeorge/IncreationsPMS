@@ -250,6 +250,11 @@
     <Content Include="Views\Receipt\PreviousReceipt.cshtml" />
     <Content Include="Views\Receipt\Receipt.cshtml" />
     <Content Include="Views\Receipt\ReceivableReport.cshtml" />
+    <Content Include="Views\Invoice\PendingProjects.cshtml" />
+    <Content Include="Views\Admin\PreviousCustomer.cshtml" />
+    <Content Include="Views\Admin\PreviousSubContractor.cshtml" />
+    <Content Include="Views\Admin\PreviousItem.cshtml" />
+    <Content Include="Views\Admin\PreviousItemGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

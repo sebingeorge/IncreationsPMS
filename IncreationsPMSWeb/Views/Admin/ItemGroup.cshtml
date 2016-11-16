@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="row form-group">
                 <div class="col-md-3">
-                    <label>Name</label>
+                    <label>Item Group Name</label>
                     <input type="text" class="form_input" />
                 </div>
             </div>
@@ -54,6 +54,7 @@
     <div class="row">
         <hr />
         <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
             <button type="button" class="form-button right">Save</button>
             <button type="button" class="form-button right" onclick="Exit()">Exit</button>
         </div>
@@ -61,6 +62,10 @@
     </div>
 </div>
 <script>
+    function Previous() {
+        var url = '@Url.Action("PreviousItemGroup", "Admin")'
+        window.location = url;
+    }
     function Exit() {
         var url = '@Url.Action("index", "home")'
         window.location = url;
