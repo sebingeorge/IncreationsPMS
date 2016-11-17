@@ -36,11 +36,11 @@
                         <ul>
                             <li>
                                 <a href="@Url.Action("EnquiryBooking", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/enquiry.png" /></span>Enquiry Booking</a>
-                                <a href="@Url.Action("PendingEnquiryStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/enquirystatus.png" /></span>Status Update - Project</a>
+                                <a href="@Url.Action("PendingEnquiryStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/enquirystatus.png" /></span>Enquiry Status Update</a>
                             </li>
                         </ul>
                     </div>
-
+                    <a href="@Url.Action("ProjectStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Project Status</a>
                     <a href="@Url.Action("Estimate", "Estimate")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Estimate</a>
                     <a href="@Url.Action("BOQPreparing", "BOQ")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>BOQ Preparing</a>
                     <a href="@Url.Action("Purchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-5"><span><img src="~/Content/Images/icon/purchaseindent.png" /></span>Purchase Indent</a>
@@ -49,9 +49,19 @@
                     <a href="@Url.Action("PendingProjects", "Invoice")" data-toggle="collapse" data-target="#first-level-8"><span><img src="~/Content/Images/icon/invoice.png" /></span>Invoice</a>
                     <a href="@Url.Action("Receipt", "Receipt")" data-toggle="collapse" data-target="#first-level-9"><span><img src="~/Content/Images/icon/receivable.png" /></span>Receipt</a>
                     <a href="@Url.Action("Payment", "Payment")" data-toggle="collapse" data-target="#first-level-10"><span><img src="~/Content/Images/icon/payable.png" /></span>Payment</a>
-                    <a href="@Url.Action("DailyActivityreport", "DailyActivityReport")" data-toggle="collapse" data-target="#first-level-11"><span><img src="~/Content/Images/icon/dailyactivityreport.png" /></span>Daily Activity Report</a>
-                    <a href="@Url.Action("ReceivableReport", "Receipt")" data-toggle="collapse" data-target="#first-level-12"><span><img src="~/Content/Images/icon/receivable.png" /></span>Receivable Report</a>
-                    <a href="@Url.Action("PayableReport", "Payment")" data-toggle="collapse" data-target="#first-level-13"><span><img src="~/Content/Images/icon/payable.png" /></span>Payable Report</a>
+
+
+                    <a href="#" data-toggle="collapse" data-target="#first-level-11"><span><img src="~/Content/Images/icon/dailyactivityreport.png" /></span>Reports<span class="caret arrow"></span></a>
+                    <div id="first-level-11" class="collapse">
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("DailyActivityreport", "Reports")" data-toggle="collapse" data-target="#first-level-1"><span><img src="~/Content/Images/icon/dailyactivityreport.png" /></span>Daily Activity Report</a>
+                                <a href="@Url.Action("ReceivableReport", "Receipt")" data-toggle="collapse" data-target="#first-level-2"><span><img src="~/Content/Images/icon/receivable.png" /></span>Receivable Report</a>
+                                <a href="@Url.Action("PayableReport", "Payment")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/payable.png" /></span>Payable Report</a>
+                                <a href="@Url.Action("MaterialPlanningReport", "Reports")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/dailyactivityreport.png" /></span>Material Planning Report</a>
+                            </li>
+                        </ul>
+                    </div>
 
 
 

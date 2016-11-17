@@ -29,7 +29,7 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
-        public ActionResult PendingProjects()
+        public ActionResult ProjectStatus()
         {
             return View();
         }

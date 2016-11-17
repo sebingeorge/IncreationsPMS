@@ -1,0 +1,394 @@
+﻿@{
+    ViewBag.Title = "MaterialPlanningReport";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Material Planning Report</h1>
+    </div>
+
+    <div class="row">
+
+
+
+        <div class="col-md-3">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <label>Material</label>
+                    <select class="form_input">
+                        <option value="">Material 1</option>
+                        <option value="">Material 2</option>
+                    </select>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <label>Batch</label>
+                    <select class="form_input">
+                        <option value="">Any</option>
+                        <option value="">Non-Batch</option>
+                        <option value="">Batch</option>
+                    </select>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr />
+
+
+
+    <div class="table-responsive scroll3">
+        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="30%">Material</th>
+                    <th width="7%">Part No.</th>
+                    <th width="7%" class="text-right">WR Qty</th>
+                    <th width="7%" class="text-right">Pnd. Iss. Qty</th>
+                    <th width="7%" class="text-right">Min. Stock</th>
+                    <th width="7%" class="text-right">Tot. Req. Qty.</th>
+                    <th width="7%" class="text-right">Curr. Stock</th>
+                    <th width="7%" class="text-right">In transit Qty</th>
+                    <th width="7%" class="text-right">Pnd. PR Qty</th>
+                    <th width="7%" class="text-right">Short/Excess</th>
+                    <th width="7%">UoM</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1001</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+                </tr>
+
+
+
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1002</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1003</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1004</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1005</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+                    <td>Interial Material</td>
+                    <td>1006</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1007</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1008</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1009</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1010</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1011</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+                    <td>Interial Material</td>
+                    <td>1012</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>1013</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>114</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+
+                <tr>
+
+                    <td>Interial Material</td>
+                    <td>115</td>
+                    <td class="text-right">11</td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">2</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">-18</td>
+                    <td class="text-right">-36</td>
+                    <td>Nos</td>
+
+
+
+
+                </tr>
+
+
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-8 col-md-4">
+            <button type="button" class="form-button right">Print</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+<script>
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+</script>
+
+
+

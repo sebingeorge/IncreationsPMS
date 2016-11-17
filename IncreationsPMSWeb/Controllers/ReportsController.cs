@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace IncreationsPMSWeb.Controllers
 {
-    public class DailyActivityReportController : BaseController
+    public class ReportsController : BaseController
     {
         // GET: DailyActivityReport
         public ActionResult Index()
@@ -18,6 +18,10 @@ namespace IncreationsPMSWeb.Controllers
             return View();
         }
         public ActionResult PreviousDailyActivityReport()
+        {
+            return View();
+        }
+        public ActionResult MaterialPlanningReport()
         {
             return View();
         }

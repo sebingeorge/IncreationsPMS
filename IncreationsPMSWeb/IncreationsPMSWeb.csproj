@@ -132,7 +132,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BOQController.cs" />
-    <Compile Include="Controllers\DailyActivityReportController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\EnquiryBookingController.cs" />
     <Compile Include="Controllers\EstimateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -227,8 +227,8 @@
     <Content Include="Views\Admin\ItemGroup.cshtml" />
     <Content Include="Views\Admin\SubContractor.cshtml" />
     <Content Include="Views\BOQ\BOQPreparing.cshtml" />
-    <Content Include="Views\DailyActivityReport\DailyActivityReport.cshtml" />
-    <Content Include="Views\DailyActivityReport\PreviousDailyActivityReport.cshtml" />
+    <Content Include="Views\Reports\DailyActivityReport.cshtml" />
+    <Content Include="Views\Reports\PreviousDailyActivityReport.cshtml" />
     <Content Include="Views\EnquiryBooking\EnquiryBooking.cshtml" />
     <Content Include="Views\EnquiryBooking\EnquiryStatus.cshtml" />
     <Content Include="Views\EnquiryBooking\PendingEnquiryStatus.cshtml" />
@@ -255,6 +255,8 @@
     <Content Include="Views\Admin\PreviousSubContractor.cshtml" />
     <Content Include="Views\Admin\PreviousItem.cshtml" />
     <Content Include="Views\Admin\PreviousItemGroup.cshtml" />
+    <Content Include="Views\Reports\MaterialPlanningReport.cshtml" />
+    <Content Include="Views\EnquiryBooking\ProjectStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
