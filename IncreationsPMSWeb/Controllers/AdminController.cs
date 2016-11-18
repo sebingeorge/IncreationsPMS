@@ -33,6 +33,10 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult ItemSubGroup()
+        {
+            return View();
+        }
         public ActionResult PreviousItemGroup()
         {
             return View();

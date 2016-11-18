@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "ItemSubGroup";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Item SubGroup</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Item SubGroup Name</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Short Name</label>
+                    <input type="text" class="form_input half" />
+                </div>
+
+                <div class="col-md-3">
+                    <label>Item Group</label>
+                    <select class="form_input">
+                        <option value="">Item Group 1</option>
+                        <option value="">Item Group 2</option>
+                        <option value="">Item Group 3</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
+            <button type="button" class="form-button right">Save</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+</div>
+<script>
+    function Previous() {
+        var url = '@Url.Action("PreviousItemGroup", "Admin")'
+        window.location = url;
+    }
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>

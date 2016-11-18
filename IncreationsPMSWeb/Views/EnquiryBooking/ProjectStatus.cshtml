@@ -1,41 +1,51 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ProjectStatus";
 }
 
 
 
+
 <div class="container content-in">
     <div class="row">
-        <h1>project Status</h1>
+        <h1>Project Status</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
 
-        <div class="col-md-2">
-            <div class="row">
-
-                <div class="col-md-6">
-                    <label>From</label>
-                    <input type="text" class="form_input" />
-                </div>
-                <div class="col-md-6">
-                    <label>To</label>
-                    <input type="text" class="form_input" />
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="row">
-
-                <div class="col-md-6">
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
                     <label>Client</label>
                     <input type="text" class="form_input" />
                 </div>
+            </div>
+        </div>
 
-
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Contact No</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Email</label>
+                    <input type="text" class="form_input" />
+                </div>
             </div>
         </div>
 
@@ -44,25 +54,100 @@
 
     </div>
 
+    <div class="row">
 
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Address 1</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Address 2</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Address 3</label>
+                    <input type="text" class="form_input" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <label>Project Enquiry</label>
+            <textarea class="form_input text-area"></textarea>
+        </div>
+
+    </div>
     <hr />
+    <div class="table-responsive scroll2">
+        <table class="table table-bordered lightblue" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="2%">#</th>
+                    <th width="35%">Milestone Name</th>
+                    <th width="7%">Start</th>
+                    <th width="7%">End</th>
+                    <th width="10%">Status</th>
+                    <th width="19%">Labour</th>
+                    <th width="10%" class="text-right">Material Budget</th>
+                    <th width="10%" class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
 
 
 
-    <div class="table-responsive scroll3">
-        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+                <tr>
+                    <td>101</td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td><input type="text" class="form_input" /></td>
+                    <td class="text-right"><input type="text" class="form_input" /></td>
+                    <td class="text-right"><input type="text" class="form_input" /></td>
+
+                </tr>
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <hr />
+    <div class="table-responsive scroll2">
         <table class="table table-bordered" id="tab_logic">
             <thead>
                 <tr class="grid_heading">
                     <th width="2%">#</th>
-                    <th width="7%">Date</th>
-                    <th width="20%">Client</th>
-                    <th width="20%">Milestone Name</th>
+                    <th width="40%">Task</th>
                     <th width="7%">Start</th>
                     <th width="7%">End</th>
-                    <th width="30%">Task</th>
-                    <th width="7%" class="text-center">Select</th>
-
+                    <th width="10%">Status</th>
+                    <th width="20%">Employee</th>
+                    <th width="7%" class="text-right">Completed Hours</th>
+                    <th width="7%" class="text-center">Completed</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,13 +155,14 @@
                 <tr>
 
                     <td>101</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
+                    <td>Kitchen</td>
+                    <td>20-11-2016</td>
+                    <td>02-01-2017</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
+                    <td>Raj</td>
+                    <td class="text-right">8 Hours</td>
+                    <td class="text-center"><input type="checkbox" name="" value="">&nbsp;Yes</td>
+
 
 
                 </tr>
@@ -85,239 +171,14 @@
 
                 <tr>
                     <td>102</td>
-                    <td>02-11-2016</td>
-                    <td>Amazon</td>
+                    <td>Kitchen</td>
+                    <td>20-11-2016</td>
+                    <td>02-01-2017</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
+                    <td>Raj</td>
+                    <td class="text-right">9 Hours</td>
+                    <td class="text-center"><input type="checkbox" name="" value="">&nbsp;Yes</td>
                 </tr>
-                <tr>
-
-                    <td>103</td>
-                    <td>05-11-2016</td>
-                    <td>Hdfc</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>105</td>
-                    <td>15-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>106</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>107</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>108</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-
-                <tr>
-
-                    <td>109</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-
-                <tr>
-
-                    <td>110</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-
-                <tr>
-
-                    <td>111</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-
-                <tr>
-
-                    <td>112</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-
-
-
-
-
-                <tr>
-
-                    <td>113</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>114</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>108</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>108</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>108</td>
-                    <td>02-11-2016</td>
-                    <td>Ihits</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"><button type="button" class="Select" onclick="Select()">Select</button></td>
-
-
-
-
-                </tr>
-
-
 
 
 
@@ -330,41 +191,21 @@
     </div>
 
 
-
-
     <div class="row">
         <hr />
-        <div class="col-md-offset-8 col-md-4">
-            @*<button type="button" class="form-button right" onclick="Proceed()">Proceed</button>*@
+        <div class="col-md-12">
+
+            <button type="button" class="form-button right">Save</button>
             <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+
         </div>
 
     </div>
-
-
-
-
 </div>
 
-
 <script>
-    function Select() {
-        var url = '@Url.Action("Projects", "EnquiryBooking")'
-        window.location = url;
-    }
-    function Proceed() {
-        var url = '@Url.Action("Projects", "EnquiryBooking")'
-        window.location = url;
-    }
-
     function Exit() {
         var url = '@Url.Action("index", "home")'
         window.location = url;
     }
 </script>
-
-
-
-
-
-

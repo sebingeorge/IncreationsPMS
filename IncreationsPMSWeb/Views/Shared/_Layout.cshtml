@@ -24,9 +24,11 @@
                         <ul>
                             <li>
                                 <a href="@Url.Action("Customer","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/customer.png" /></span>Customer</a>
-                                <a href="@Url.Action("SubContractor","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Sub Contractor</a>
-                                <a href="@Url.Action("Item","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/customer.png" /></span>Item</a>
-                                <a href="@Url.Action("ItemGroup","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Item Group</a>
+                                <a href="@Url.Action("SubContractor","admin")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Sub Contractor</a>
+                                <a href="@Url.Action("ItemGroup","admin")" data-toggle="collapse" data-target="#second-level-3"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Item Group</a>
+                                <a href="@Url.Action("ItemSubGroup","admin")" data-toggle="collapse" data-target="#second-level-4"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Item SubGroup</a>
+                                <a href="@Url.Action("Item","admin")" data-toggle="collapse" data-target="#second-level-4"><span><img src="~/Content/Images/icon/customer.png" /></span>Item</a>
+
                             </li>
                         </ul>
                     </div>
@@ -37,11 +39,11 @@
                             <li>
                                 <a href="@Url.Action("EnquiryBooking", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/enquiry.png" /></span>Enquiry Booking</a>
                                 <a href="@Url.Action("PendingEnquiryStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/enquirystatus.png" /></span>Enquiry Status Update</a>
+                                <a href="@Url.Action("Estimate", "Estimate")" data-toggle="collapse" data-target="#second-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Estimate</a>
                             </li>
                         </ul>
                     </div>
-                    <a href="@Url.Action("ProjectStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Project Status</a>
-                    <a href="@Url.Action("Estimate", "Estimate")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Estimate</a>
+                    <a href="@Url.Action("PendingProjectStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Project Status</a>
                     <a href="@Url.Action("BOQPreparing", "BOQ")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>BOQ Preparing</a>
                     <a href="@Url.Action("Purchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-5"><span><img src="~/Content/Images/icon/purchaseindent.png" /></span>Purchase Indent</a>
                     <a href="@Url.Action("PendingPurchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-6"><span><img src="~/Content/Images/icon/purchaseorder.png" /></span>Purchase Order</a>
