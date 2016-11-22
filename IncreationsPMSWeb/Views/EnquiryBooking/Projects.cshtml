@@ -88,157 +88,129 @@
             </div>
         </div>
 
-     </div>
+    </div>
 
 
-        <div class="row">
+    <div class="row">
 
 
-            <div class="col-md-12">
-                <label>Project Enquiry</label>
-                <textarea class="form_input text-area"></textarea>
-            </div>
-
+        <div class="col-md-12">
+            <label>Project Enquiry</label>
+            <textarea class="form_input text-area"></textarea>
         </div>
+
+    </div>
     <hr />
-    <div class="table-responsive scroll2">
-        <table class="table table-bordered lightblue" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="2%">#</th>
-                    <th width="23%">Milestone Name</th>
-                    <th width="7%">Start</th>
-                    <th width="7%">End</th>
-                    <th width="20%">Task</th>
-                    <th width="10%">Status</th>
-                    <th width="10%">Labour</th>
-                    <th width="10%" class="text-right">Material Budget</th>
-                    <th width="10%" class="text-right">Total</th>
-                    <th width="2%" class="text-center"></th>
-                </tr>
-            </thead>
-            <tbody>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Task</a></li>
+        <li><a data-toggle="tab" href="#menu1">Payment Schedule</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="table-responsive scroll2">
+                <table class="table table-bordered lightblue" id="tab_logic">
+                    <thead>
+                        <tr class="grid_heading">
+                            <th width="2%">#</th>
+                            <th width="23%">Milestone Name</th>
+                            <th width="60%">Task</th>
+                            <th width="7%">Start</th>
+                            <th width="7%">End</th>
+                            <th width="2%" class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
 
 
-                <tr>
-                    <td>101</td>
-                    <td><input type="text" class="form_input" /></td>
-                    <td><input type="text" class="form_input" /></td>
-                    <td><input type="text" class="form_input" /></td>
-                    <td>
-                        <table class="table_in">
-                            <tr>
-                                <td width="20%"><b>1</b></td>
-                                <td><input type="text" class="form_input" /></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><input type="text" class="form_input" /></td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td><input type="text" class="form_input" /></td>
-                    <td><input type="text" class="form_input" /></td>
-                    <td class="text-right"><input type="text" class="form_input" /></td>
-                    <td class="text-right"><input type="text" class="form_input" /></td>
-                    <td class="text-center"><img src="../Content/images/Plus.png" /></td>
-                </tr>
+                        <tr>
+                            <td>101</td>
+                            <td><input type="text" class="form_input" /></td>
+                            <td>
+                                <table class="table_in">
+                                    <tr>
+                                        <td width="5%"><b>1</b></td>
+                                        <td><input type="text" class="form_input" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><input type="text" class="form_input" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <input type="text" class="form_input" />
+                                <input type="text" class="form_input" />
+                            </td>
+                            <td>
+                                <input type="text" class="form_input" />
+                                <input type="text" class="form_input" />
+                            </td>
+
+
+
+                            <td class="text-center"><img src="../Content/images/Plus.png" /></td>
+                        </tr>
 
 
 
 
 
-            </tbody>
+                    </tbody>
 
-        </table>
+                </table>
 
+            </div>
+            
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="table-responsive scroll2">
+                <table class="table table-bordered" id="tab_logic">
+                    <thead>
+                        <tr class="grid_heading">
+                            <th width="7%">Date</th>
+                            <th width="86%">Description</th>
+                            <th width="7%">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+
+                            <td>101</td>
+                            <td></td>
+                            <td></td>
+
+
+
+
+                        </tr>
+
+
+
+
+
+
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
     </div>
-
-
-        <hr />
-    <div class="table-responsive scroll2">
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="2%">#</th>
-                    <th width="55%">Task</th>
-                    <th width="7%">Start</th>
-                    <th width="7%">End</th>
-                    <th width="20%">Employee</th>
-                    <th width="7%" class="text-right">Hours</th>
-                    <th width="2%" class="text-center"></th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>Kitchen</td>
-                    <td>20-11-2016</td>
-                    <td>02-01-2017</td>
-                    <td>Raj</td>
-                    <td class="text-right">8 Hours</td>
-                    <td class="text-center"><img src="../Content/images/Plus.png" /></td>
+</div>
 
 
 
-                </tr>
-
-
-
-
-
-
-
-
-
-            </tbody>
-
-        </table>
-
-    </div>
 
 
 
     <hr />
 
-    <h3>Payment Schedule</h3>
-    <div class="table-responsive scroll2">
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="7%">Date</th>
-                    <th width="86%">Description</th>
-                    <th width="7%">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
+    <h3></h3>
 
-                <tr>
-
-                    <td>101</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-
-
-
-
-
-
-
-
-            </tbody>
-
-        </table>
-
-    </div>
         
 
         <div class="row">

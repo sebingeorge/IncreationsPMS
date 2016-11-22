@@ -17,5 +17,9 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult PendingBOQPreparing()
+        {
+            return View();
+        }
     }
 }
