@@ -260,6 +260,7 @@
     <Content Include="Views\EnquiryBooking\PendingProjectStatus.cshtml" />
     <Content Include="Views\Admin\ItemSubGroup.cshtml" />
     <Content Include="Views\BOQ\PendingBOQPreparing.cshtml" />
+    <Content Include="Views\BOQ\WorkStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

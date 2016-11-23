@@ -21,5 +21,9 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult WorkStatus()
+        {
+            return View();
+        }
     }
 }
