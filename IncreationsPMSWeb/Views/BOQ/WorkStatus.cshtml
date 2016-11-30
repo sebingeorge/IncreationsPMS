@@ -46,7 +46,7 @@
                 <tr class="grid_heading">
                     <th width="3%">BOQNo</th>
                     <th width="7%">Date</th>
-                    <th width="17%">Milestone</th>
+                    <th width="10%">Milestone</th>
                     <th width="13%">Task</th>
                     <th width="7%" class="text-right">Qty</th>
                     <th width="36%">
@@ -63,6 +63,7 @@
                     </th>
                     <th width="7%" class="text-right">Total Amount</th>
                     <th width="7%" class="text-center">Payment</th>
+                    <th width="7%" class="text-center">Bill to Client</th>
 
 
 
@@ -96,6 +97,7 @@
                     </td>
                     <td class="text-right">15000</td>
 
+                    <td class="text-center"><input type="checkbox" name="" value=""></td>
                     <td class="text-center"><input type="checkbox" name="" value=""></td>
 
 
@@ -135,6 +137,7 @@
                     </td>
                     <td class="text-right">15000</td>
                     <td class="text-center"><input type="checkbox" name="" value=""></td>
+                    <td class="text-center"><input type="checkbox" name="" value=""></td>
 
 
 
@@ -169,6 +172,7 @@
                         </table>
                     </td>
                     <td class="text-right">15000</td>
+                    <td class="text-center"><input type="checkbox" name="" value=""></td>
                     <td class="text-center"><input type="checkbox" name="" value=""></td>
 
 
@@ -206,6 +210,7 @@
                     <td class="text-right">15000</td>
 
                     <td class="text-center"><input type="checkbox" name="" value=""></td>
+                    <td class="text-center"><input type="checkbox" name="" value=""></td>
 
 
                 </tr>
@@ -235,7 +240,8 @@
 
     <div class="row">
         <hr />
-        <div class="col-md-offset-8 col-md-4">
+        <div class="col-md-offset-6 col-md-6">
+            <button type="button" class="form-button right" onclick="bill()">Bill To Client</button>
             <button type="button" class="form-button right" onclick="Payment()">Payment</button>
             <button type="button" class="form-button right" onclick="Proceed()">Save</button>
             <button type="button" class="form-button right" onclick="Exit()">Exit</button>
