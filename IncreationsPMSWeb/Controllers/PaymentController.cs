@@ -25,5 +25,13 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult SubContractorPayment()
+        {
+            return View();
+        }
+        public ActionResult paymentFollowup()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = "PaymentFollowup";
+}
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Payment Follow up</h1>
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="col-md-4">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Client</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>Project</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <label>Task</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr />
+
+
+
+    <div class="table-responsive scroll3">
+        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="3%">BOQNo</th>
+                    <th width="7%">Date</th>
+                    <th width="15%">Client</th>
+                    <th width="30%">Milestone</th>
+                    <th width="31%">Task</th>
+                    <th width="7%" class="text-right">Qty</th>
+                    <th width="7%" class="text-right">Amount</th>
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>101</td>
+                    <td>11-11-2016</td>
+                    <td>iHits</td>
+                    <td>Drawing Submission</td>
+                    <td>Design and Drawing Submission</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">15000</td>
+
+
+
+
+
+                </tr>
+
+
+
+                <tr>
+
+                    <td>101</td>
+                    <td>11-11-2016</td>
+                    <td>iHits</td>
+                    <td>Floor Covering</td>
+                    <td>Covering of Floor </td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">15000</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>11-11-2016</td>
+                    <td>iHits</td>
+                    <td>False Ceiling Gypsum</td>
+                    <td>Gypsum board fixing</td>
+                    <td class="text-right">1</td>
+                    <td class="text-right">15000</td>
+
+
+
+
+                </tr>
+                <tr>
+
+                    <td>101</td>
+                    <td>11-11-2016</td>
+                    <td>iHits</td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">1</td>               
+                    <td class="text-right">15000</td>
+
+
+
+
+                </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-6 col-md-6">
+            <button type="button" class="form-button right" onclick="bill()">Bill To Client</button>
+            <button type="button" class="form-button right" onclick="Proceed()">Save</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+<script>
+    function bill() {
+        var url = '@Url.Action("Invoice", "Invoice")'
+        window.location = url;
+    }
+    function Payment() {
+        var url = '@Url.Action("PreviousPayment", "Payment")'
+        window.location = url;
+    }
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>
