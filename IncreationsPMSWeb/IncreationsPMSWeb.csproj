@@ -255,6 +255,7 @@
     <Content Include="Views\BOQ\WorkStatus.cshtml" />
     <Content Include="Views\Payment\SubContractorPayment.cshtml" />
     <Content Include="Views\Payment\paymentFollowup.cshtml" />
+    <Content Include="Views\EnquiryBooking\PendingProjects.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
