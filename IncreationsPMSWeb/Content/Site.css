@@ -618,3 +618,37 @@ content-in
 }
 }
 
+
+
+
+.wb 
+{
+    border:1px solid #f5f5f5;
+    padding:10px;
+}
+
+.wb img 
+    {
+    width:165px;
+    height:109px;
+    }
+
+
+    .wb h2 
+    {
+    font-size: 11px;
+    color:#6c6c6c;
+    }
+
+
+    .wb .nav-tabs li a 
+    {
+        color:#414141;
+    }
+
+    .wb .tab-content > .tab-pane, .pill-content > .pill-pane
+
+    {
+        padding:10px !important;
+    }
+
