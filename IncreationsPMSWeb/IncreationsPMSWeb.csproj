@@ -133,6 +133,7 @@
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\TimeTrackController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,6 +259,7 @@
     <Content Include="Views\Payment\paymentFollowup.cshtml" />
     <Content Include="Views\EnquiryBooking\PendingProjects.cshtml" />
     <Content Include="Views\Sample\SampleD.cshtml" />
+    <Content Include="Views\TimeTrack\TimeTrack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
