@@ -1,0 +1,373 @@
+﻿@{
+    ViewBag.Title = "TimeTrack";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Time Track</h1>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-md-2">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>From</label>
+                    <input type="text" class="form_input" />
+                </div>
+                <div class="col-md-6">
+                    <label>To</label>
+                    <input type="text" class="form_input" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr />
+
+
+
+    <div class="table-responsive scroll3">
+        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+                <tr class="grid_heading">
+                    <th width="10%">Project</th>
+                    <th width="10%">Staff Name</th>
+                    <th width="7%">Service Date</th>
+                    <th width="7%">Sales Code</th>
+                    <th width="31%">Description</th>
+                    <th width="7%" class="text-right">Rate</th>
+                    <th width="7%" class="text-right">Charge</th>
+                    <th width="7%" class="text-right">Billable</th>
+                    <th width="7%" class="text-right">Billed</th>
+                    <th width="7%" class="text-center">Edit</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+
+                    <td>Interior</td>
+                    <td>Tom</td>
+                    <td>10-11-2016</td>
+                    <td>GH156</td>
+                    <td></td>
+                    <td class="text-right">5000</td>
+                    <td class="text-right">100</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+
+
+
+                <tr>
+
+                    <td>Interior</td>
+                    <td>Rahul Salve</td>
+                    <td>12-10-2016</td>
+                    <td>HJ1205</td>
+                    <td></td>
+                    <td class="text-right">10000</td>
+                    <td class="text-right">120</td>
+                    <td class="text-right">yes</td>
+                    <td class="text-right">yes</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Interior</td>
+                    <td>Ramesh Salunke</td>
+                    <td>20-11-2016</td>
+                    <td>GHT2015</td>
+                    <td></td>
+                    <td class="text-right">2000</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">yes</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Ganesh Dathe</td>
+                    <td>21-11-2016</td>
+                    <td>GHT2016</td>
+                    <td></td>
+                    <td class="text-right">1800</td>
+                    <td class="text-right">20</td>
+                    <td class="text-right">yes</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Interior</td>
+                    <td>Mohit Talreja</td>
+                    <td>22-11-2016</td>
+                    <td>CST2100</td>
+                    <td></td>
+                    <td class="text-right">2200</td>
+                    <td class="text-right">12</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sachin Gatham</td>
+                    <td>23-11-2016</td>
+                    <td>CST102</td>
+                    <td></td>
+                    <td class="text-right">1500</td>
+                    <td class="text-right">12</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+                <tr>
+
+
+                    <td>Mv Britos</td>
+                    <td>Sean</td>
+                    <td>22-12-2016</td>
+                    <td>HTG201</td>
+                    <td></td>
+                    <td class="text-right">4000</td>
+                    <td class="text-right">50</td>
+                    <td class="text-right">No</td>
+                    <td class="text-right">No</td>
+                    <td class="text-center"></td>
+
+
+
+
+
+                </tr>
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-8 col-md-4">
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+<script>
+
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+        }
+</script>
