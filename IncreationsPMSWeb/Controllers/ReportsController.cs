@@ -25,5 +25,13 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult AgeingSummaryReport()
+        {
+            return View();
+        }
+        public ActionResult MonthlyCommitment()
+        {
+            return View();
+        }
     }
 }

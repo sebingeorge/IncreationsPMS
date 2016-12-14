@@ -260,6 +260,8 @@
     <Content Include="Views\EnquiryBooking\PendingProjects.cshtml" />
     <Content Include="Views\Sample\SampleD.cshtml" />
     <Content Include="Views\TimeTrack\TimeTrack.cshtml" />
+    <Content Include="Views\Reports\AgeingSummaryReport.cshtml" />
+    <Content Include="Views\Reports\MonthlyCommitment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
