@@ -262,6 +262,8 @@
     <Content Include="Views\TimeTrack\TimeTrack.cshtml" />
     <Content Include="Views\Reports\AgeingSummaryReport.cshtml" />
     <Content Include="Views\Reports\MonthlyCommitment.cshtml" />
+    <Content Include="Views\EnquiryBooking\LabourEnteringReport.cshtml" />
+    <Content Include="Views\EnquiryBooking\LabourEntering.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

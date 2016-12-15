@@ -41,6 +41,17 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult LabourEnteringReport()
+        {
+            return View();
+        }
+
+        public ActionResult LabourEntering()
+        {
+            return View();
+        }
+
+        
 
     }
 }
