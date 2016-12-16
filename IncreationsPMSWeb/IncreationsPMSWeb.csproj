@@ -264,6 +264,8 @@
     <Content Include="Views\Reports\MonthlyCommitment.cshtml" />
     <Content Include="Views\EnquiryBooking\LabourEnteringReport.cshtml" />
     <Content Include="Views\EnquiryBooking\LabourEntering.cshtml" />
+    <Content Include="Views\EnquiryBooking\MaterialEntering.cshtml" />
+    <Content Include="Views\EnquiryBooking\MaterialEnteringReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
