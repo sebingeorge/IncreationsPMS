@@ -50,6 +50,14 @@ namespace IncreationsPMSWeb.Controllers
         {
             return View();
         }
+        public ActionResult MaterialEntering()
+        {
+            return View();
+        }
+        public ActionResult MaterialEnteringReport()
+        {
+            return View();
+        }
 
         
 
