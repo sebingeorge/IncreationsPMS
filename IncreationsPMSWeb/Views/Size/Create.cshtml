@@ -1,0 +1,54 @@
+﻿@model IncreationsPMSDomain.Size
+@{
+    ViewBag.Title = "Create";
+}
+
+--@*<h2>Create</h2>*@
+<div class="container content-in">
+    <div class="row">
+        <h1>Size</h1>
+    </div>
+   @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Size_form" }))
+   {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Code</label>
+                        @Html.TextBoxFor(m => m.SizeUserCode)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        @Html.TextBoxFor(m => m.SizeName)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Remarks</label>
+                        @Html.TextAreaFor(m => m.SizeRemarks)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                <button type="button" class="form-button" onclick="Previous()">Previous</button>
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="submit" class="form-button right">Save</button>
+              
+            </div>
+            </div>
+    }
+    </div>

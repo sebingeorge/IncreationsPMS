@@ -133,6 +133,7 @@
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\SizeController.cs" />
     <Compile Include="Controllers\TimeTrackController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,6 +182,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\photo.jpg" />
     <Content Include="Content\images\plus.png" />
+    <Content Include="Content\toastr.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -199,6 +201,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -264,6 +267,8 @@
     <Content Include="Views\Reports\MonthlyCommitment.cshtml" />
     <Content Include="Views\EnquiryBooking\LabourEnteringReport.cshtml" />
     <Content Include="Views\EnquiryBooking\LabourEntering.cshtml" />
+    <Content Include="Views\Size\Index.cshtml" />
+    <Content Include="Views\Size\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
