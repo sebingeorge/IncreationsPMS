@@ -73,15 +73,15 @@
 
         <div class="col-md-3">
             <div class="row form-group">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label>Mode of Contact</label>
                     @Html.DropDownListFor(m => Model.ModeofContactId, (SelectList)ViewBag.ModeOfContact, "Select Mode Of Contact", new { @class = "form_input", autocomplete = "off" })
                  </div>
 
-                <div class="col-md-6">
+                @*<div class="col-md-6">
                     <label>Reference</label>
                     @Html.TextBoxFor(m => m.EnquiryReference, new { @class = "form_input" })
-                </div>
+                </div>*@
             </div>
         </div>
 
@@ -110,32 +110,38 @@
             </div>
         </div>
 
-
-
-    </div>
-
-
-    <div class="row">
-
-
-        <div class="col-md-12">
-            <label>Enquiry Details</label>
-            @*<textarea class="form_input text-area"></textarea>*@
-         @Html.TextAreaFor(m => m.EnquiryDetails, new { @class = "form_input text-area" })
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Reference</label>
+                    @Html.TextBoxFor(m => m.EnquiryReference, new { @class = "form_input" })
+                </div>
+            </div>
         </div>
+            </div>
 
-        </div>
 
-        <div class="row">
-            <hr />
-            <div class="col-md-12">
-                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
-                <button type="submit" class="form-button right">Save</button>
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <label>Enquiry Details</label>
+                    @*<textarea class="form_input text-area"></textarea>*@
+                    @Html.TextAreaFor(m => m.EnquiryDetails, new { @class = "form_input text-area" })
                 </div>
 
+            </div>
+
+            <div class="row">
+                <hr />
+                <div class="col-md-12">
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="submit" class="form-button right">Save</button>
+                </div>
+
+            </div>
+            }
         </div>
-}
-    </div>
 
 
 <script>
