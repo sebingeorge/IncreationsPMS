@@ -1,0 +1,120 @@
+﻿@model IncreationsPMSDomain.SubContractor
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+<div class="row">
+    <div class="col-md-12">
+        <div class="row form-group">
+            <div class="col-md-2">
+                <label>Code</label>
+                @Html.HiddenFor(m => m.SubId)
+                @Html.TextBoxFor(m => m.SubRefNo, new { @class = "form_input half" })
+                @Html.ValidationMessageFor(m => m.SubRefNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Contractor Name</label>
+                @Html.TextBoxFor(m => m.SubName, new { @class = "form_input" })
+                @Html.ValidationMessageFor(m => m.SubName, "", new { @class = "text-danger" })
+            </div>
+                  </div>
+    </div>
+        </div>
+
+<hr />
+<h2>Contact Details</h2>
+<div class="row">
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Name</label>
+                @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Designation</label>
+                @Html.TextBoxFor(m => m.Designation, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Office No.</label>
+                @Html.TextBoxFor(m => m.OfficeNo, new { @class = "form_input" })
+            </div>
+            <div class="col-md-6">
+                <label>Mobile No.</label>
+                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Email ID</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+   </div>
+
+<hr />
+<h2>Billing Address</h2>
+<div class="row">
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Address 1</label>
+                @Html.TextBoxFor(m => m.Address1, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Address 2</label>
+                @Html.TextBoxFor(m => m.Address2, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Address 3</label>
+                @Html.TextBoxFor(m => m.Address3, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label>Address 4</label>
+                @Html.TextBoxFor(m => m.Address4, new { @class = "form_input" })
+            </div>
+        </div>
+    </div>
+</div>    
+<script>
+    $(document).ready(function () {
+        $(".numbers-only").keypress(function (e) {
+            if (e.which == 8 || (e.which == 45 && $(this).val().indexOf('-') == -1) || (e.which == 46 && $(this).val().indexOf('.') == -1) || (e.which > 47 && e.which < 58)) {
+            }
+            else {
+                return false;
+            }
+        });
+
+    })
+  </script>

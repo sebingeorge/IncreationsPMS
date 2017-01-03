@@ -2,7 +2,19 @@
 @{
     ViewBag.Title = "Create";
 }
-
+<script>
+    function Previous()
+    {
+        var url = '@Url.Action("PreviousList")';
+        window.location = url;
+    }
+ 
+</script>
+<script>
+ function Exit() {
+        location.href = '@Url.Action("Index", "Home")';
+        }
+</script>
 --@*<h2>Create</h2>*@
 <div class="container content-in">
     <div class="row">
@@ -47,7 +59,8 @@
                 <button type="button" class="form-button" onclick="Previous()">Previous</button>
                 <button type="button" class="form-button right" onclick="Exit()">Exit</button>
                 <button type="submit" class="form-button right">Save</button>
-              
+                <button type="submit" class="form-button right">Delete</button>
+
             </div>
             </div>
     }

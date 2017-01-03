@@ -1,28 +1,42 @@
-﻿
-@{
+﻿@model IncreationsPMSDomain.EnquiryBooking
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+
+@*@{
     ViewBag.Title = "EnquiryBooking";
-}
+}*@
 
 
 
+<script>
+    $(function () {
+        $("#EnquiryDate").datepicker({ dateFormat: "dd-MMM-yyyy" });
+    });
+</script>
 
 
 <div class="container content-in">
     <div class="row">
         <h1>Enquiry Booking</h1>
     </div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "bay_form" }))
+{
 
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-6">
                     <label>En No</label>
-                    <input type="text" class="form_input" />
+                    @Html.HiddenFor(m => m.EnquiryId)
+                    @Html.TextBoxFor(m => m.EnquiryRef, new { @class = "form_input half" })
+                    @Html.ValidationMessageFor(m => m.EnquiryRef, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="col-md-6">
                     <label>Date</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.EnquiryDate, new { @class = "form_input" })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -34,8 +48,8 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Client</label>
-                    <input type="text" class="form_input" />
-                </div>
+                    @Html.TextBoxFor(m => m.EnquiryClient, new { @class = "form_input" })
+              </div>
             </div>
         </div>
 
@@ -43,11 +57,8 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Client Type</label>
-                    <select class="form_input">
-                        <option value="">Residential</option>
-                        <option value="">Commercial</option>
-                    </select>
-                </div>
+                    @Html.DropDownListFor(m => Model.ClientTypeId, (SelectList)ViewBag.ClientType, "Select Client Type", new { @class = "form_input", autocomplete = "off" })
+                 </div>
             </div>
         </div>
 
@@ -55,12 +66,8 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Project Type</label>
-                    <select class="form_input">
-                        <option value="">Renovation</option>
-                        <option value="">Architectural</option>
-                        <option value=""> Interior</option>
-                    </select>
-                </div>
+                  @Html.DropDownListFor(m => Model.ProjectTypeId, (SelectList)ViewBag.ProjectType, "Select Project Type", new { @class = "form_input", autocomplete = "off" })
+              </div>
             </div>
         </div>
 
@@ -68,17 +75,12 @@
             <div class="row form-group">
                 <div class="col-md-6">
                     <label>Mode of Contact</label>
-                    <select class="form_input">
-                        <option value="">Direct</option>
-                        <option value="">Internet</option>
-                        <option value="">NewsPaper Advertisement</option>
-                        <option value="">Reference</option>
-                    </select>
-                </div>
+                    @Html.DropDownListFor(m => Model.ModeofContactId, (SelectList)ViewBag.ModeOfContact, "Select Mode Of Contact", new { @class = "form_input", autocomplete = "off" })
+                 </div>
 
                 <div class="col-md-6">
                     <label>Reference</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.EnquiryReference, new { @class = "form_input" })
                 </div>
             </div>
         </div>
@@ -87,7 +89,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Contact No</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.EnquiryContactNo, new { @class = "form_input" })
                 </div>
             </div>
         </div>
@@ -95,7 +97,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Email</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.EnquiryEmail, new { @class = "form_input" })
                 </div>
             </div>
         </div>
@@ -103,7 +105,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Location</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.EnquiryLocation, new { @class = "form_input" })
                 </div>
             </div>
         </div>
@@ -118,24 +120,21 @@
 
         <div class="col-md-12">
             <label>Enquiry Details</label>
-            <textarea class="form_input text-area"></textarea>
+            @*<textarea class="form_input text-area"></textarea>*@
+         @Html.TextAreaFor(m => m.EnquiryDetails, new { @class = "form_input text-area" })
         </div>
 
         </div>
-
-
-
-
-
 
         <div class="row">
             <hr />
             <div class="col-md-12">
-                <button type="button" class="form-button right">Save</button>
                 <button type="button" class="form-button right" onclick="Exit()">Exit</button>
-            </div>
+                <button type="submit" class="form-button right">Save</button>
+                </div>
 
         </div>
+}
     </div>
 
 

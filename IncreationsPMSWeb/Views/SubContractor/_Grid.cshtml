@@ -1,0 +1,59 @@
+﻿@model List<IncreationsPMSDomain.SubContractor>
+
+@*@using GridMvc.Html*@
+@*<div class="table-responsive scroll3">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(m => m.SubRefNo).Titled("Ref No.").SetWidth(12);
+        columns.Add(m => m.SubName).Titled("Subcontractor").SetWidth(7);
+        columns.Add(m => m.ContactPerson).Titled("Contact Person").SetWidth(7);
+        columns.Add(m => m.Email).Titled("Email").SetWidth(7);
+        columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Edit", new { Id = m.SubId })">Edit</a>);
+        columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Delete", new { Id = m.SubId })">Delete</a>);
+
+    }).WithPaging(15)
+</div>*@
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="grid_heading">
+            <th width="14%"><h1>Ref No.</h1></th>
+            <th width="30%"><h1>Subcontractor</h1></th>
+            <th width="20%"><h1>Contact Person</h1></th>
+            <th width="20%"><h1>Email</h1></th>
+            <th width="20%"><h1>Office No.</h1></th>
+            <th width="20%"><h1>Mobile No.</h1></th>
+            <th width="1%" class="text-center"><h1></h1></th>
+        </tr>
+    </thead>
+
+    <tbody class="grid_row">
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SubRefNo</td>
+                    <td>@item.SubName</td>
+                    <td>@item.ContactPerson</td>
+                    <td>@item.Email</td>
+                    <td>@item.OfficeNo</td>
+                    <td>@item.MobileNo</td>
+                    <td>
+                        <center><input type="button" class="form-button4" value="Select" title="Select to view details" onclick="Open(@item.SubId)" /></center>
+          </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">
+                    <center><em>No items found!</em></center>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

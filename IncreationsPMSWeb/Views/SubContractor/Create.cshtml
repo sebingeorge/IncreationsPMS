@@ -1,0 +1,66 @@
+﻿@model IncreationsPMSDomain.SubContractor
+@{
+    ViewBag.Title = "Sub Contractor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function Previous()
+    {
+
+        var url = '@Url.Action("Index")';
+        location.href = url;
+    }
+    function Exit() {
+        var url = '@Url.Action("Index", "Home")';
+        location.href = url;
+    }
+    function Delete(id) {
+        var url = '@Url.Action("Delete")';
+        url += "/" + id
+        window.location = url;
+    }
+    function Update(id) {
+        var url = '@Url.Action("Update")';
+        url += "/" + id
+        window.location = url;
+    }
+</script>
+
+
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+
+<div class="container content-in">
+    <div class="row">
+        <h1>SubContractor</h1>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "box_form" }))
+    {
+        @Html.Partial("_Form", Model)
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+               
+               
+                @if (actionName == "Edit")
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="Submit" class="form-button right">Update</button>
+                    <button type="button" class="form-button" onclick="Delete(@Model.SubId)">Delete</button>
+
+                }
+                else
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="submit" class="form-button right">Save</button>
+                    <button type="button" class="form-button" onclick="Previous()">Previous</button>
+                   
+                }
+
+
+            </div>
+        </div>
+    }
+</div>
+
+

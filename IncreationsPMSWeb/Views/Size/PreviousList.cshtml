@@ -1,0 +1,45 @@
+﻿@model IList<IncreationsPMSDomain.Size>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="grid_heading">
+            <th width="14%"><h1>Ref No</h1></th>
+            <th width="30%"><h1>Size</h1></th>
+            <th width="20%"><h1>Remarks</h1></th>
+            <th width="1%" class="text-center"><h1></h1></th>
+        </tr>
+    </thead>
+
+    <tbody class="grid_row">
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SizeUserCode</td>
+                    <td>@item.SizeName</td>
+                    <td>@item.SizeRemarks</td>
+                 
+                    <td>
+                        <center><input type="button" class="form-button4" value="Select" title="Select to view details" onclick="Open(@item.SizeCode)" /></center>
+                    </td>
+                  
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">
+                    <center><em>No items found!</em></center>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+

@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Increations ERP Application</title>
+    <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/bundles/toasterStyle")
     @Scripts.Render("~/bundles/toasterScript")
     <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-
+    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
+    <link href="~/Content/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+  
+  
     <script src="~/Scripts/toastr.min.js"></script>
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
 
@@ -74,7 +78,8 @@
                         <ul>
                             <li>
                                 <a href="@Url.Action("Customer","admin")" data-toggle="collapse" data-target="#second-level-1"><span><img src="~/Content/Images/icon/customer.png" /></span>Client</a>
-                                <a href="@Url.Action("SubContractor","admin")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Sub Contractor</a>
+                                @*<a href="@Url.Action("SubContractor","admin")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Sub Contractor</a>*@
+                                <a href="@Url.Action("Create","SubContractor")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Sub Contractor</a>
                                 <a href="@Url.Action("Create","Size")" data-toggle="collapse" data-target="#second-level-2"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Size</a>
                                 @*<a href="@Url.Action("ItemGroup","admin")" data-toggle="collapse" data-target="#second-level-3"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Item Group</a>
                                 <a href="@Url.Action("ItemSubGroup","admin")" data-toggle="collapse" data-target="#second-level-4"><span><img src="~/Content/Images/icon/subcontractor.png" /></span>Item SubGroup</a>
@@ -168,7 +173,28 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @*<script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>*@
+
+    <script type="text/javascript" src="~/Scripts/datetimepicker/bootstrap.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Scripts/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Scripts/datetimepicker/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
     <script>
+        $('.form_date').datetimepicker({
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'dd-M-yyyy',
+        });
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
