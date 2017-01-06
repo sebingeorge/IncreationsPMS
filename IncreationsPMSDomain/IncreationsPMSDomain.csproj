@@ -44,7 +44,9 @@
   <ItemGroup>
     <Compile Include="Dropdown.cs" />
     <Compile Include="EnquiryBooking.cs" />
+    <Compile Include="EnquiryStatus.cs" />
     <Compile Include="LoginViewModel.cs" />
+    <Compile Include="PendingEnquiryStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Size.cs" />

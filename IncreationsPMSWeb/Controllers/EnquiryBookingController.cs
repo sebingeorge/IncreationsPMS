@@ -87,12 +87,90 @@ namespace IncreationsPMSWeb.Controllers
         }
         public ActionResult PendingEnquiryStatus()
         {
-            return View();
+            //return View();
+            var repo = new EnquiryBookingRepository();
+            IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus();
+            return View(PendingEnquiryStatus);
         }
-        public ActionResult EnquiryStatus()
+    
+
+        public ActionResult EnquiryStatus(int? EnquiryId)
         {
-            return View();
+            EnquiryBookingRepository repo = new EnquiryBookingRepository();
+
+            EnquiryStatus model = repo.GetEnquiryStatusDetails(EnquiryId ?? 0);
+
+           
+            //string internalId = "";
+            //try
+            //{
+            //    internalId = DatabaseCommonRepository.GetNextDocNo(8);
+
+            //}
+            //catch (NullReferenceException nx)
+            //{
+            //    TempData["success"] = "";
+            //    TempData["error"] = "Some required data was missing. Please try again.|" + nx.Message;
+            //}
+            //catch (Exception ex)
+            //{
+            //    TempData["success"] = "";
+            //    TempData["error"] = "Some error occurred. Please try again.|" + ex.Message;
+            //}
+
+            //model.PurchaseRequestNo = internalId;
+            //model.PurchaseRequestDate = System.DateTime.Today;
+            //model.RequiredDate = System.DateTime.Today;
+            //model.OrganizationId = OrganizationId;
+            //model.CreatedDate = System.DateTime.Now;
+            //model.CreatedBy = UserID.ToString();
+
+            return View(model);
         }
+
+
+
+        [HttpPost]
+        public ActionResult EnquiryStatus(EnquiryStatus model)
+        {
+           
+
+            var repo = new EnquiryBookingRepository();
+         
+            {
+                var result = new EnquiryBookingRepository().UpdateEnquiryStatus(model);
+                if (result.EnquiryId > 0)
+                {
+
+                    return RedirectToAction("Projects", "EnquiryBooking");
+                }
+
+                else
+                {
+                    return RedirectToAction("Edit");
+                }
+
+            }
+            
+
+        }
+
+        public ActionResult EnquiryCancel(int Id)
+        {
+                                
+                   
+            {
+        
+                var result = new EnquiryBookingRepository().UpdateEnquiryCancel(Id);
+                                              
+                    return RedirectToAction("index", "home");
+
+            }
+
+        }
+
+
+
         public ActionResult Projects()
         {
             return View();

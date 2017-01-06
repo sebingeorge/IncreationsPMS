@@ -49,9 +49,9 @@ namespace IncreationsPMSDAL
                 IDbTransaction trn = connection.BeginTransaction();
 
                 string sql = @"INSERT INTO EnquiryBooking(EnquiryRef,EnquiryDate,EnquiryClient,ClientTypeId,ModeofContactId,ProjectTypeId, 
-                EnquiryReference,EnquiryContactNo,EnquiryEmail,EnquiryLocation,EnquiryDetails)
+                EnquiryReference,EnquiryContactNo,EnquiryEmail,EnquiryLocation,EnquiryDetails,EnquiryCancel)
                 VALUES(@EnquiryRef,@EnquiryDate,@EnquiryClient,@ClientTypeId,@ModeofContactId,@ProjectTypeId,@EnquiryReference,
-                @EnquiryContactNo,@EnquiryEmail,@EnquiryLocation,@EnquiryDetails);
+                @EnquiryContactNo,@EnquiryEmail,@EnquiryLocation,@EnquiryDetails,0);
                 SELECT CAST(SCOPE_IDENTITY() as int)";
                 try
                 {
@@ -72,5 +72,84 @@ namespace IncreationsPMSDAL
                 return objEnquiryBooking;
             }
         }
+        public IEnumerable<PendingEnquiryStatus> GetPendingEnquiryStatus()
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+
+                string query = @"SELECT
+                                  EnquiryId,EnquiryRef,convert (varchar(50),EnquiryDate,103)EnquiryDate,EnquiryClient,ModeofContactName,
+                                  ProjectTypeName from EnquiryBooking HD
+                                  inner join ClientType CT on CT.ClientTypeId =HD.ClientTypeId
+                                  inner join ModeOfContact MOC on MOC.ModeofContactId =HD.ModeofContactId
+                                  inner join ProjectType PT on PT.ProjectTypeId =HD.ProjectTypeId
+                                  where EnquiryCancel=0
+                                  order by EnquiryDate";
+	                                                                     
+                return connection.Query<PendingEnquiryStatus>(query);
+            }
+        }
+
+        public EnquiryStatus GetEnquiryStatusDetails(int EnquiryId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string qry = "select EnquiryId, EnquiryRef, convert (varchar(50), EnquiryDate, 103)EnquiryDate,EnquiryClient,";
+                qry += " ModeofContactName,ClientTypeName,ProjectTypeName,EnquiryReference,EnquiryContactNo,";
+                qry += " EnquiryEmail,EnquiryLocation,EnquiryDetails";
+                qry += " from EnquiryBooking HD";
+                qry += " inner join ClientType CT on CT.ClientTypeId = HD.ClientTypeId";
+                qry += " inner join ModeOfContact MOC on MOC.ModeofContactId = HD.ModeofContactId";
+                qry += " inner join ProjectType PT on PT.ProjectTypeId = HD.ProjectTypeId";
+                qry += " where HD.EnquiryId = " + EnquiryId.ToString();
+
+               EnquiryStatus EnquiryStatus = connection.Query<EnquiryStatus>(qry).FirstOrDefault();
+                return EnquiryStatus;
+            }
+        }
+
+                           
+      public EnquiryStatus UpdateEnquiryStatus(EnquiryStatus model)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string sql = @"UPDATE EnquiryBooking SET EnquiryProfileSending = @EnquiryProfileSending ,EnquiryOfferSending = @EnquiryOfferSending, 
+                                 EnquiryLayoutReceiving = @EnquiryLayoutReceiving  
+                                 OUTPUT INSERTED.EnquiryId WHERE EnquiryId = EnquiryId";
+
+                try
+                {
+                    var id = connection.Execute(sql, model);
+                    model.EnquiryId = id;
+            }
+                catch (Exception ex)
+                {
+
+                    model.EnquiryId = 0;
+
+                }
+                return model;
+            }
+        }
+
+        public int UpdateEnquiryCancel(int Id)
+        {
+            int result = 0;
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                
+                string sql = @"UPDATE EnquiryBooking SET EnquiryCancel = 1   WHERE EnquiryId=@Id";
+
+                {
+
+                    var id = connection.Execute(sql, new { Id = Id });
+                  return id;
+
+                }
+
+            }
+        }
+
+
     }
 }

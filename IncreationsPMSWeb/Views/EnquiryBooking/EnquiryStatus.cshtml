@@ -1,45 +1,87 @@
-﻿
-@{
+﻿@model IncreationsPMSDomain.EnquiryStatus 
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+@*@{
     ViewBag.Title = "EnquiryStatus";
-}
+}*@
 
 
+<script>
+    function Accept() {
+        
+        location.href = '@Url.Action("EnquiryStatus")';
+                  
+        @*var url = '@Url.Action("Projects", "EnquiryBooking")'
+        window.location = url;*@
+    }
+
+   
+
+    function EnquiryCancel(id) {
+        var url = '@Url.Action("EnquiryCancel")';
+        url += "?id=" + id ;
+        window.location = url;
+
+    }
+
+    $(document).ready(function () {
+    Tick();
+    });
+
+   function Tick() {
+       
+        $('.subject-list').on('change', function () {
+            $('.subject-list').not(this).prop('checked', false);
+        });
+
+        if ($("#EnquiryProfileSending").is(":checked") || $("#EnquiryOfferSending").is(":checked") || $("#EnquiryLayoutReceiving").is(":checked")) {
+            $("#table-bom").show();
+        }
+        else {
+            $("#table-bom").hide();
+        }
+    }
+</script>
 
 <div class="container content-in">
     <div class="row">
         <h1>Enquiry Updating Status</h1>
     </div>
-
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "box_form" }))
+{
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-6">
-                    <label>En No</label>
-                    <input type="text" class="form_input" />
+                 <label>En No</label>
+                    @Html.HiddenFor(m => m.EnquiryId, new { @class = "form_input", autocomplete = "off" })
+                    @Html.TextBoxFor(m => m.EnquiryRef, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
                 <div class="col-md-6">
                     <label>Date</label>
-                    <input type="text" class="form_input" />
-                </div>
+                    @*<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.EnquiryDate, new { @class = "form_input", @Value = Model.EnquiryDate.Value.ToString("dd-MMM-yyyy") })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>*@
+                    @Html.TextBoxFor(m => m.EnquiryDate, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
+              </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-
-        <div class="col-md-3">
+       <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Client</label>
-                    <input type="text" class="form_input" />
-                </div>
+              @Html.TextBoxFor(m => m.EnquiryClient, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
+            </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Client Type</label>
-                    <input type="text" class="form_input" />
+                @Html.TextBoxFor(m => m.ClientTypeName, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
             </div>
         </div>
@@ -47,7 +89,8 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Project Type</label>
-                    <input type="text" class="form_input" />
+              
+                    @Html.TextBoxFor(m => m.ProjectTypeName, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
             </div>
         </div>
@@ -55,7 +98,8 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Reference</label>
-                    <input type="text" class="form_input" />
+                   
+                    @Html.TextBoxFor(m => m.EnquiryReference, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
             </div>
         </div>
@@ -63,7 +107,8 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Contact No</label>
-                    <input type="text" class="form_input" />
+               
+                    @Html.TextBoxFor(m => m.EnquiryContactNo, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
             </div>
         </div>
@@ -71,7 +116,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Email</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.EnquiryEmail, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
             </div>
         </div>
@@ -79,13 +124,10 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Location</label>
-                    <input type="text" class="form_input" />
+              @Html.TextBoxFor(m => m.EnquiryLocation, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
 
@@ -94,8 +136,8 @@
 
         <div class="col-md-12">
             <label>Enquiry Details</label>
-            <textarea class="form_input text-area"></textarea>
-        </div>
+    @Html.TextAreaFor(m => m.EnquiryDetails, new { @class = "form_input text-area" })
+     </div>
 
     </div>
     <hr />
@@ -109,46 +151,54 @@
 
                         <td><h2>Status Update</h2></td>
                         <td class="main-check">
-                            <input type="checkbox" name="" value="" class="check"> Profile Sending
+                            @*<input type="checkbox" name="" value="" class="check"> Profile Sending
                             <input type="checkbox" name="" value="" class="check"> Offer Sending
-                            <input type="checkbox" name="" value="" class="check"> Layout Receiving
+                            <input type="checkbox" name="" value="" class="check"> Layout Receiving*@
+                          
+                               <div class="row">
+                                <div class="col-md-4">
+                                    @Html.CheckBoxFor(model => model.EnquiryProfileSending)
+                                   @* @Html.CheckBoxFor(m => m.EnquiryProfileSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
+                                    <label for="name">Profile Sending</label>
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.CheckBoxFor(model => model.EnquiryOfferSending)
+                                 @*   @Html.CheckBoxFor(m => m.EnquiryOfferSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
+                                    <label for="name">Offer Sending</label>
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.CheckBoxFor(model => model.EnquiryLayoutReceiving)
+                                   @* @Html.CheckBoxFor(m => m.EnquiryLayoutReceiving, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
+                                    <label for="name">Layout Receiving</label>
+                                </div>
+                            </div>
+                            
+
                         </td>
-
-
-
+                                               
                     </tr>
-
-
-
-
-                </tbody>
+                  </tbody>
 
             </table>
         </div>
 
         </div>
 
+
         <div class="row">
             <hr />
             <div class="col-md-12">
-                <button type="button" class="form-button right" onclick="Exit()">Enquiry Cancel</button>
-                <button type="button" class="form-button right" onclick="Accept()">Accept Offer</button>
+               
+                <button type="button" class="form-button right" onclick="EnquiryCancel('@Model.EnquiryId')">Enquiry Cancel</button>
+                <button type="submit" class="form-button right" onclick="Accept()">Accept Offer</button>
+               
 
             </div>
 
         </div>
+}
     </div>
-<script>
-    function Accept() {
-        var url = '@Url.Action("Projects", "EnquiryBooking")'
-        window.location = url;
-    }
 
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-    }
-</script>
 
 
 
