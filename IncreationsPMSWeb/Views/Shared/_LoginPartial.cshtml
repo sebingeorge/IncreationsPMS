@@ -1,0 +1,70 @@
+﻿@model Capital.Domain.QuickView
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    @*<ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>*@
+}
+@{
+ 
+    int total = 0;
+   
+    if (Model.RenewalPolicy == true)
+    {
+        total += Model.NoOfRenewalPolicy;
+    }
+   
+}
+<div class="alert1">
+    <ul class="nav navbar-nav right">
+        <li>
+            <a data-toggle="dropdown" class="bcn admin-icon" href="#"><img src="~/Images/icon/admin1.png" /></a>
+
+            <ul class="dropdown-menu">
+
+                <li><a href="@Url.Action("Create", "Customer")" ><span><img src="~/Images/icon/customer.png" /></span>Customer</a></li>
+                <li><a href="@Url.Action("Create", "SalesManager")" ><span><img src="~/Images/icon/sales-Manager.png" /></span>Employee Details</a></li>
+                <li><a href="@Url.Action("Create", "InsuranceCompany")" ><span><img src="~/Images/icon/insurancecompany.png" /></span>Insurance Company</a></li>
+                <li><a href="@Url.Action("Create", "InsuranceProduct")" ><span><img src="~/Images/icon/insuranceproduct.png" /></span>Insurance Product</a></li>
+                <li><a href="@Url.Action("Register", "Account")" ><span>&nbsp;&nbsp;<img src="~/Images/icon/admin.png" /></span>User</a></li>
+
+
+            </ul>
+            </li>
+
+    </ul>
+    <ul class="nav navbar-nav right">
+        <li>
+            <i class="glyphicon glyphicon-bell bell1"></i><a data-toggle="dropdown" class="dropdown-toggle" href="#">@total</a>
+            <ul class="dropdown-menu">
+                @*<li><a href="@Url.Action("Index", "New_Policy", new { type = 1 })" class=""><span class="badge pull-right">@Model.NoOfNewPolicy</span>New Policy List</a></li>*@
+                <li><a href="@Url.Action("Index", "Policy_Renewal")" class=""><span class="badge pull-right">@Model.NoOfRenewalPolicy</span>Renewal List</a></li>
+                @*<li><a href="@Url.Action("Index", "Policy_Endorsement")" class=""><span class="badge pull-right">@Model.NoOfEndorsePolicy</span>Policy Endorsement</a></li>
+                <li><a href="@Url.Action("Index", "DailyActivity")" class=""><span class="badge pull-right">@Model.NoOfDailyActivity</span>Daily Activity Report</a></li>
+                <li><a href="@Url.Action("Create", "Sales_Target")" class=""><span class="badge pull-right">@Model.NoOfSalesTarget</span>Sales Target</a></li>*@
+                @*<li><a href="@Url.Action("Sales_Achievement_report", "Sales_Achievement_report")">Sales Achievement report</a></li>*@
+                @*<li><a href="@Url.Action("MeetingSchedule", "MeetingSchedule")">Meeting Schedule</a></li>*@
+                @*<li><a href="@Url.Action("PendingReceivableReport", "ReceivableReport")">Receivable Report</a></li>
+                <li><a href="@Url.Action("PayableReport", "PayableReport")">Payable Report</a></li>*@
+            </ul>
+        </li>
+    </ul>
+</div>
+

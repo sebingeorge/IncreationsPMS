@@ -41,5 +41,14 @@ namespace IncreationsPMSDAL
                 return connection.Query<Dropdown>("SELECT ModeofContactId Id, ModeofContactName Name FROM ModeOfContact").ToList();
             }
         }
+
+
+        public List<Dropdown> GetClient()
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                return connection.Query<Dropdown>("SELECT ClientId Id, ClientName Name FROM Client").ToList();
+            }
+        }
     }
 }

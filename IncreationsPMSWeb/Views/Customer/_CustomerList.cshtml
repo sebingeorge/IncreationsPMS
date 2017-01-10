@@ -1,0 +1,21 @@
+﻿
+@model List<IncreationsPMSDomain.Client> 
+@using GridMvc.Html
+
+<div class="table-responsive scroll3">
+
+
+    @Html.Grid(Model).Columns(columns =>
+            {
+
+                //columns.Add(m => m.ClientId).Titled("ID").SetWidth(10);
+                columns.Add(m => m.ClientName).Titled("Client").SetWidth(10);
+                columns.Add(m => m.ContactPerson).Titled("Contact Name").SetWidth(10);
+                columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Edit", new { type = ViewBag.Type, Id = m.ClientId})">Edit</a>);
+                columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent").RenderValueAs(m => @<a href="@Url.Action("Delete", new { Id = m.ClientId })">Delete</a>);
+       
+
+
+
+    }).WithPaging(15)
+</div>

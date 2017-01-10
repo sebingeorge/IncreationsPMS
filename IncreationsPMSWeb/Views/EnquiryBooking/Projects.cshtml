@@ -1,26 +1,209 @@
-﻿
-@{
+﻿@model IncreationsPMSDomain.Projects 
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+
+@*@{
     ViewBag.Title = "Projects";
-}
+}*@
 
+<script>
+   
 
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+    function ClientChanged(Client) {
+      var ClientId = Client.value;
+        $.ajax({
+            url: "@Url.Action("GetClientContactDetailsByKey", "EnquiryBooking")",
+            data: { Id: ClientId },
+        cache: false,
+        type: "GET",
+        timeout: 10000,
+        dataType: "json",
+        success: function (result) {
+            if (result.Success) { // this sets the value from the response
+                $('#MobileNo').val(result.MobileNo);
+               $("#Email").val(result.Email);
+                $("#Address1").val(result.Address1);
+                $("#Address2").val(result.Address2);
+                $("#Address3").val(result.Address3);
+            } else {
+                $('#SomeOtherHtmlTextBox').val("Failed");
+            }
+        }
+    });
+    }
+
+    function TaskAdd() {
+      
+        var i = 0;
+        var no = 1;
+        $('input[id^="Row_Addition_"]').each(function () {
+            var id = this.id;
+            no++;
+            var row = Number(id.replace("Row_Addition_", ""));
+            if (row > i) {
+                i = row;
+            }
+        });
+     
+        i++; 
+        var index = (new Date()).getTime(); // unique indexer
+      
+        var clone = $('#Row_ProjectTask_Id_0').clone(); // clone the BatchProducts item
+        //Update the index of the clone
+        clone.html($(clone).html().replace(/ProjectTask_0__/g, 'ProjectTask_' + i + '__'));
+        clone.html($(clone).html().replace(/\ProjectTask[0]./g, 'ProjectTask[' + i + '].'));
+        clone.html($(clone).html().replace(/\[0\]/g, '[' + i + ']'));
+        clone.html($(clone).html().replace(/\(0\)/g, '(' + i + ')'));
+        clone.html($(clone).html().replace(/Row_Addition_0/g, 'Row_Addition_' + i + ''));
+       
+        clone.html($(clone).html().replace(/CI_slno_0/, 'CI_slno_' + i + ''));
+        clone.html($(clone).html().replace(/this,0/, 'this,' + i + ''));
+        
+        $("#tab_ProjectTask").append('<tr id="' + 'Row_ProjectTask_Id_' + i + '">' + clone.html() + '  </tr>');
+        $("#CI_slno_" + i).val((i + 1));
+        //bind keyup for numbers only
+        $(".numbers-only").keypress(function (e) {
+            if (e.which == 8 || (e.which == 46 && $(this).val().indexOf('.') == -1) || (e.which > 47 && e.which < 58)) { } else { return false; }
+        });
+    }
+
+    function TaskDelete(index) {
+
+        var i = 0;
+        var no = 1;
+        $('input[id^="Row_Addition_"]').each(function () {
+            var id = this.id;
+            no++;
+            var row = Number(id.replace("Row_Addition_", ""));
+            if (row > i) {
+                i = row;
+            }
+        });
+        i++;
+        
+        if (i > 1) {
+            $("#Row_ProjectTask_Id_" + index).remove();
+            for (var j = index + 1; j < i; j++) {
+                var Id = $("#ProjectTask_" + j + "__TaskId").val();
+                var MileStoneName = $("#ProjectTask_" + j + "__MileStoneName").val(); 
+                var TaskName = $("#ProjectTask_" + j + "__TaskName").val();
+                var StartDate = $("#ProjectTask_" + j + "__StartDate").val();
+                var EndDate = $("#ProjectTask_" + j + "__EndDate").val();
+                var clone = $("#Row_ProjectTask__Id_" + j).clone(true, true);
+                clone.html($(clone).html().replace("TaskDelete(" + j, "TaskDelete(" + (j - 1)));
+                clone.html($(clone).html().replace('CI_slno_' + j, 'CI_slno_' + (j - 1)));
+                clone.html($(clone).html().replace("Row_ProjectTask__" + j, "Row_ProjectTask__" + (j - 1)));
+                clone.html($(clone).html().replace("this," + j, "this," + (j - 1)));
+                $("#Row_ProjectTask_Id_" + j).html(clone.html());
+                $("#Row_ProjectTask_Id_" + j).attr("id", "Row_ProjectTask_Id_" + (j - 1));
+                $("#CI_slno_" + (j - 1)).val(j);
+                $("#ProjectTask_" + (j - 1) + "__MileStoneName").val(MileStoneName);
+                $("#ProjectTask_" + (j - 1) + "__TaskName").val(TaskName);
+                $("#ProjectTask_" + (j - 1) + "__StartDate").val(StartDate);
+                $("#ProjectTask_" + (j - 1) + "__EndDate").val(EndDate);
+           }
+        }
+    }
+    function PaymentScheduleAdd() {
+           var i = 0;
+        var no = 1;
+        $('input[id^="Row_Schedule_"]').each(function () {
+            var id = this.id;
+            no++;
+            var row = Number(id.replace("Row_Schedule_", ""));
+            if (row > i) {
+                i = row;
+            }
+        });
+     
+        i++; 
+        var index = (new Date()).getTime(); // unique indexer
+     
+        var clone = $('#Row_ProjectPaymentSchedule_Id_0').clone(); // clone the BatchProducts item
+        //Update the index of the clone
+   
+        clone.html($(clone).html().replace(/ProjectPaymentSchedule_0__/g, 'ProjectPaymentSchedule_' + i + '__'));
+        clone.html($(clone).html().replace(/\ProjectPaymentSchedule[0]./g, 'ProjectPaymentSchedule[' + i + '].'));
+        clone.html($(clone).html().replace(/\[0\]/g, '[' + i + ']'));
+        clone.html($(clone).html().replace(/\(0\)/g, '(' + i + ')'));
+        clone.html($(clone).html().replace(/Row_Schedule_0/g, 'Row_Schedule_' + i + ''));
+        
+        //clone.html($(clone).html().replace(/CI_slno_0/, 'CI_slno_' + i + ''));
+        clone.html($(clone).html().replace(/this,0/, 'this,' + i + ''));
+        
+        $("#tab_ProjectPaymentSchedule").append('<tr id="' + 'Row_ProjectPaymentSchedule_Id_' + i + '">' + clone.html() + '  </tr>');
+     
+        //$("#CI_slno_" + i).val((i + 1));
+        //bind keyup for numbers only
+        $(".numbers-only").keypress(function (e) {
+            if (e.which == 8 || (e.which == 46 && $(this).val().indexOf('.') == -1) || (e.which > 47 && e.which < 58)) { } else { return false; }
+        });
+    }
+    function PaymentScheduleDelete(index) {
+
+        var i = 0;
+        var no = 1;
+        $('input[id^="Row_Schedule_"]').each(function () {
+            var id = this.id;
+            no++;
+            var row = Number(id.replace("Row_Schedule_", ""));
+            if (row > i) {
+                i = row;
+            }
+        });
+        i++;
+        
+        if (i > 1) {
+            $("#Row_ProjectPaymentSchedule_Id_" + index).remove();
+            for (var j = index + 1; j < i; j++) {
+                var Id = $("#ProjectPaymentSchedule_" + j + "__Paymentid").val();
+                var Date = $("#ProjectPaymentSchedule_" + j + "__Date").val(); 
+                var Description = $("#ProjectPaymentSchedule_" + j + "__Description").val();
+                var Percentage = $("#ProjectPaymentSchedule_" + j + "__Percentage").val();
+                var Amount = $("#ProjectPaymentSchedule_" + j + "__Amount").val();
+                var clone = $("#Row_ProjectPaymentSchedule__Id_" + j).clone(true, true);
+                clone.html($(clone).html().replace("PaymentScheduleDelete(" + j, "PaymentScheduleDelete(" + (j - 1)));
+                //clone.html($(clone).html().replace('CI_slno_' + j, 'CI_slno_' + (j - 1)));
+                clone.html($(clone).html().replace("Row_ProjectPaymentSchedule__" + j, "Row_ProjectPaymentSchedule__" + (j - 1)));
+                clone.html($(clone).html().replace("this," + j, "this," + (j - 1)));
+                $("#Row_ProjectPaymentSchedule_Id_" + j).html(clone.html());
+                $("#Row_ProjectPaymentSchedule_Id_" + j).attr("id", "Row_ProjectPaymentSchedule_Id_" + (j - 1));
+                //$("#CI_slno_" + (j - 1)).val(j);
+                $("#ProjectPaymentSchedule_" + (j - 1) + "__Date").val(Date);
+                $("#ProjectPaymentSchedule_" + (j - 1) + "__Description").val(Description);
+                $("#ProjectPaymentSchedule_" + (j - 1) + "__Percentage").val(Percentage);
+                $("#ProjectPaymentSchedule_" + (j - 1) + "__Amount").val(Amount);
+            }
+        }
+    }
+
+</script>
 
 
 <div class="container content-in">
     <div class="row">
         <h1>Projects</h1>
     </div>
-
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Projects" }))
+{
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-6">
                     <label>P No</label>
-                    <input type="text" class="form_input" />
-                </div>
+                    @Html.HiddenFor(m => m.ProjectId)
+                    @Html.TextBoxFor(m => m.ProjectRefNo, new { @class = "form_input half" })
+                    @Html.ValidationMessageFor(m => m.ProjectRefNo, "", new { @class = "text-danger" })
+                  </div>
                 <div class="col-md-6">
                     <label>Date</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.ProjectDate, new { @class = "form_input", @Value = Model.ProjectDate.ToString("dd-MMM-yyyy") })
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +215,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Client</label>
-                    <input type="text" class="form_input" />
+                    @Html.DropDownListFor(m => Model.ClientId, (SelectList)ViewBag.Client, "Select Client", new { @class = "form_input", autocomplete = "off", @onchange = "ClientChanged(this)" })
                 </div>
             </div>
         </div>
@@ -41,15 +224,15 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Contact No</label>
-                    <input type="text" class="form_input" />
-                </div>
+                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input half", @readonly = "readonly" })
+                   </div>
             </div>
-        </div>
+        </div> 
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Email</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form_input half", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -65,7 +248,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Address 1</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Address1, new { @class = "form_input half", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -74,7 +257,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Address 2</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Address2, new { @class = "form_input half", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -83,7 +266,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Address 3</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Address3, new { @class = "form_input half", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -96,7 +279,7 @@
 
         <div class="col-md-12">
             <label>Project Enquiry</label>
-            <textarea class="form_input text-area"></textarea>
+            @Html.TextAreaFor(m => m.ProjectEnquiry, new { @class = "form_input text-area" })
         </div>
 
     </div>
@@ -109,137 +292,121 @@
     <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
             <div class="table-responsive scroll2">
-                <table class="table table-bordered lightblue" id="tab_logic">
-                    <thead>
-                        <tr class="grid_heading">
-                            <th width="2%">#</th>
-                            <th width="23%">Milestone Name</th>
-                            <th width="60%">Task</th>
-                            <th width="7%">Start</th>
-                            <th width="7%">End</th>
-                            <th width="2%" class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <table class="table table-bordered lightblue" id="tab_ProjectTask">
+                    @*<table class="table table-bordered lightblue" id="tab_logic">*@
+                        <thead>
+                            <tr class="grid_heading">
+                                <th width="2%"></th>
+                                <th width="5%" class="text-center">#</th>
+                                <th width="18%">Milestone Name</th>
+                                <th width="50%">Task</th>
+                                <th width="10%">Start</th>
+                                <th width="10%">End</th>
+                                <th width="2%" class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @for (int i = 0; i < Model.ProjectTask.Count; i++)
+                            {
+                                <tr id="Row_ProjectTask_Id_@i">
+                                    <td style="vertical-align:middle">
+                                        <a class="glyphicon glyphicon-minus" style="top:0px" onclick="TaskDelete(@i)"></a>
+                                    </td>
+                                    <td>
+                                        @Html.HiddenFor(m => m.ProjectTask[i].ProjectId)
+                                        <input type="hidden" id="Row_Addition_@i" />
+                                        <input id="CI_slno_@i" type="text" value="@(i + 1)" style="width:100%" class="form_input text-center" disabled />
+                                    </td>
+                                    <td>
+
+                                        @Html.TextBoxFor(m => @Model.ProjectTask[i].MileStoneName, new { @class = "form_input", @style = "text-align:left" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => @Model.ProjectTask[i].TaskName, new { @class = "form_input", @style = "text-align:left" })
+                                    </td>
+                                    <td>
+
+                                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            @Html.TextBoxFor(model => Model.ProjectTask[i].StartDate, new { @class = "form_input" })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            @Html.TextBoxFor(model => Model.ProjectTask[i].EndDate, new { @class = "form_input" })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick="TaskAdd()"></a></td>
+                                </tr>
+                            }
 
 
 
-                        <tr>
-                            <td>101</td>
-                            <td><input type="text" class="form_input" /></td>
-                            <td>
-                                <table class="table_in">
-                                    <tr>
-                                        <td width="5%"><b>1</b></td>
-                                        <td><input type="text" class="form_input" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><input type="text" class="form_input" /></td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td>
-                                <input type="text" class="form_input" />
-                                <input type="text" class="form_input" />
-                            </td>
-                            <td>
-                                <input type="text" class="form_input" />
-                                <input type="text" class="form_input" />
-                            </td>
 
 
+                        </tbody>
 
-                            <td class="text-center"><img src="../Content/images/Plus.png" /></td>
-                        </tr>
-
-
-
-
-
-                    </tbody>
-
-                </table>
+                    </table>
 
             </div>
             
         </div>
         <div id="menu1" class="tab-pane fade">
             <div class="table-responsive scroll2">
-                <table class="table table-bordered" id="tab_logic">
-                    <thead>
-                        <tr class="grid_heading">
-                            <th width="7%">Date</th>
-                            <th width="86%">Description</th>
-                            <th width="7%">%</th>
-                            <th width="7%">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-
-                            <td>01-12-2016</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                <table class="table table-bordered" id="tab_ProjectPaymentSchedule">
+                    @*<table class="table table-bordered" id="tab_logic">*@
+                        <thead>
+                            <tr class="grid_heading">
+                                <th width="2%"></th>
+                                <th width="12%">Date</th>
+                                <th width="80%">Description</th>
+                                <th width="7%">%</th>
+                                <th width="7%">Amount</th>
+                                <th width="2%" class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
 
+                            @for (int i = 0; i < Model.ProjectPaymentSchedule.Count; i++)
+                            {
+                                <tr id="Row_ProjectPaymentSchedule_Id_@i">
+                                    <td style="vertical-align:middle">
+                                        <a class="glyphicon glyphicon-minus" style="top:0px" onclick="PaymentScheduleDelete(@i)"></a>
+                                    </td>
+
+                                    <td>
+                                        @Html.HiddenFor(m => m.ProjectPaymentSchedule[i].ProjectId)
+                                        <input type="hidden" id="Row_Schedule_@i" />
+                                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            @Html.TextBoxFor(model => Model.ProjectPaymentSchedule[i].Date, new { @class = "form_input" })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(m => @Model.ProjectPaymentSchedule[i].Description, new { @class = "form_input", @style = "text-align:left" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.ProjectPaymentSchedule[i].Percentage, new { @class = "form_input numbers-only", autocomplete = "off", @style = "text-align:right" })
+                                     </td>
+                                    <td>
+                                        
+                                        @Html.TextBoxFor(m => m.ProjectPaymentSchedule[i].Amount, new { @class = "form_input numbers-only", autocomplete = "off", @style = "text-align:right" })
+                                    </td>
+
+                                    <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick="PaymentScheduleAdd()"></a></td>
+                                </tr>
+                            }
 
 
-                        </tr>
-                        <tr>
+                        </tbody>
 
-                            <td>02-12-2016</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-                        </tr>
-                        <tr>
-
-                            <td>03-12-2016</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-                        </tr>
-                        <tr>
-
-                            <td>04-12-2016</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-                        </tr>
-                        <tr>
-
-                            <td>05-12-2016</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-
-
-
-                        </tr>
-
-
-
-
-
-                    </tbody>
-
-                </table>
+                    </table>
 
             </div>
     </div>
@@ -254,23 +421,18 @@
 
     <h3></h3>
 
-        
+
 
         <div class="row">
             <hr />
             <div class="col-md-12">
-              
-                <button type="button" class="form-button right">Save</button>
                 <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="submit" class="form-button right">Save</button>
+        
 
             </div>
 
         </div>
+}
     </div>
 
-<script>
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-        }
-</script>

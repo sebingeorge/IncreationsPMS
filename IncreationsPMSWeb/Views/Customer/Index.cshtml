@@ -1,0 +1,94 @@
+﻿@model List<IncreationsPMSDomain.Client>
+@{
+    ViewBag.Title = "CLient Previous list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Previous Client</h1>
+    </div>
+
+    <div class="row">
+
+
+
+ 
+        <div class="col-md-4">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Client</label>
+                    <input id="cus" class="form_input" placeholder="Search for Client" onkeyup="Filter()" />
+                </div>
+
+            </div>
+        </div>
+
+       
+
+
+
+
+    </div>
+
+
+    <hr />
+
+    <div id="Cus_list">
+        @Html.Action("CustomerList")
+    </div>
+
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-8 col-md-4">
+            <button type="button" class="form-button right" onclick="Proceed()">Add</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+    function Create() {
+        var url = '@Url.Action("Create")';
+        location.href = url;
+    }
+    function Exit() {
+        var url = '@Url.Action("Index","Home")';
+        location.href = url;
+    }
+
+
+    function Filter() {
+
+        $("#Cus_list").addClass("fade");
+
+        var Customer = $("#cus").val().trim();
+        var url = '@Url.Action("CustomerList")';
+        url += "?Customer=" + encodeURIComponent(Customer);
+        $("#Cus_list").load(url, function () {
+            $("#Cus_list").removeClass("fade");
+        });
+    }
+    function Proceed() {
+        var url = '@Url.Action("Create", "Customer")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+
+</script>
+
+
+
+
+
+

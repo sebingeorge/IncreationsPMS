@@ -65,8 +65,7 @@ namespace IncreationsPMSWeb.Controllers
             FillClientType();
             FillProjectType();
             FillModeOfContact();
-           
-        }
+             }
         void FillClientType()
         {
 
@@ -85,6 +84,7 @@ namespace IncreationsPMSWeb.Controllers
             ViewBag.ModeOfContact = new SelectList((new DropdownRepository()).GetModeOfContact(), "Id", "Name");
 
         }
+
         public ActionResult PendingEnquiryStatus()
         {
             //return View();
@@ -173,8 +173,73 @@ namespace IncreationsPMSWeb.Controllers
 
         public ActionResult Projects()
         {
-            return View();
+            FillDropdownsProject();
+            Projects Projects = new Projects();
+            Projects.ProjectTask = new List<ProjectTask>();
+            Projects.ProjectTask.Add(new ProjectTask());
+            Projects.ProjectPaymentSchedule = new List<ProjectPaymentSchedule>();
+            Projects.ProjectPaymentSchedule.Add(new ProjectPaymentSchedule());
+            Projects.ProjectRefNo = new ProjectsRepository().GetRefNo(Projects);
+            Projects.ProjectDate = DateTime.Now;
+            Projects.ProjectTask[0].StartDate= DateTime.Now;
+            Projects.ProjectTask[0].EndDate = DateTime.Now;
+            Projects.ProjectPaymentSchedule[0].Date = DateTime.Now;
+            //Projects.ProjectPaymentSchedule[0].Date = DateTime.Now;
+            return View(Projects);
         }
+        void FillDropdownsProject()
+        {
+            FillClient();
+        }
+        void FillClient()
+        {
+
+            ViewBag.ClientId = new SelectList((new DropdownRepository()).GetClient(), "Id", "Name");
+
+        }
+        public JsonResult GetClientContactDetailsByKey(int Id)
+        {
+            var details = (new ProjectsRepository()).GetClientContactDetails(Id);
+            return Json(new { Success = true, MobileNo = details.MobileNo, Email = details.Email, Address1 = details.Address1, Address2 = details.Address2, Address3 = details.Address3 }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult Projects(Projects model)
+        {
+            //model.OrganizationId = OrganizationId;
+            //model.CreatedDate = System.DateTime.Now;
+            //model.CreatedBy = UserID.ToString();
+
+            var repo = new ProjectsRepository();
+            //bool isexists = repo.IsFieldExists(repo.ConnectionString(), "Projects", "SubName", model.SubName, null, null);
+            //if (!isexists)
+            {
+                var result = new ProjectsRepository().Insert(model);
+                if (result.ProjectId > 0)
+                {
+
+                    TempData["Success"] = "Added Successfully!";
+                    TempData["ProjectRefNo"] = result.ProjectRefNo;
+                    return RedirectToAction("Projects");
+                }
+
+                else
+                {
+                    TempData["error"] = "Oops!!..Something Went Wrong!!";
+                    TempData["ProjectRefNo"] = null;
+                    return View("Projects", model);
+                }
+
+            }
+            //else
+            //{
+
+            //    TempData["error"] = "This Name Alredy Exists!!";
+            //    TempData["ProjectRefNo"] = null;
+            //    return View("Create", model);
+            //}
+
+        }
+
         public ActionResult PendingProjects()
         {
             return View();

@@ -40,5 +40,11 @@ namespace IncreationsPMSWeb.Controllers
 
             }
         }
+        public int OrganizationId
+        {
+            get { return 1; }
+            set { }
+        }
+
     }
 }

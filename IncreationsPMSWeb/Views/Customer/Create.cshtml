@@ -1,0 +1,259 @@
+﻿@model IncreationsPMSDomain.Client
+@{
+    ViewBag.Title = "Client";
+}
+
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Client</h1>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "box_form" }))
+    { 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <label>Client Name</label>
+                        @*<input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.ClientName, new { @class = "form_input" })
+                        @Html.ValidationMessageFor(m => m.ClientName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+         <div class="row">                                        
+            <div class="col-md-12">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                
+                        @*<input type="text" class="form_input" />*@
+                        @Html.HiddenFor(m => m.ClientId)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Client Short Name</label>
+                        @*<input type="text" class="form_input half" />*@
+                        @Html.TextBoxFor(m => m.ClientShortName, new { @class = "form_input half" })
+                        @Html.ValidationMessageFor(m => m.ClientShortName, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+        <hr />
+        <h2>Contact Details</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Name</label>
+                        @*<input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form_input" })
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Designation</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.Designation, new { @class = "form_input" })
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Office No.</label>
+                        @*<input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.OfficeNo, new { @class = "form_input" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Mobile No.</label>
+                        @*<input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input" })
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Email ID</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form_input" })
+                     @*   @Html.ValidationMessageFor(m => m.Email, "Invalid email address", new { @class = "text-danger" })*@
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Pin</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.Pin, new { @class = "form_input" })
+                    @*    @Html.ValidationMessageFor(m => m.Pin, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>District</label>
+                        @*<select class="form_input">
+                                <option value="">Ernakulam</option>
+                                <option value="">Iddukki</option>
+                            </select>*@
+                        @Html.DropDownListFor(m => m.District, new SelectList(ViewBag.District, "Value", "Text", Model.District), "Select District", new { @class = "form_input" })
+
+                       @* @Html.DropDownListFor(m => Model.SalesMgId, (SelectList)ViewBag.SalesManager, "Select Manager", new { @class = "form_input", autocomplete = "off" })*@
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <hr />
+        <h2>Billing Address</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Address 1</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.Address1, new { @class = "form_input" })
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Address 2</label>
+                        @*<input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.Address2, new { @class = "form_input" })
+                    </div>
+
+
+
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row form-group">
+
+                    <div class="col-md-12">
+                        <label>Address 3</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.Address3, new { @class = "form_input" })
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row form-group">
+
+
+
+                    <div class="col-md-6">
+                        <label>Credit Period</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.CreditPeriod, new { @class = "form_input" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Credit Amount</label>
+                        @* <input type="text" class="form_input" />*@
+                        @Html.TextBoxFor(m => m.CreditLimit, new { @class = "form_input" })
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                <button type="button" class="form-button" onclick="Previous()">Previous</button>
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                @if (actionName == "Edit")
+                {
+                    <button type="submit" class="form-button right">Update</button>
+                }
+                else if (actionName == "Delete")
+                {
+                    <button type="submit" class="form-button right">Delete</button>
+                }
+                else
+                {
+                    <button type="submit" class="form-button right">Save</button>
+                }                        
+
+            </div>
+
+        </div>
+    }
+</div>
+
+
+<script>
+    function Previous() {
+        var url = '@Url.Action("Index", "Customer")'
+        window.location = url;
+    }
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+    $(function () {
+        if ('@Model.District' != '0')
+        {
+
+            $('#District').val(@Model.District);
+        }
+
+      
+    })
+</script>
