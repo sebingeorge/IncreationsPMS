@@ -192,10 +192,10 @@
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>P No</label>
                     @Html.HiddenFor(m => m.ProjectId)
-                    @Html.TextBoxFor(m => m.ProjectRefNo, new { @class = "form_input half" })
+                    @Html.TextBoxFor(m => m.ProjectRefNo, new { @class = "form_input" })
                     @Html.ValidationMessageFor(m => m.ProjectRefNo, "", new { @class = "text-danger" })
                   </div>
                 <div class="col-md-6">
@@ -224,7 +224,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Contact No</label>
-                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input half", @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input", @readonly = "readonly" })
                    </div>
             </div>
         </div> 
@@ -232,7 +232,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Email</label>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form_input half", @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form_input", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -248,7 +248,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Address 1</label>
-                    @Html.TextBoxFor(m => m.Address1, new { @class = "form_input half", @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.Address1, new { @class = "form_input", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -257,7 +257,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Address 2</label>
-                    @Html.TextBoxFor(m => m.Address2, new { @class = "form_input half", @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.Address2, new { @class = "form_input", @readonly = "readonly" })
                 </div>
             </div>
         </div>
@@ -266,7 +266,7 @@
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Address 3</label>
-                    @Html.TextBoxFor(m => m.Address3, new { @class = "form_input half", @readonly = "readonly" })
+                    @Html.TextBoxFor(m => m.Address3, new { @class = "form_input", @readonly = "readonly" })
                 </div>
             </div>
         </div>

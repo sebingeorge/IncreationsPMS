@@ -3712,12 +3712,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .input-group-btn {
   width: 1%;
   white-space: nowrap;
-  vertical-align: middle;
+
 }
 
 .input-group-addon {
-  padding: 6px 12px;
-  font-size: 14px;
+  padding: 0 5px;
+  font-size: 11px;
   font-weight: normal;
   line-height: 1;
   text-align: center;

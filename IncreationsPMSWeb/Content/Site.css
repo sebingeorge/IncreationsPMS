@@ -172,10 +172,14 @@ textarea {
     width:100%;
     border:1px solid #a1b943;
     color:#313c04;
-    margin-bottom:6px;
+    /*margin-bottom:6px;*/
     font-size:11px;
     border-radius:2px;
     -moz-border-radus:2px;
+}
+.left
+ {
+    float:left;
 }
 .text-area 
 {
@@ -221,6 +225,11 @@ textarea {
     padding-right: 5px;
 
 }
+.status-update input[type="radio"], input[type="checkbox"]
+ {
+    margin-top:0;
+}
+
     .Select .btn:hover 
     {
      color:#75d2f0;
