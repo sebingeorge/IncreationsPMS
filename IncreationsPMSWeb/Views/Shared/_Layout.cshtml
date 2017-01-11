@@ -10,8 +10,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/bundles/toasterStyle")
     @Scripts.Render("~/bundles/toasterScript")
-    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>*@
     <link href="~/Content/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
   
   
@@ -96,14 +96,14 @@
                         </ul>
                     </div>
                     @*<a href="@Url.Action("PendingProjectStatus", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-3"><span><img src="~/Content/Images/icon/estimate.png" /></span>Project Status</a>*@
-                    <a href="@Url.Action("PendingProjects", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Projects</a>
+                    <a href="@Url.Action("PendingProjects", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/projects.png" /></span>Projects</a>
                     <a href="@Url.Action("PendingBOQPreparing", "BOQ")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>BOQ Preparing</a>
-                    <a href="@Url.Action("WorkStatus", "BOQ")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Work Status</a>
-                    <a href="@Url.Action("SubContractorPayment", "Payment")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Sub Contractor Payment</a>
-                    <a href="@Url.Action("PaymentFollowup", "Payment")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Payment Follow up</a>
-                    <a href="@Url.Action("TimeTrack", "TimeTrack")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Time Track</a>
-                    <a href="@Url.Action("LabourEntering", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Labour Entering</a>
-                    <a href="@Url.Action("MaterialEntering", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/boq.png" /></span>Material Entering</a>
+                    <a href="@Url.Action("WorkStatus", "BOQ")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/work-status.png" /></span>Work Status</a>
+                    <a href="@Url.Action("SubContractorPayment", "Payment")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/payment.png" /></span>Sub Contractor Payment</a>
+                    <a href="@Url.Action("PaymentFollowup", "Payment")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/followup.png" /></span>Payment Follow up</a>
+                    <a href="@Url.Action("TimeTrack", "TimeTrack")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/timetrack.png" /></span>Time Track</a>
+                    <a href="@Url.Action("LabourEntering", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/entering.png" /></span>Labour Entering</a>
+                    <a href="@Url.Action("MaterialEntering", "EnquiryBooking")" data-toggle="collapse" data-target="#first-level-4"><span><img src="~/Content/Images/icon/entering.png" /></span>Material Entering</a>
                     @*<a href="@Url.Action("Payment", "Payment")" data-toggle="collapse" data-target="#first-level-5"><span><img src="~/Content/Images/icon/payable.png" /></span>Payment</a>*@
                     @*<a href="@Url.Action("Purchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-5"><span><img src="~/Content/Images/icon/purchaseindent.png" /></span>Purchase Indent</a>
                     <a href="@Url.Action("PendingPurchaseindent", "Purchase")" data-toggle="collapse" data-target="#first-level-6"><span><img src="~/Content/Images/icon/purchaseorder.png" /></span>Purchase Order</a>
@@ -128,7 +128,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="@Url.Action("SampleD", "Sample")" data-toggle="collapse" data-target="#first-level-12"><span><img src="~/Content/Images/icon/dailyactivityreport.png" /></span>Work Details</a>
+                    <a href="@Url.Action("SampleD", "Sample")" data-toggle="collapse" data-target="#first-level-12"><span><img src="~/Content/Images/icon/details.png" /></span>Work Details</a>
 
 
 

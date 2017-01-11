@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
-                <div class="col-md-6">
+                <div class="col-md-4">
                  <label>En No</label>
                     @Html.HiddenFor(m => m.EnquiryId, new { @class = "form_input", autocomplete = "off" })
                     @Html.TextBoxFor(m => m.EnquiryRef, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
@@ -142,14 +142,14 @@
     </div>
     <hr />
     <div class="row">
-        <div class="table-responsive  col-md-offset-7 col-md-5">
+        <div class="table-responsive  col-md-offset-5 col-md-7">
             <table class="table table-bordered" id="tab_logic">
 
                 <tbody>
 
                     <tr>
 
-                        <td><h2>Status Update</h2></td>
+                        <td><br /><h2>Status Update</h2></td>
                         <td class="main-check">
                             @*<input type="checkbox" name="" value="" class="check"> Profile Sending
                             <input type="checkbox" name="" value="" class="check"> Offer Sending
@@ -157,20 +157,36 @@
                           
                                <div class="row">
                                 <div class="col-md-4">
-                                    @Html.CheckBoxFor(model => model.EnquiryProfileSending)
-                                   @* @Html.CheckBoxFor(m => m.EnquiryProfileSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
-                                    <label for="name">Profile Sending</label>
+                                    <table>
+                                        <tr>
+                                            <td>@Html.CheckBoxFor(model => model.EnquiryProfileSending)</td>
+                                            @* @Html.CheckBoxFor(m => m.EnquiryProfileSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
+                                            <td><label for="name">Profile Sending</label></td>
+</tr>
+                                    </table>
                                 </div>
-                                <div class="col-md-4">
-                                    @Html.CheckBoxFor(model => model.EnquiryOfferSending)
-                                 @*   @Html.CheckBoxFor(m => m.EnquiryOfferSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
-                                    <label for="name">Offer Sending</label>
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.CheckBoxFor(model => model.EnquiryLayoutReceiving)
-                                   @* @Html.CheckBoxFor(m => m.EnquiryLayoutReceiving, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
-                                    <label for="name">Layout Receiving</label>
-                                </div>
+                                   <div class="col-md-4">
+                                       <table>
+                                           <tr>
+                                               <td>
+                                                   @Html.CheckBoxFor(model => model.EnquiryOfferSending)
+                                               </td>
+                                                   @*   @Html.CheckBoxFor(m => m.EnquiryOfferSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
+                                               <td><label for="name">Offer Sending</label></td>
+</tr>
+                                       </table>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <table>
+                                           <tr>
+                                               <td>
+                                                   @Html.CheckBoxFor(model => model.EnquiryLayoutReceiving)
+                                                   </td>
+                                               @* @Html.CheckBoxFor(m => m.EnquiryLayoutReceiving, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
+                                               <td><label for="name">Layout Receiving</label></td>
+</tr>
+                                       </table>
+                                   </div>
                             </div>
                             
 

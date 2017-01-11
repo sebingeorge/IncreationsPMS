@@ -162,12 +162,15 @@
     <Content Include="Content\images\icon\boq.png" />
     <Content Include="Content\images\icon\customer.png" />
     <Content Include="Content\images\icon\dailyactivityreport.png" />
+    <Content Include="Content\images\icon\details.png" />
     <Content Include="Content\images\icon\endorsement.png" />
     <Content Include="Content\images\icon\enquiry.png" />
     <Content Include="Content\images\icon\enquirystatus.png" />
+    <Content Include="Content\images\icon\entering.png" />
     <Content Include="Content\images\icon\estimate.png" />
     <Content Include="Content\images\icon\filter.png" />
     <Content Include="Content\images\icon\finance.png" />
+    <Content Include="Content\images\icon\followup.png" />
     <Content Include="Content\images\icon\grn.png" />
     <Content Include="Content\images\icon\insurancecompany.png" />
     <Content Include="Content\images\icon\insuranceproduct.png" />
@@ -178,7 +181,9 @@
     <Content Include="Content\images\icon\operation.png" />
     <Content Include="Content\images\icon\payable.png" />
     <Content Include="Content\images\icon\payablereport.png" />
+    <Content Include="Content\images\icon\payment.png" />
     <Content Include="Content\images\icon\policyrenewal.png" />
+    <Content Include="Content\images\icon\projects.png" />
     <Content Include="Content\images\icon\purchaseindent.png" />
     <Content Include="Content\images\icon\purchaseorder.png" />
     <Content Include="Content\images\icon\receivable.png" />
@@ -187,6 +192,8 @@
     <Content Include="Content\images\icon\salesachivementreport.png" />
     <Content Include="Content\images\icon\salestarget.png" />
     <Content Include="Content\images\icon\subcontractor.png" />
+    <Content Include="Content\images\icon\timetrack.png" />
+    <Content Include="Content\images\icon\work-status.png" />
     <Content Include="Content\images\icon_nav.png" />
     <Content Include="Content\images\interior.jpg" />
     <Content Include="Content\images\interior1.jpg" />

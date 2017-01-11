@@ -24,10 +24,10 @@
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>En No</label>
                     @Html.HiddenFor(m => m.EnquiryId)
-                    @Html.TextBoxFor(m => m.EnquiryRef, new { @class = "form_input half" })
+                    @Html.TextBoxFor(m => m.EnquiryRef, new { @class = "form_input" })
                     @Html.ValidationMessageFor(m => m.EnquiryRef, "", new { @class = "text-danger" })
                 </div>
 
