@@ -49,6 +49,7 @@
     <Compile Include="EnquiryStatus.cs" />
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="PendingEnquiryStatus.cs" />
+    <Compile Include="PendingProjects.cs" />
     <Compile Include="ProjectPaymentSchedule.cs" />
     <Compile Include="Projects.cs" />
     <Compile Include="ProjectTask.cs" />

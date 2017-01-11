@@ -242,7 +242,89 @@ namespace IncreationsPMSWeb.Controllers
 
         public ActionResult PendingProjects()
         {
-            return View();
+            
+            var repo = new ProjectsRepository();
+            IEnumerable<PendingProjects> PendingProjects = repo.GetPendingProjects();
+            return View(PendingProjects);
+        }
+        public ActionResult ProjectsDisplay(int ProjectId)
+            //(int? ProjectId)
+        {
+            if (ProjectId == 0)
+            {
+                TempData["error"] = "That was an invalid/unknown request.";
+                return RedirectToAction("Index", "Home");
+            }
+            ProjectsRepository repo = new ProjectsRepository();
+            FillDropdownsProject();
+            Projects model = repo.GetProjectsDetails(ProjectId);
+            //(ProjectId ?? 0)
+            //model.ProjectTask = new List<ProjectTask>();
+            //model.ProjectTask.Add(new ProjectTask());
+            //model.ProjectPaymentSchedule = new List<ProjectPaymentSchedule>();
+            //model.ProjectPaymentSchedule.Add(new ProjectPaymentSchedule());
+            model.ProjectTask = repo.GetTaskDetails(ProjectId);
+
+            if (model.ProjectTask.Count == 0)
+                model.ProjectTask.Add(new ProjectTask());
+
+            model.ProjectPaymentSchedule = repo.GetPaymentDetails(ProjectId);
+
+            if (model.ProjectPaymentSchedule.Count == 0)
+                model.ProjectPaymentSchedule.Add(new ProjectPaymentSchedule());
+
+            return View("Projects", model);
+        }
+        [HttpPost]
+        public ActionResult ProjectsDisplay(Projects model)
+        {
+            //ViewBag.Title = "Edit";
+            //model.OrganizationId = OrganizationId;
+            //model.CreatedDate = System.DateTime.Now;
+            //model.CreatedBy = UserID.ToString();
+
+            FillDropdownsProject();
+
+            var repo = new ProjectsRepository();
+            //var result1 = new ProjectsRepository().CHECK(model.ProjectId);
+            //if (result1 > 0)
+            //{
+            //    TempData["error"] = "Sorry! Already Used.";
+            //    TempData["GRNNo"] = null;
+            //    return View("Edit", model);
+            //}
+
+            //else
+            {
+                try
+                {
+                    var result = new ProjectsRepository().UpdateProjects(model);
+                    if (result.ProjectId > 0)
+                    {
+                        TempData["success"] = "Updated successfully. (" + result.ProjectRefNo + ")";
+                        TempData["ProjectRefNo"] = result.ProjectRefNo;
+                       return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                //catch (SqlException)
+                //{
+                //    TempData["error"] = "Some error occured while connecting to database. Please check your network connection and try again.";
+                //}
+                //catch (NullReferenceException)
+                //{
+                //    TempData["error"] = "Some required data was missing. Please try again.";
+                //}
+                catch (Exception)
+                {
+                    TempData["error"] = "Some error occured. Please try again.";
+                }
+                return RedirectToAction("Index", "Home");
+            }
+
         }
         public ActionResult ProjectStatus()
         {

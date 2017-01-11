@@ -180,6 +180,12 @@
         }
     }
 
+    @*function Update(ProjectId) {
+        alert(ProjectId);
+        var url = '@Url.Action("ProjectsDisplay")';
+        url += "/" + ProjectId
+        window.location = url;
+    }*@
 </script>
 
 
@@ -188,7 +194,9 @@
         <h1>Projects</h1>
     </div>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Projects" }))
-{
+  
+
+    {
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
@@ -426,9 +434,18 @@
         <div class="row">
             <hr />
             <div class="col-md-12">
+              @if (actionName == "ProjectsDisplay")
+              {
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="submit" class="form-button right">Update</button>
+                @*<button type="button" class="form-button right" onclick="Update('@Model.ProjectId')">Update</button>*@
+              }
+              else
+              {
                 <button type="button" class="form-button right" onclick="Exit()">Exit</button>
                 <button type="submit" class="form-button right">Save</button>
-        
+              }
+
 
             </div>
 

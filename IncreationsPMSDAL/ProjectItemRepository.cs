@@ -32,5 +32,22 @@ namespace IncreationsPMSDAL
                 throw;
             }
         }
+
+        public int DeleteTask(int Id, IDbConnection connection, IDbTransaction txn)
+        {
+            string sql = @"Delete FROM ProjectTask  WHERE ProjectId=@Id";
+            {
+                var id = connection.Execute(sql, new { Id = Id }, txn);
+                return id;
+            }
+        }
+        public int DeletePayment(int Id, IDbConnection connection, IDbTransaction txn)
+        {
+            string sql = @"Delete FROM ProjectPaymentSchedule  WHERE ProjectId=@Id";
+            {
+                var id = connection.Execute(sql, new { Id = Id }, txn);
+                return id;
+            }
+        }
     }
 }

@@ -109,5 +109,169 @@ namespace IncreationsPMSDAL
                 return objProjects;
             }
         }
+
+        public IEnumerable<PendingProjects> GetPendingProjects()
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+
+                string query = @"SELECT
+                                 hd.ProjectId,ProjectRefNo,ProjectDate,ClientName,
+                                  Description,StartDate,EndDate
+                                  from Project hd
+                                  inner join ProjectTask task on task.ProjectId =hd.ProjectId
+                                  inner join ProjectPaymentSchedule sh on sh.ProjectId =hd.ProjectId
+                                  inner join Client c on c.ClientId =hd.ClientId
+                                  order by ProjectDate";
+
+                return connection.Query<PendingProjects>(query);
+            }
+        }
+
+        public Projects GetProjectsDetails(int ProjectId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string qry = "select ProjectId,ProjectRefNo, convert (varchar(50), ProjectDate, 103)ProjectDate,";
+                       qry += " hd.ClientId ClientId,MobileNo,Email,Address1,Address2,Address3";
+                       qry += " from Project hd ";
+                       qry += " inner join Client c on c.ClientId =hd.ClientId";
+                       qry += " where ProjectId = " + ProjectId.ToString();
+
+                Projects Projects = connection.Query<Projects>(qry).FirstOrDefault();
+                return Projects;
+            }
+        }
+
+       public List<ProjectTask> GetTaskDetails(int ProjectId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string qry = "select hd.ProjectId,MileStoneName,TaskName,StartDate,EndDate";
+                       qry += " from Project hd  ";
+                       qry += " inner join ProjectTask task on task.ProjectId=hd.ProjectId";
+                       qry += " where task.ProjectId = " + ProjectId.ToString();
+                       return connection.Query<ProjectTask>(qry).ToList();
+            }
+        }
+        public List<ProjectPaymentSchedule> GetPaymentDetails(int ProjectId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string qry = "select hd.ProjectId,Date,Description,Percentage,Amount";
+                qry += " from Project hd  ";
+                qry += " inner join  ProjectPaymentSchedule pay on pay.ProjectId=hd.ProjectId";
+                qry += " where pay.ProjectId = " + ProjectId.ToString();
+                return connection.Query<ProjectPaymentSchedule>(qry).ToList();
+            }
+        }
+
+        public Projects UpdateProjects(Projects model)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                IDbTransaction txn = connection.BeginTransaction();
+                try
+                {
+               
+                    //model.ProjectTask = model.ProjectTask
+                    //    .Where(x => (x.AdditionId != null || x.AdditionId != 0) && x.Addition > 0)
+                    //    .Sum(x => x.Addition);
+                    //model.ProjectPaymentSchedule = model.ProjectPaymentSchedule
+                    //    .Where(x => (x.DeductionId != null || x.DeductionId != 0) && x.Deduction > 0)
+                    //    .Sum(x => x.Deduction);
+
+                    //string sql = @"UPDATE Projects SET 
+                    //          ProjectEnquiry = @ProjectEnquiry WHERE ProjectId = @ProjectId";
+                    //var id = connection.Execute(sql, model, txn);
+
+                    int output = new ProjectItemRepository().DeleteTask(model.ProjectId, connection, txn);
+
+                    output = new ProjectItemRepository().DeletePayment(model.ProjectId, connection, txn);
+
+                    output = InsertProjectDT(model, connection, txn);
+
+                    //InsertLoginHistory(dataConnection, model.CreatedBy, "Update", "Projects", id.ToString(), "0");
+
+                    txn.Commit();
+                    return model;
+                }
+                catch (Exception)
+                {
+                    txn.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public int InsertProjectDT(Projects model, IDbConnection connection, IDbTransaction txn)
+        {
+
+            //model.Items = model.Items.Where(m => m.AcceptedQuantity > 0).ToList<GRNItem>();
+            //if (model.Items != null && model.Items.Count > 0)
+            //{
+            //    try
+            //    {
+            //        foreach (var item in model.Items)
+            //        {
+            //            item.GRNId = model.GRNId;
+            //            item.Amount = item.AcceptedQuantity * item.Rate;
+            //            new GRNItemRepository().InsertGRNItem(item, connection, txn);
+            //            new StockUpdateRepository().InsertStockUpdate(
+            //                new StockUpdate
+            //                {
+            //                    CreatedBy = model.CreatedBy,
+            //                    CreatedDate = model.CreatedDate,
+            //                    OrganizationId = model.OrganizationId,
+            //                    ItemId = item.ItemId,
+            //                    Quantity = item.AcceptedQuantity,
+            //                    StockInOut = "IN",
+            //                    StockPointId = model.StockPointId,
+            //                    StockType = model.isDirectPurchaseGRN ? "DirectGRN" : "GRN",
+            //                    StocktrnId = model.GRNId,
+            //                    StockUserId = model.GRNNo,
+            //                    stocktrnDate = model.GRNDate
+            //                }, connection, txn);
+            //        }
+
+
+                    
+            foreach (var ProjectTask in model.ProjectTask)
+            {
+                if ((ProjectTask.MileStoneName == null)) continue;
+                new ProjectItemRepository().InsertProjectTask(new ProjectTask
+                {
+                    ProjectId = model.ProjectId,
+                    MileStoneName = ProjectTask.MileStoneName,
+                    TaskName = ProjectTask.TaskName,
+                    StartDate = ProjectTask.StartDate,
+                    EndDate = ProjectTask.EndDate
+                }, connection, txn);
+
+            }
+
+                                  
+         foreach (var ProjectPaymentSchedule in model.ProjectPaymentSchedule)
+            {
+                if ((ProjectPaymentSchedule.Description == null)) continue;
+                new PaymentScheduleItemRepository().InsertProjectPaymentSchedule(new ProjectPaymentSchedule
+                {
+                    ProjectId = model.ProjectId,
+                    Paymentid = ProjectPaymentSchedule.Paymentid,
+                    Date = ProjectPaymentSchedule.Date,
+                    Description = ProjectPaymentSchedule.Description,
+                    Percentage = ProjectPaymentSchedule.Percentage,
+                    Amount = ProjectPaymentSchedule.Amount
+                }, connection, txn);
+
+            }
+
+            return 1;
+
+        }
+
+
+
     }
+
 }
