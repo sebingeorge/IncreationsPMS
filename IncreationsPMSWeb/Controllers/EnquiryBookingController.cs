@@ -18,10 +18,11 @@ namespace IncreationsPMSWeb.Controllers
         {
             //ViewBag.Title = "Create";
             FillDropdowns();
-            EnquiryBooking EnquiryBooking = new EnquiryBooking();
+             EnquiryBooking EnquiryBooking = new EnquiryBooking();
             EnquiryBooking.EnquiryRef = new EnquiryBookingRepository().GetRefNo(EnquiryBooking);
+            EnquiryBooking.EnquiryDate = DateTime.Now;
             return View(EnquiryBooking);
-
+            
         }
         [HttpPost]
         public ActionResult EnquiryBooking(EnquiryBooking model)
@@ -90,7 +91,7 @@ namespace IncreationsPMSWeb.Controllers
             //return View();
             var repo = new EnquiryBookingRepository();
             IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus();
-            return View(PendingEnquiryStatus);
+           return View(PendingEnquiryStatus);
         }
     
 

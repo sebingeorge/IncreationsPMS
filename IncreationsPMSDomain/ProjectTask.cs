@@ -10,7 +10,7 @@ namespace IncreationsPMSDomain
 {
  public   class ProjectTask
     {
-        public int? TaskId { get; set; }
+        public int? ProjectTaskId { get; set; }
         public string MileStoneName { get; set; }
         public string TaskName { get; set; }
         public DateTime StartDate { get; set; }

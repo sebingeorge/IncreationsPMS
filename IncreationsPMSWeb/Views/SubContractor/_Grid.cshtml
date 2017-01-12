@@ -2,17 +2,17 @@
 
 @*@using GridMvc.Html*@
 @*<div class="table-responsive scroll3">
-    @Html.Grid(Model).Columns(columns =>
-    {
-        columns.Add(m => m.SubRefNo).Titled("Ref No.").SetWidth(12);
-        columns.Add(m => m.SubName).Titled("Subcontractor").SetWidth(7);
-        columns.Add(m => m.ContactPerson).Titled("Contact Person").SetWidth(7);
-        columns.Add(m => m.Email).Titled("Email").SetWidth(7);
-        columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Edit", new { Id = m.SubId })">Edit</a>);
-        columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Delete", new { Id = m.SubId })">Delete</a>);
+        @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(m => m.SubRefNo).Titled("Ref No.").SetWidth(12);
+            columns.Add(m => m.SubName).Titled("Subcontractor").SetWidth(7);
+            columns.Add(m => m.ContactPerson).Titled("Contact Person").SetWidth(7);
+            columns.Add(m => m.Email).Titled("Email").SetWidth(7);
+            columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Edit", new { Id = m.SubContractorId })">Edit</a>);
+            columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Delete", new { Id = m.SubContractorId })">Delete</a>);
 
-    }).WithPaging(15)
-</div>*@
+        }).WithPaging(15)
+    </div>*@
 
 <table class="table table-bordered table-hover">
     <thead>
@@ -40,7 +40,7 @@
                     <td>@item.OfficeNo</td>
                     <td>@item.MobileNo</td>
                     <td>
-                        <center><input type="button" class="form-button5" value="Select" title="Select to view details" onclick="Open(@item.SubId)" /></center>
+                        <center><input type="button" class="form-button5" value="Select" title="Select to view details" onclick="Open(@item.SubContractorId)" /></center>
           </td>
                 </tr>
             }

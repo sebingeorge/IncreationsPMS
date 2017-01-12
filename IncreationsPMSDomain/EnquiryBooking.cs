@@ -11,7 +11,7 @@ namespace IncreationsPMSDomain
     {
         public int EnquiryId { get; set; }
         public string EnquiryRef { get; set; }
-        public DateTime? EnquiryDate { get; set; }
+        public DateTime EnquiryDate { get; set; }
         public string  EnquiryClient { get; set; }
         public int? ClientTypeId { get; set; }
         public int? ModeofContactId { get; set; }

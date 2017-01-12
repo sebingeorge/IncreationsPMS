@@ -35,14 +35,14 @@ namespace IncreationsPMSDAL
                     objSubContractor.SubRefNo = internalid.ToString();
 
                     int id = connection.Query<int>(sql, objSubContractor, trn).Single();
-                    objSubContractor.SubId = id;
+                    objSubContractor.SubContractorId = id;
                    //InsertLoginHistory(dataConnection, objSubContractor.CreatedBy, "Create", "Designation", id.ToString(), "0");
                     trn.Commit();
                 }
                 catch (Exception ex)
                 {
                     trn.Rollback();
-                    objSubContractor.SubId = 0;
+                    objSubContractor.SubContractorId = 0;
                     objSubContractor.SubRefNo = null;
                 }
                 return objSubContractor;
@@ -177,14 +177,14 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string query = @"select SubId,SubRefNo,SubName,ContactPerson,Email,OfficeNo,MobileNo
+                string query = @"select SubContractorId,SubRefNo,SubName,ContactPerson,Email,OfficeNo,MobileNo
                 from SubContractor 
                 order by SubName";
                 return connection.Query<SubContractor>(query).ToList();
             }
         }
 
-        public SubContractor GetSubContractorView(int SubId)
+        public SubContractor GetSubContractorView(int SubContractorId)
         {
 
             using (IDbConnection connection = OpenConnection(dataConnection))
@@ -193,17 +193,17 @@ namespace IncreationsPMSDAL
                 IDbTransaction txn = connection.BeginTransaction();
 
                 query = @"select * from SubContractor
-                        where SubId=@SubId";
+                        where SubContractorId=@SubContractorId";
 
                 var model = connection.Query<SubContractor>(query, new
                 {
-                    SubId = SubId
+                    SubContractorId = SubContractorId
                 }, txn).First<SubContractor>();
 
                 //try
                 //{
-                //    query = @"DELETE FROM SubContractor WHERE SubId = @SubId";
-                //    connection.Execute(query, new { SubId = SubId }, txn);
+                //    query = @"DELETE FROM SubContractor WHERE SubContractorId = @SubContractorId";
+                //    connection.Execute(query, new { SubContractorId = SubContractorId }, txn);
                 //    txn.Rollback();
 
                 //    model.isUsed = false;
@@ -226,7 +226,7 @@ namespace IncreationsPMSDAL
                 IDbTransaction txn = connection.BeginTransaction();
                 try
                 {
-                    string query = @"DELETE FROM SubContractor OUTPUT deleted.SubRefNo WHERE SubId = @Id;";
+                    string query = @"DELETE FROM SubContractor OUTPUT deleted.SubRefNo WHERE SubContractorId = @Id;";
                     
                     string ref_no = connection.Query<string>(query, new { Id = Id }, txn).First();
                     //InsertLoginHistory(dataConnection, CreatedBy, "Delete", typeof(QuerySheet).Name, Id.ToString(), OrganizationId.ToString());
@@ -251,7 +251,7 @@ namespace IncreationsPMSDAL
                     string query = @"Update SubContractor Set SubRefNo=@SubRefNo,SubName=@SubName,ContactPerson=@ContactPerson,
                                    Designation=@Designation,OfficeNo=@OfficeNo,MobileNo=@MobileNo,Email=@Email,Address1=@Address1,
                                    Address2=@Address2,Address3=@Address3,Address4=@Address4  
-                                   OUTPUT INSERTED.SubId WHERE SubId=@SubId";
+                                   OUTPUT INSERTED.SubContractorId WHERE SubContractorId=@SubContractorId";
                     
                     string ref_no = connection.Query<string>(query, model, txn).First();
                     //InsertLoginHistory(dataConnection, CreatedBy, "Delete", typeof(QuerySheet).Name, Id.ToString(), OrganizationId.ToString());

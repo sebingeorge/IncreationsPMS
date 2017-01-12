@@ -5,7 +5,7 @@
         <div class="row form-group">
             <div class="col-md-2">
                 <label>Code</label>
-                @Html.HiddenFor(m => m.SubId)
+                @Html.HiddenFor(m => m.SubContractorId)
                 @Html.TextBoxFor(m => m.SubRefNo, new { @class = "form_input half" })
                 @Html.ValidationMessageFor(m => m.SubRefNo, "", new { @class = "text-danger" })
             </div>

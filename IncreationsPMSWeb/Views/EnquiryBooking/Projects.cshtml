@@ -68,6 +68,28 @@
         $(".numbers-only").keypress(function (e) {
             if (e.which == 8 || (e.which == 46 && $(this).val().indexOf('.') == -1) || (e.which > 47 && e.which < 58)) { } else { return false; }
         });
+        Append_Date();
+        resetValues(i);
+    }
+    function resetValues(index) {
+        $("#ProjectTask_" + index + "__ProjectTaskId").val('');
+        $("#ProjectTask_" + index + "__MileStoneName").val('');
+        $("#ProjectTask_" + index + "__TaskName").val('');
+        $("#del_" + index).removeClass('hide');
+
+    }
+    function Append_Date() {
+        $('.form_date').datetimepicker({
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'dd-M-yyyy',
+        });
     }
 
     function TaskDelete(index) {
@@ -87,7 +109,7 @@
         if (i > 1) {
             $("#Row_ProjectTask_Id_" + index).remove();
             for (var j = index + 1; j < i; j++) {
-                var Id = $("#ProjectTask_" + j + "__TaskId").val();
+                var Id = $("#ProjectTask_" + j + "__ProjectTaskId").val();
                 var MileStoneName = $("#ProjectTask_" + j + "__MileStoneName").val(); 
                 var TaskName = $("#ProjectTask_" + j + "__TaskName").val();
                 var StartDate = $("#ProjectTask_" + j + "__StartDate").val();
@@ -180,12 +202,7 @@
         }
     }
 
-    @*function Update(ProjectId) {
-        alert(ProjectId);
-        var url = '@Url.Action("ProjectsDisplay")';
-        url += "/" + ProjectId
-        window.location = url;
-    }*@
+   
 </script>
 
 
@@ -208,10 +225,12 @@
                   </div>
                 <div class="col-md-6">
                     <label>Date</label>
-                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        @Html.TextBoxFor(m => m.ProjectDate, new { @class = "form_input", @Value = Model.ProjectDate.ToString("dd-MMM-yyyy") })
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
+                           <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            @Html.TextBoxFor(m => m.ProjectDate, new { @class = "form_input", @Value = Model.ProjectDate.ToString("dd-MMM-yyyy") })
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+
+                        </div>
                 </div>
             </div>
         </div>
@@ -337,14 +356,14 @@
                                     <td>
 
                                         <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            @Html.TextBoxFor(model => Model.ProjectTask[i].StartDate, new { @class = "form_input" })
+                                            @Html.TextBoxFor(model => Model.ProjectTask[i].StartDate, new { @class = "form_input", @Value = Model.ProjectTask[i].StartDate.ToString("dd-MMM-yyyy") })
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
 
-                                    </td>
+                                      </td>
                                     <td>
                                         <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            @Html.TextBoxFor(model => Model.ProjectTask[i].EndDate, new { @class = "form_input" })
+                                            @Html.TextBoxFor(model => Model.ProjectTask[i].EndDate, new { @class = "form_input", @Value = Model.ProjectTask[i].EndDate.ToString("dd-MMM-yyyy") })
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </td>

@@ -34,7 +34,7 @@ namespace IncreationsPMSWeb.Controllers
             if (!isexists)
             {
                 var result = new SubContractorRepository().Insert(model);
-                if (result.SubId > 0)
+                if (result.SubContractorId > 0)
                 {
 
                     TempData["Success"] = "Added Successfully!";
@@ -142,7 +142,7 @@ namespace IncreationsPMSWeb.Controllers
                 {
                     TempData["error"] = "Oops! Something went wrong!";
                     TempData["SubRefNo"] = null;
-                    return RedirectToAction("Edit", new { id = model.SubId });
+                    return RedirectToAction("Edit", new { id = model.SubContractorId });
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace IncreationsPMSDomain
         {
 
         }
-        public int SubId { get; set; }
+        public int SubContractorId { get; set; }
         public string SubRefNo { get; set; }
         //[Required]
 
