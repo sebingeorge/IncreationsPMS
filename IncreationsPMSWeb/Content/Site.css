@@ -295,10 +295,10 @@ textarea {
 {
     margin:0;
 }
-.content-in .grid_heading
+.in.content-in .grid_heading
 {
-    /*background-color:#1da2cd !important;*/
-    /*height:20px;*/
+    background-color:#1da2cd !important;
+    height:20px;
 }
 table thead tr th
 {
