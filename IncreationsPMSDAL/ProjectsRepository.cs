@@ -61,6 +61,7 @@ namespace IncreationsPMSDAL
                 string sql = @"INSERT INTO Project(ProjectRefNo,ProjectDate,ClientId,ProjectEnquiry)
                              VALUES(@ProjectRefNo,@ProjectDate,@ClientId,@ProjectEnquiry);
                              SELECT CAST(SCOPE_IDENTITY() as int)";
+
                 try
                 {
                     int internalid = DatabaseCommonRepository.GetInternalIDFromDatabase(connection, trn, typeof(Projects).Name, "0", 1);
@@ -206,36 +207,7 @@ namespace IncreationsPMSDAL
 
         public int InsertProjectDT(Projects model, IDbConnection connection, IDbTransaction txn)
         {
-
-            //model.Items = model.Items.Where(m => m.AcceptedQuantity > 0).ToList<GRNItem>();
-            //if (model.Items != null && model.Items.Count > 0)
-            //{
-            //    try
-            //    {
-            //        foreach (var item in model.Items)
-            //        {
-            //            item.GRNId = model.GRNId;
-            //            item.Amount = item.AcceptedQuantity * item.Rate;
-            //            new GRNItemRepository().InsertGRNItem(item, connection, txn);
-            //            new StockUpdateRepository().InsertStockUpdate(
-            //                new StockUpdate
-            //                {
-            //                    CreatedBy = model.CreatedBy,
-            //                    CreatedDate = model.CreatedDate,
-            //                    OrganizationId = model.OrganizationId,
-            //                    ItemId = item.ItemId,
-            //                    Quantity = item.AcceptedQuantity,
-            //                    StockInOut = "IN",
-            //                    StockPointId = model.StockPointId,
-            //                    StockType = model.isDirectPurchaseGRN ? "DirectGRN" : "GRN",
-            //                    StocktrnId = model.GRNId,
-            //                    StockUserId = model.GRNNo,
-            //                    stocktrnDate = model.GRNDate
-            //                }, connection, txn);
-            //        }
-
-
-                    
+                                            
             foreach (var ProjectTask in model.ProjectTask)
             {
                 if ((ProjectTask.MileStoneName == null)) continue;

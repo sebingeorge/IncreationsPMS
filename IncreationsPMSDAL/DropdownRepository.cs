@@ -50,5 +50,13 @@ namespace IncreationsPMSDAL
                 return connection.Query<Dropdown>("SELECT ClientId Id, ClientName Name FROM Client").ToList();
             }
         }
+        public List<Dropdown> FillSubContractor()
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                var param = new DynamicParameters();
+                return connection.Query<Dropdown>("select SubContractorId Id,SubName Name from SubContractor").ToList();
+            }
+        }
     }
 }

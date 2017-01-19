@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="BOQPreparingRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="DatabaseCommonRepository.cs" />
     <Compile Include="DistrictRepository.cs" />

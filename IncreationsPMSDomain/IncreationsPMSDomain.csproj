@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BOQPreparing.cs" />
+    <Compile Include="PendingBOQPreparing.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="District.cs" />
     <Compile Include="Dropdown.cs" />

@@ -1,250 +1,280 @@
-﻿
+﻿@model IncreationsPMSDomain.BOQPreparing
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+
 @{
     ViewBag.Title = "BOQPreparing";
 }
+<script>
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+    function Delete(id) {
+        var url = '@Url.Action("Delete")';
+        url += "/" + id
+        window.location = url;
+    }
+    function WorkDetails(index) {
+        $('div[id$="_WorkDetails_popup"]').addClass('hide');
 
+        $('#work_' + index + '_WorkDetails_popup').removeClass('hide');
+
+    }
+    function AddWork(Workindex) {
+
+        var i = 0;
+        var no = 1;
+        $('#tab_logic_work' + Workindex + ' input[id^="RowWork_"]').each(function () {
+            var id = this.id;
+            no++;
+            var row = Number(id.replace("RowWork_", ""));
+            if (row > i) {
+                i = row;
+            }
+        });
+        i++;
+
+        var index = (new Date()).getTime(); // unique indexer
+        var clone = $('#tab_logic_work' + Workindex + ' #0').clone(); // clone the BatchProducts item
+
+        clone.html($(clone).html().replace(new RegExp("BOQPreparingItem_" + Workindex + "__BOQPreparingItemWork_0__", "g"), 'BOQPreparingItem_' + Workindex + '__BOQPreparingItemWork_' + i + '__'));
+        clone.html($(clone).html().replace(new RegExp(".BOQPreparingItemWork\\[0].", "g"), ".BOQPreparingItemWork[" + i + "]."));
+        clone.html($(clone).html().replace(/RowWork_0/, 'RowWork_' + i));
+        clone.html($(clone).html().replace(new RegExp("DeleteWork\\(0", "g"), "DeleteWork(" + i));
+        clone.html($(clone).html().replace(new RegExp("TextChanged\\(" + Workindex + ",0", "g"), "TextChanged(" + Workindex + "," + i));
+        clone.html($(clone).html().replace(/sno1/, 'sno' + (i + 1) + ''));
+        clone.html($(clone).html().replace(/this,0/, 'this,' + i + ''));
+        $("#tab_logic_work" + Workindex).append('<tr id="' + i + '">' + clone.html() + '  </tr>');
+        $("#tab_logic_work" + Workindex + " #sno" + (i + 1)).html((i + 1));
+        //Append_Date();
+        resetValues(Workindex, i);
+      
+    }
+    function resetValues(Workindex,i) {
+        $("#BOQPreparingItem_" + Workindex + "__BOQPreparingItemWork_" + i + "__WorkAmount").val(0);
+        $("#BOQPreparingItem_" + Workindex + "__BOQPreparingItemWork_" + i + "__SubContractorId").val('');
+        $("#BOQPreparingItem_" + Workindex + "__BOQPreparingItemWork_" + i + "__ProjectWorkDescription").val('');
+    }
+    function Append_Date() {
+        $('.form_date').datetimepicker({
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'dd-M-yyyy',
+        });
+    }
+    function DeleteWork(index, Workindex) {
+
+        var i = 0;
+        var no = 1;
+        $('#tab_logic_work' + Workindex + ' input[id^="RowWork_"]').each(function () {
+            var id = this.id;
+            no++;
+            var row = Number(id.replace("RowWork_", ""));
+            if (row > i) {
+                i = row;
+            }
+        });
+        i++;
+
+        if (i > 1) {
+            $("#tab_logic_work" + Workindex + " #" + index).remove();
+            for (var j = index + 1; j < i; j++) {
+                var clone = $("#tab_logic_work" + roomindex + "#" + j).clone(true, true);
+                clone.html($(clone).html().replace(new RegExp("BOQPreparingItem_" + Workindex + "__BOQPreparingItemWork_" + j + "__", "g"), 'BOQPreparingItem_' + roomindex + '__BOQPreparingItemWork_' + j - 1 + '__'));
+                clone.html($(clone).html().replace(new RegExp(".BOQPreparingItemWork\\[" + j + "].", "g"), ".BOQPreparingItemWork[" + j - 1 + "]."));
+                clone.html($(clone).html().replace(new RegExp('sno' + (j + 1) + '">' + (j + 1), "g"), 'sno' + (j) + '">' + (j)));
+                clone.html($(clone).html().replace("Delete(" + j, "Delete(" + (j - 1)));
+                clone.html($(clone).html().replace("RowWork_" + j, "RowWork_" + (j - 1)));
+                clone.html($(clone).html().replace("this," + j, "this," + (j - 1)));
+                $("#tab_logic_work" + Workindex + " #" + j).html(clone.html());
+                $("#BOQPreparingItemWork_" + (j - 1) + "__SlNo").val(j);
+                $("#tab_logic_work" + Workindex + " #" + (j)).attr('id', (j - 1));
+            }
+        }
+    }
+</script>
 
 <div class="container in content-in">
     <div class="row">
         <h1>BOQ Preparing</h1>
     </div>
 
-
-    <div class="row">
-
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "BOQPreparing" }))
 
 
- 
+        {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
 
+                    <div class="col-md-1">
+                        <label>Ref No</label>
+                        @Html.HiddenFor(m => m.ProjectWorkId)
+                        @Html.TextBoxFor(m => m.projectWorkRefNo, new { @class = "form_input" })
+                    </div>
 
-        <div class="col-md-12">
-            <div class="row">
+                    <div class="col-md-2">
+                        <label>Date</label>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            @Html.TextBoxFor(m => m.projectWorkDate, new { @class = "form_input", @Value = Model.projectWorkDate.ToString("dd-MMM-yyyy") })
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
 
-                <div class="col-md-1">
-                    <label>ID</label>
-                    <input type="text" class="form_input" />
+                    <div class="col-md-3">
+                        <label>Project</label>
+                        @Html.HiddenFor(m => m.ProjectId)
+                        @Html.TextBoxFor(m => m.ProjectEnquiry, new { @class = "form_input" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Client</label>
+                        @Html.HiddenFor(m => m.ClientId)
+                        @Html.TextBoxFor(m => m.ClientName, new { @class = "form_input" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Prefered by</label>
+                        @Html.TextBoxFor(m => m.PreparedBy, new { @class = "form_input" })
+                    </div>
+
                 </div>
+            </div>
 
-                <div class="col-md-2">
-                    <label>Date</label>
-                    <input type="text" class="form_input" />
-                </div>
 
-                <div class="col-md-3">
-                    <label>Project</label>
-                    <input type="text" class="form_input" />
-                </div>
-                <div class="col-md-3">
-                    <label>Client</label>
-                    <input type="text" class="form_input" />
-                </div>
 
-                <div class="col-md-3">
-                    <label>Prefered by</label>
-                    <input type="text" class="form_input" />
-                </div>
 
+        </div>
+
+
+        <hr />
+
+
+
+        <div class="table-responsive scroll3">
+            @*<span class="filter"><img src="~/Content/images/icon/filter.png" /></span>*@
+            <table class="table table-bordered" id="tab_logic">
+                <thead>
+                    <tr class="grid_heading">
+                        <th width="5%">Project No</th>
+                        <th width="10%">Date</th>
+                        <th width="18%">Milestone</th>
+                        <th width="25%">Task</th>
+                        <th width="30%">Work Detail</th>
+                        <th width="7%" class="text-right">Total Amount</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (int i = 0; i < Model.BOQPreparingItem.Count; i++)
+                {
+                        @*<tr id="Row_ProjectTask_Id_@i">*@
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(m => @Model.BOQPreparingItem[i].ProjectId, new { @class = "form_input", @style = "text-align:left" })
+                                @Html.TextBoxFor(m => @Model.BOQPreparingItem[i].ProjectRefNo, new { @class = "form_input", @style = "text-align:center" })
+                            </td>
+                            <td>
+                                <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    @Html.TextBoxFor(model => Model.BOQPreparingItem[i].ProjectDate, new { @class = "form_input", @Value = Model.BOQPreparingItem[i].ProjectDate.ToString("dd-MMM-yyyy") })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </td>
+
+                            <td>
+                                @Html.TextBoxFor(m => @Model.BOQPreparingItem[i].MileStoneName, new { @class = "form_input", @style = "text-align:left" })
+                            </td>
+                            <td>
+                                @Html.HiddenFor(m => @Model.BOQPreparingItem[i].ProjectTaskId, new { @class = "form_input", @style = "text-align:left" })
+                                @Html.TextBoxFor(m => @Model.BOQPreparingItem[i].TaskName, new { @class = "form_input", @style = "text-align:left" })
+                            </td>
+                            <td onclick="WorkDetails(@i)" class="grid-cell" value="Work Details" data-toggle="modal" data-target="#WorkDetailspopup"><a href="#" class="WorkDetails">Select Work Details</a></td>
+
+                            <td>
+                                @Html.TextBoxFor(m => @Model.BOQPreparingItem[i].TotalAmount, new { @class = "form_input", @readonly = "true", @style = "text-align:right" })
+                                @*<input  class="form_input text-right" readonly />*@
+                            </td>
+
+
+                        </tr>
+                    }
+
+                    <tr class="grid_heading">
+                        <th width="93%" class="text-right" colspan="5">
+                            Total
+                        </th>
+                        <th width="7%" class="text-right">
+                            <span id="baseTotal"></span>
+                        </th>
+                    </tr>
+            </table>
+
+        </div>
+
+        <table class="table table-bordered" id="tab_logic">
+            <thead>
+
+            </thead>
+        </table>
+
+
+    <!-- Work Details Column Click PopUp -->
+        <div id="WorkDetailspopup" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg" style="width:800px">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Work Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="WorkDetails">
+                            @if (Model.BOQPreparingItem != null && Model.BOQPreparingItem.Count > 0)
+                            {
+                                for (int i = 0; i < Model.BOQPreparingItem.Count; i++)
+                                {
+                                    ViewBag.currentIndex = i;
+                                    <div id="work_@(i)_WorkDetails_popup" class="hide">
+                                        @Html.Partial("_WorkDetails", Model)
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
 
 
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                @if (actionName == "ShowDetails")
 
-    </div>
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                        <button type="Submit" class="form-button right">Update</button>
+                        <button type="button" class="form-button left" onclick="Delete(@Model.ProjectWorkId)">Delete</button>
+                }
+                else
 
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="submit" class="form-button right">Save</button>
+                }
+            </div>
 
-    <hr />
-
-
-
-    <div class="table-responsive scroll3">
-        @*<span class="filter"><img src="~/Content/images/icon/filter.png" /></span>*@
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="3%">PtNo</th>
-                    <th width="7%">Date</th>
-                    <th width="15%">Milestone</th>
-                    <th width="15%">Task</th>
-                    <th width="53%">
-                        Work Detail
-                        @*<table class="table_in">
-                            <tr>
-                                <td width="45%" style="color:#fff;"><b>Work</b></td>
-                                <td width="45%" style="color:#fff;"><b>Sub Contractor</b></td>
-                                <td style="color:#fff;"><b>Start</b></td>
-                                <td style="color:#fff;"><b>End</b></td>
-                                <td style="color:#fff;" class="right"><b>Amount</b></td>
-                                <td style="vertical-align:middle"></td>
-                            </tr>
-                            </table>*@
-
-                            </th>
-                            <th width="7%" class="text-right">Total Amount</th>
-
-
-</tr>
-            </thead>
-            <tbody>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>03-11-2016</td>
-                    <td>Drawing Submission</td>
-                    <td>Design and Drawing Submission</td>
-
-                    <td>
-                        <table class="table_in">
-                            <thead>
-                                <tr class="grid_heading">
-                                    <td width="45%" style="color:#fff;"><b>Work</b></td>
-                                    <td width="45%" style="color:#fff;"><b>Sub Contractor</b></td>
-                                    <td style="color:#fff;"><b>Start</b></td>
-                                    <td style="color:#fff;"><b>End</b></td>
-                                    <td style="color:#fff;" class="right"><b>Amount</b></td>
-                                    <td style="vertical-align:middle"></td>
-                                </tr>
-                                </thead>
-                            <tbody>
-                                <tr>
-                                    <td width="45%">Design</td>
-                                    <td width="45%">Lijith</td>
-                                    <td>10-01-2017</td>
-                                    <td>15-01-2017</td>
-                                    <td class="right">3000</td>
-                                    <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick=""></a></td>
-                                </tr>
-                                <tr>
-                                    <td>Drawing</td>
-                                    <td>Raj</td>
-                                    <td>10-01-2017</td>
-                                    <td>15-01-2017</td>
-                                    <td class="right">9000</td>
-                                    <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick=""></a></td>
-                                </tr>
-                                <tr>
-                                    <td>Print</td>
-                                    <td>Jose</td>
-                                    <td>10-01-2017</td>
-                                    <td>15-01-2017</td>
-                                    <td class="right">500</td>
-                                    <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick=""></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td class="text-right">64000</td>
-
-
-
-
-
-                </tr>
-
-
-
-                
-                
-                <tr>
-
-                    <td>101</td>
-                    <td>11-11-2016</td>
-                    <td>Electrical Works</td>
-                    <td>Wiring</td>
-
-                    <td>
-                        <table class="table_in">
-                            <thead>
-                                <tr class="grid_heading">
-                                    <td width="45%" style="color:#fff;"><b>Work</b></td>
-                                    <td width="45%" style="color:#fff;"><b>Sub Contractor</b></td>
-                                    <td style="color:#fff;"><b>Start</b></td>
-                                    <td style="color:#fff;"><b>End</b></td>
-                                    <td style="color:#fff;" class="right"><b>Amount</b></td>
-                                    <td style="vertical-align:middle"></td>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td width="40%">Wiring False ceiling</td>
-                                <td width="40%">Jose</td>
-                                <td>10-01-2017</td>
-                                <td>15-01-2017</td>
-                                <td class="right">8000</td>
-                                <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick=""></a></td>
-                            </tr>
-                            <tr>
-                                <td>Wiring in walls</td>
-                                <td>Rim</td>
-                                <td>10-01-2017</td>
-                                <td>15-01-2017</td>
-                                <td class="right">7000</td>
-                                <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick=""></a></td>
-                            </tr>
-                            <tr>
-                                <td>Fitting of Lights</td>
-                                <td>Tim</td>
-                                <td>10-01-2017</td>
-                                <td>15-01-2017</td>
-                                <td class="right">30000</td>
-                                <td style="vertical-align:middle"><a class="glyphicon glyphicon-plus" style="top:0px" onclick=""></a></td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="text-right">100000</td>
-
-
-
-
-                </tr>
-
-
-
-
-
-            </tbody>
-
-
-
-
-
-        </table>
-
-    </div>
-
-    <table class="table table-bordered" id="tab_logic">
-        <thead>
-            <tr class="grid_heading">
-
-                <th width="93%" class="text-right">
-                    Total
-                </th>
-                <th width="7%" class="text-right">150000</th>
-
-
-            </tr>
-        </thead>
-    </table>
-
-
-
-
-    <div class="row">
-        <hr />
-        <div class="col-md-offset-8 col-md-4">
-            <button type="button" class="form-button right" onclick="Proceed()">Save</button>
-            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
         </div>
 
-    </div>
-
-
-
+    }
 
 </div>
-<script>
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-        }
-</script>

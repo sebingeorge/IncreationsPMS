@@ -24,7 +24,7 @@ namespace IncreationsPMSDAL
                              INSERT INTO [dbo].[MST_SYSTEM_DOCUMENT_SERIALNO]
                               ([MST_UNIQUEID],[MST_DOCUMENTID],[MST_LASTSERIALNO])
                              VALUES(@UNIQUEID,@DOCUMENTTYPEID,0);
-                             IF( @DOUPDATE=1)
+                             IF(@DOUPDATE=1)
                              BEGIN
                              
                              		UPDATE	MST_SYSTEM_DOCUMENT_SERIALNO

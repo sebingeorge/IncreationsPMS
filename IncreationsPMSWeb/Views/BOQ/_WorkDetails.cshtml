@@ -1,0 +1,92 @@
+﻿@model IncreationsPMSDomain.BOQPreparing
+
+@{
+    int currentIndex = ViewBag.currentIndex;
+}
+<script>
+    function TextChanged(baseindex, row)
+    {
+        Cal_Summary(row, baseindex);
+    }
+
+    function Cal_Summary(row, baseindex) {
+        var Total = parseFloat("0");
+        $("#tab_logic_work"+ baseindex + " .ClTotal").each(function (i, obj) {
+           
+            var tot = $(obj).val();
+            //var tot = $(obj).val();
+            //alert(baseindex + "--" + i);
+            if (isNaN(tot)) {
+                tot = Number("0");
+            }
+            Total = (Number(Total) + Number(tot));
+            $("#BOQPreparingItem_" + baseindex + "__TotalAmount").val(Total);
+            CalculateBaseTotal();
+        });
+        //alert(Total);
+    }
+
+    function CalculateBaseTotal() {
+        var total = 0;
+        $('#tab_logic input[id$="__TotalAmount"]').each(function (index, object) {
+            total += Number(isNaN($(object).val()) ? 0 : $(object).val());
+        })
+        $('#baseTotal').text(total);
+    }
+ </script>
+
+<div class="table-responsive scroll2 ">
+    <table style="width:400%" class="table table-bordered" id="tab_logic_work@(currentIndex)">
+        <thead>
+            <tr class="grid_heading">
+                <th width="1%" class="text-center"></th>
+                <th width="2%" class="text-center"><h1>#</h1></th>
+                <td width="40%" style="color:#fff;"><b>Work</b></td>
+                <td width="30%" style="color:#fff;"><b>Sub Contractor</b></td>
+                <td width="10%" style="color:#fff;" nowrap><b>Start</b></td>
+                <td width="10%" style="color:#fff;" nowrap><b>End</b></td>
+                <td style="color:#fff;" class="text-right"><b>Amount</b></td>
+                <td style="vertical-align:middle"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork.Count; i++)
+            {
+                <tr id="@i">
+                    <td style="vertical-align:middle"><a class="glyphicon glyphicon-minus" style="top:0px" onclick="DeleteWork(@i,@currentIndex)"></a></td>
+                    <td align="center">
+                        <input type="hidden" id="RowWork_@i" />
+                        <span id="sno@(i + 1)">@(i + 1)</span>
+                        @Html.HiddenFor(m => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].ProjectTaskId)
+                    </td>
+
+                    <td>@Html.TextBoxFor(m => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].ProjectWorkDescription,new { @class = "form_input" })</td>
+                    @*<td> </td>*@
+
+                        <td>@Html.DropDownListFor(m => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].SubContractorId, new SelectList(ViewBag.SubContractorList, "Value", "Text", Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].SubContractorId), "Select Sub Contractor", new { @class = "form_input" })</td>
+                   <td>
+                       <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                           @Html.TextBoxFor(model => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].PlanedStartDate, new { @class = "form_input", @Value = Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].PlanedStartDate.ToString("dd-MMM-yyyy") })
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                       </div>
+                   </td>
+                    <td>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            @Html.TextBoxFor(model => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].PlanedEndDate, new { @class = "form_input", @Value = Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].PlanedEndDate.ToString("dd-MMM-yyyy") })
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </td>
+                    <td>@Html.TextBoxFor(m => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].WorkAmount, new { @class = "form_input numbers-only text-right ClTotal", @onchange = "TextChanged(" + currentIndex + "," + i + ");", @onkeyup = "TextChanged(" + currentIndex + "," + i + ");", autocomplete = "off" })</td>
+
+                    <td style="vertical-align:middle"><a id="add_row" class="glyphicon glyphicon-plus" style="top:0px" onclick="AddWork(@currentIndex)"></a></td>
+                </tr>
+            }
+            @*<tr class="grid_heading footer">
+                <th class="text-right" colspan="6">Total:</th>
+                <th width="15%" class="text-right"><span id="TotalAmt"></span></th>
+                <th></th>
+            </tr>*@
+        </tbody>
+
+    </table>
+</div>

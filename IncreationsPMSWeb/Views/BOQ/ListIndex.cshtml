@@ -1,0 +1,28 @@
+﻿
+<script>
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+    function Open(id) {
+        var url = '@Url.Action("ShowDetails")';
+        url += "?id=" + id;
+        //alert(id);
+        window.location = url;
+    }
+</script>
+<div class="container content-in">
+    <div class="row">
+        <h1>BOQ List</h1>
+    </div>
+    <br />
+    <div id="BOQPreparing_list">
+        @Html.Action("BOQPrepareList")
+    </div>
+    <div class="row">
+        <hr />
+        <div class="col-md-offset-8 col-md-4">
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+    </div>
+</div>
