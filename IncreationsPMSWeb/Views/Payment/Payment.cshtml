@@ -74,7 +74,7 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="row form-group">
 
@@ -82,7 +82,7 @@
                     <label>Payment Mode</label>
                     @Html.DropDownListFor(m => Model.PaymentModeId, (SelectList)ViewBag.PaymentModeList, "Select Payment Mode", new { @class = "form_input", autocomplete = "off" })
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>Cheque No</label>
                     @Html.TextBoxFor(m => m.ChequeNo, new { @class = "form_input" })
                 </div>
