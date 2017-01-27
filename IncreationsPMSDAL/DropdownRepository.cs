@@ -58,5 +58,13 @@ namespace IncreationsPMSDAL
                 return connection.Query<Dropdown>("select SubContractorId Id,SubName Name from SubContractor").ToList();
             }
         }
+        public List<Dropdown> FillPaymentMode()
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                var param = new DynamicParameters();
+                return connection.Query<Dropdown>("select PaymentModeId Id,PaymentModeName Name from PaymentMode").ToList();
+            }
+        }
     }
 }

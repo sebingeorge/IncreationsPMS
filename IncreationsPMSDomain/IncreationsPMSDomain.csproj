@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BOQPreparing.cs" />
+    <Compile Include="Payment.cs" />
     <Compile Include="PendingBOQPreparing.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="District.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="PendingEnquiryStatus.cs" />
     <Compile Include="PendingProjects.cs" />
+    <Compile Include="PendingSubContractorPayment.cs" />
     <Compile Include="ProjectPaymentSchedule.cs" />
     <Compile Include="Projects.cs" />
     <Compile Include="ProjectTask.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Size.cs" />
     <Compile Include="SubContractor.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="WorkStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

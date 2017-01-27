@@ -1,0 +1,76 @@
+﻿@model List<IncreationsPMSDomain.PendingBOQPreparing>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+   function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+   }
+    function Previous() {
+        var url = '@Url.Action("PreviousPayment", "Payment")'
+        window.location = url;
+    }
+    function Filter() {
+        $("#SubContractorPayment").addClass("fade");
+        var ProjectEnquiry = $("#ProjectEnquiry").val().trim();
+        var TaskName = $("#TaskName").val().trim();
+        var SubName = $("#SubName").val().trim();
+        var url = '@Url.Action("SubContractorPayment")';
+        url += "?ProjectEnquiry=" + encodeURIComponent(ProjectEnquiry) + "&TaskName=" + encodeURIComponent(TaskName) + "&SubName=" + encodeURIComponent(SubName);
+        $("#SubContractorPayment").load(url, function () {
+            $("#SubContractorPayment").removeClass("fade");
+        });
+    }
+       </script>
+<div class="container content-in">
+    <div class="row">
+        <h1>Sub Contractor Payment</h1>
+    </div>
+
+
+    <div class="row">
+
+
+
+
+        <div class="col-md-8">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>Project</label>
+                    <input id="ProjectEnquiry" class="form_input" placeholder="Search for Project." onkeyup="Filter()" />
+                </div>
+                <div class="col-md-4">
+                    <label>Task</label>
+                    <input id="TaskName" class="form_input" placeholder="Search for TaskName" onkeyup="Filter()" />
+                </div>
+                <div class="col-md-4">
+                    <label>Subcontractor</label>
+                    <input id="SubName" class="form_input" placeholder="Search for Subcontractor." onkeyup="Filter()" />
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <Br />
+    <div id="SubContractorPayment">
+        @Html.Action("SubContractorPayment")
+    </div>
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+          <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+          <button type="button" class="form-button" onclick="Previous()">Previous</button>
+        </div>
+
+    </div>
+
+
+ 
+</div>

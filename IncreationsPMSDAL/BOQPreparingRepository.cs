@@ -112,9 +112,9 @@ namespace IncreationsPMSDAL
                     {
                         items.ProjectWorkId = model.ProjectWorkId;
                         sql = @"INSERT INTO ProjectWorkBOQItem
-                                   (ProjectWorkId,ProjectTaskId,TotalAmount,PercentageComplete,IsCompleted)
+                                   (ProjectWorkId,ProjectTaskId,TotalAmount,IsCompleted)
                                    VALUES
-                                  (@ProjectWorkId,@ProjectTaskId,@TotalAmount,0,0);
+                                  (@ProjectWorkId,@ProjectTaskId,@TotalAmount,0);
                                   SELECT CAST(SCOPE_IDENTITY() as int);";
 
                         items.ProjectWorkItemId = connection.Query<int>(sql, items).Single();
@@ -287,6 +287,95 @@ namespace IncreationsPMSDAL
                     throw ex;
                 }
             }
+        }
+        public IEnumerable<WorkStatus> GetWorkStatus(string ProjectEnquiry = "", string TaskName = "", string ClientName="")
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string query = @"SELECT hd.ProjectWorkId,projectWorkRefNo,projectWorkDate,MileStoneName,TaskName,
+                                 task.ProjectTaskId,ClientName,StartDate,EndDate,item.ProjectWorkItemId,ProjectEnquiry
+                                 FROM ProjectWorkBOQ hd
+                                 inner join ProjectWorkBOQItem item on item.ProjectWorkId=hd.ProjectWorkId
+                                 inner join ProjectTask task on task.ProjectTaskId=item.ProjectTaskId
+                                 inner join Project on Project.ProjectId=task.ProjectId
+                                 inner join Client on Client.ClientId=Project.ClientId
+                                 where task.TaskName LIKE '%'+@TaskName+'%'
+                                 and Project.ProjectEnquiry like '%'+@ProjectEnquiry+'%'
+                                 and Client.ClientName like '%'+@ClientName+'%'
+                                 order by HD.projectWorkDate ";
+                return connection.Query<WorkStatus>(query, new { ProjectEnquiry = ProjectEnquiry, TaskName = TaskName, ClientName= ClientName }).ToList();
+            }
+        }
+
+        public WorkStatus GetWorkStatusCreate(int Id)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string sql = @"SELECT hd.ProjectWorkId,projectWorkRefNo,projectWorkDate,MileStoneName,TaskName,
+                                  item.ProjectWorkItemId,ProjectEnquiry,ClientName
+                                  FROM ProjectWorkBOQ hd
+                                  inner join ProjectWorkBOQItem item on item.ProjectWorkId=hd.ProjectWorkId
+                                  inner join ProjectTask task on task.ProjectTaskId=item.ProjectTaskId
+                                  inner join Project on Project.ProjectId=task.ProjectId
+                                  inner join Client on Client.ClientId=Project.ClientId
+                                  where item.ProjectWorkItemId=@Id";
+          var objWorkStatus = connection.Query<WorkStatus>(sql, new
+                {
+                    Id = Id
+                }).First<WorkStatus>();
+
+                return objWorkStatus;
+            }
+
+
+        }
+        public List<WorkStatusItem> GetWorkStatusItem(int Id)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string qry = "SELECT hd.ProjectWorkId,projectWorkRefNo,projectWorkDate,MileStoneName,TaskName,WorkAmount,";
+                qry += " ProjectWorkDescription,SubName,ProjectWorkDetailsId,item.ProjectWorkItemId,ProjectEnquiry,PercentageComplete,Remarks";
+                qry += " FROM ProjectWorkBOQ hd ";
+                qry += " inner join ProjectWorkBOQItem item on item.ProjectWorkId = hd.ProjectWorkId";
+                qry += " inner join ProjectWorkBOQItemWork work on work.ProjectWorkItemId = item.ProjectWorkItemId";
+                qry += "  inner join ProjectTask task on task.ProjectTaskId = item.ProjectTaskId";
+                qry += "  inner join SubContractor s on s.SubContractorId = work.SubContractorId";
+                qry += " inner join Project on Project.ProjectId = task.ProjectId";
+                qry += " where item.ProjectWorkItemId = " + Id.ToString();
+                return connection.Query<WorkStatusItem>(qry).ToList();
+            }
+        }
+    
+        public Result UpdateWorkStatus(WorkStatus model)
+        {
+            Result res = new Result(false);
+            int id = 0;
+            try
+            {
+                using (IDbConnection connection = OpenConnection(dataConnection))
+                {
+
+
+                    foreach (WorkStatusItem item in model.WorkStatusItem)
+                    {
+                        string sql = @"UPDATE ProjectWorkBOQItemWork SET PercentageComplete = @PercentageComplete,Remarks = @Remarks WHERE ProjectWorkDetailsId = @ProjectWorkDetailsId";
+                        id = connection.Execute(sql, item);
+
+                    }
+
+
+                    if (id > 0)
+                    {
+                        return (new Result(true));
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return (new Result(false, ex.InnerException == null ? ex.Message : ex.InnerException.Message));
+            }
+            return res;
         }
     }
     }

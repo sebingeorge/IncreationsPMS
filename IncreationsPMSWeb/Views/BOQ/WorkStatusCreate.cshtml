@@ -1,0 +1,124 @@
+﻿@model IncreationsPMSDomain.WorkStatus
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
+
+@{
+    ViewBag.Title = "WorkStatusCreate";
+}
+<script>
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+           
+  </script>
+
+<div class="container in content-in">
+    <div class="row">
+        <h1>Work Status</h1>
+    </div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "WorkStatus" }))
+
+
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                        <div class="col-md-3">
+                        <label>Project</label>
+                          @Html.TextBoxFor(m => m.ProjectEnquiry, new { @class = "form_input" })
+                         </div>
+                    <div class="col-md-3">
+                        <label>Task</label>
+                     @Html.TextBoxFor(m => m.TaskName, new { @class = "form_input" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Client</label>
+                        @Html.TextBoxFor(m => m.ClientName, new { @class = "form_input" })
+                    </div>
+                </div>
+            </div>
+            
+         </div>
+
+           <hr />
+
+
+
+        <div class="table-responsive scroll3">
+                <table class="table table-bordered" id="tab_logic">
+                <thead>
+                    <tr class="grid_heading">
+                        <th width="5%">BOQ No</th>
+                        <th width="11%">Date</th>
+                        <th width="18%">Milestone</th>
+                        <th width="20%">Task</th>
+                        <th width="25%">Work</th>
+                        <th width="18%">Sub Contractor</th>
+                        <th width="15%">Amount</th>
+                       <th width="15%">% Completion</th>
+                        <th width="40%">Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (int i = 0; i < Model.WorkStatusItem.Count; i++)
+                   
+                        {
+
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(m => @Model.WorkStatusItem[i].ProjectWorkId, new { @class = "form_input", @style = "text-align:left" })
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].projectWorkRefNo, new { @class = "form_input", @style = "text-align:left" })
+                            </td>
+
+                            <td>
+                                <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    @Html.TextBoxFor(model => Model.WorkStatusItem[i].projectWorkDate, new { @class = "form_input", @Value = Model.WorkStatusItem[i].projectWorkDate.ToString("dd-MMM-yyyy") })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </td>
+
+                            <td>
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].MileStoneName, new { @class = "form_input", @style = "text-align:left" })
+                            </td>
+                            <td>
+                               @Html.TextBoxFor(m => @Model.WorkStatusItem[i].TaskName, new { @class = "form_input", @style = "text-align:left" })
+                            </td>
+                            <td>
+                                @Html.HiddenFor(m => @Model.WorkStatusItem[i].ProjectWorkDetailsId, new { @class = "form_input", @style = "text-align:left" })
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].ProjectWorkDescription, new { @class = "form_input", @style = "text-align:left" })
+                            </td>
+                          <td>
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].SubName, new { @class = "form_input", @readonly = "true", @style = "text-align:left" })
+                           </td>
+                            <td>
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].WorkAmount, new { @class = "form_input", @readonly = "true", @style = "text-align:right" })
+                             </td>
+                            <td>
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].PercentageComplete, new { @class = "form_input",  @style = "text-align:right" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => @Model.WorkStatusItem[i].Remarks, new { @class = "form_input",  @style = "text-align:left" })
+                            </td>
+
+                        </tr>
+                    }
+
+                
+            </table>
+
+        </div>
+ 
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="submit" class="form-button right">Save</button>     
+                </div>
+
+        </div>
+
+    }
+
+</div>

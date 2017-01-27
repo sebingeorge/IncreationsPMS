@@ -1,0 +1,67 @@
+﻿@model List<IncreationsPMSDomain.PendingSubContractorPayment>
+
+@*@{
+    ViewBag.Title = "SubContractorPayment";
+}*@
+
+   
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="grid_heading">
+            <th width="3%">BOQ No</th>
+            <th width="7%">Date</th>
+            <th width="7%">Project Description</th>
+            <th width="15%">Milestone</th>
+            <th width="15%">Task</th>
+            <th width="26%">Work</th>
+            <th width="20%">Sub Contractor</th>
+            <th width="10%">Amount</th>
+            <th width="10%">%Complete</th>
+            <th width="1%" class="text-center">Select</th>
+        </tr>
+    </thead>
+
+    <tbody class="grid_row">
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model) 
+            {
+                <tr>
+                    <td>@item.projectWorkRefNo</td>
+                    <td>@item.projectWorkDate.ToString("dd/MMM/yyyy")</td>
+                     <td>@item.ProjectEnquiry</td>
+                    <td>@item.MileStoneName</td>
+                    <td>@item.TaskName</td>
+                    <td>@item.ProjectWorkDescription</td>
+                    <td>@item.SubName</td>
+                    <td>@item.WorkAmount</td>
+                    <td>@item.PercentageComplete</td>
+                    <td><center>@Html.ActionLink("Select", "Payment", "Payment", new { ProjectWorkDetailsId = @item.ProjectWorkDetailsId }, new { @class = "form-button5" })</center></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">
+                    <center><em>No items found!</em></center>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+

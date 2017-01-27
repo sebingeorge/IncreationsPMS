@@ -43,11 +43,14 @@ namespace IncreationsPMSDomain
         public int ProjectWorkItemId { get; set; }
         public string ProjectWorkDescription { get; set; }
         public int SubContractorId { get; set; }
+        public string SubName { get; set; }
         public DateTime PlanedStartDate { get; set; }
         public DateTime PlanedEndDate { get; set; }
         public DateTime? ActualStartDate { get; set; }
         public DateTime? ActualEndDate { get; set; }
         public decimal WorkAmount { get; set; }
+        public decimal PercentageComplete { get; set; }
+        public string Remarks { get; set; }
         public int sno { get; set; }
     }
     }

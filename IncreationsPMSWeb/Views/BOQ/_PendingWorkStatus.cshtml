@@ -1,0 +1,17 @@
+﻿@model List<IncreationsPMSDomain.WorkStatus>
+@using GridMvc.Html
+
+<div class="table-responsive scroll3">
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(m => m.projectWorkRefNo).Titled("BOQ No").SetWidth(5);
+columns.Add(m => m.projectWorkDate).Format("{0:dd/MM/yyyy}").Titled("Date").SetWidth(5);
+columns.Add(m => m.ProjectEnquiry).Titled("Project Description").SetWidth(15);
+columns.Add(m => m.ClientName).Titled("ClientName").SetWidth(15);
+columns.Add(m => m.MileStoneName).Titled("Milestone").SetWidth(20);
+columns.Add(m => m.TaskName).Titled("Task").SetWidth(15);
+columns.Add(m => m.StartDate).Format("{0:dd/MM/yyyy}").Titled("Start Date").SetWidth(5);
+columns.Add(m => m.EndDate).Format("{0:dd/MM/yyyy}").Titled("End Date").SetWidth(5);
+columns.Add().Encoded(false).Sanitized(false).SetWidth(5).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("WorkStatusCreate", new { Id = m.ProjectWorkItemId })">Select</a>);
+}).WithPaging(15)
+</div>

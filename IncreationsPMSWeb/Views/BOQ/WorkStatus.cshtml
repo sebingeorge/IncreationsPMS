@@ -1,7 +1,31 @@
-﻿@{
+﻿@model List<IncreationsPMSDomain.WorkStatus>
+@{
     ViewBag.Title = "WorkStatus";
 }
 
+<script>
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+    function Select() {
+        var url = '@Url.Action("WorkStatusCreate", "BOQ")'
+        window.location = url;
+    }
+
+    function Filter() {
+        $("#WorkStatus").addClass("fade");
+        var ProjectEnquiry = $("#ProjectEnquiry").val().trim();
+        var TaskName = $("#TaskName").val().trim();
+        var ClientName = $("#ClientName").val().trim();
+        var url = '@Url.Action("PendingWorkStatus")';
+        url += "?ProjectEnquiry=" + encodeURIComponent(ProjectEnquiry) + "&TaskName=" + encodeURIComponent(TaskName) + "&ClientName=" + encodeURIComponent(ClientName);
+           $("#WorkStatus").load(url, function () {
+           $("#WorkStatus").removeClass("fade");
+        });
+    }
+</script>
 
 <div class="container content-in">
     <div class="row">
@@ -10,258 +34,34 @@
 
 
     <div class="row">
-
-
-
-
-        <div class="col-md-4">
+           <div class="col-md-8">
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>Project</label>
-                    <input type="text" class="form_input" />
-                </div>
-                <div class="col-md-6">
+                    <input id="ProjectEnquiry" class="form_input" placeholder="Search for Project." onkeyup="Filter()" />
+             </div>
+
+                <div class="col-md-4">
                     <label>Task</label>
-                    <input type="text" class="form_input" />
+                    <input id="TaskName" class="form_input" placeholder="Search for TaskName" onkeyup="Filter()" />
                 </div>
 
-            </div>
+                <div class="col-md-4">
+                    <label>Client</label>
+                    <input id="ClientName" class="form_input" placeholder="Search for Client." onkeyup="Filter()" />
+                </div>
+
+
+               </div>
         </div>
-
-
-
-
+      </div>
+       <br />
+    
+        <div id="WorkStatus">
+        @Html.Action("PendingWorkStatus")
     </div>
 
-
-    <hr />
-
-
-
-    <div class="table-responsive scroll3">
-        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="3%">BOQNo</th>
-                    <th width="7%">Date</th>
-                    <th width="10%">Milestone</th>
-                    <th width="20%">Task</th>
-                    <th width="53%">
-
-                        <table class="table_in">
-                            <tr>
-                                <td style="color:#fff;"><b>Work Detail</b></td>
-                            </tr>
-                        </table>
-
-                    </th>
-                    <th width="7%" class="text-right">Total Amount</th>
-
-
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>11-11-2016</td>
-                    <td>Drawing Submission</td>
-                    <td>Design and Drawing Submission</td>
-
-                    <td width="43%">
-                        <table class="table_in">
-                            <thead>
-                                <tr class="grid_heading">
-                                    <th width="40%"><b>Work</b></th>
-                                    <th width="35%"><b>Sub Contractor</b></th>
-                                    <th class="text-right" width="15%"><b>Amount</b></th>
-                                    <th class="text-right" width="10%"><b>%Complete</b></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Design</td>
-                                    <td>Lijith</td>
-                                    <td class="text-right">3000</td>
-                                    <td><input type="text" class="form_input text-right" /></td>
-                                </tr>
-                                <tr>
-                                    <td>Drawing</td>
-                                    <td>Raj</td>
-                                    <td class="text-right">3000</td>
-                                    <td><input type="text" class="form_input text-right" /></td>
-                                </tr>
-                            </tbody>
-
-                        </table>
-                    </td>
-                    <td class="text-right">15000</td>
-
-
-
-
-
-                </tr>
-
-
-
-                <tr>
-
-                    <td>101</td>
-                    <td>11-11-2016</td>
-                    <td>Floor Covering</td>
-                    <td>Covering of Floor </td>
-
-                    <td width="43%">
-                        <table class="table_in">
-                            <thead>
-                                <tr class="grid_heading">
-                                    <th width="40%"><b>Work</b></th>
-                                    <th width="35%"><b>Sub Contractor</b></th>
-                                    <th class="text-right" width="15%"><b>Amount</b></th>
-                                    <th class="text-right" width="10%"><b>%Complete</b></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td width="33%">Floor Covering with sheet</td>
-                                    <td width="33%">Sujith</td>
-                                    <td class="text-right" width="15%">3000</td>
-                                    <td width="19%"><input type="text" class="form_input" /></td>
-                                </tr>
-                                <tr>
-                                    <td width="33%">Cleaning</td>
-                                    <td width="33%">Raj</td>
-                                    <td class="text-right" width="15%">3000</td>
-                                    <td width="19%"><input type="text" class="form_input" /></td>
-                                </tr>
-                                <tr>
-                                    <td width="33%">Flooring Lamp</td>
-                                    <td width="33%">Jis</td>
-                                    <td class="text-right" width="15%">3000</td>
-                                    <td width="19%"><input type="text" class="form_input" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td class="text-right">15000</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>11-11-2016</td>
-                    <td>False Ceiling Gypsum</td>
-                    <td>Gypsum board fixing</td>
-
-                    <td width="43%">
-                        <table class="table_in">
-                            <thead>
-                                <tr class="grid_heading">
-                                    <th width="40%"><b>Work</b></th>
-                                    <th width="35%"><b>Sub Contractor</b></th>
-                                    <th class="text-right" width="15%"><b>Amount</b></th>
-                                    <th class="text-right" width="10%"><b>%Complete</b></th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td width="33%">GI Framing</td>
-                                <td width="33%">Jinse</td>
-                                <td class="text-right" width="15%">3000</td>
-                                <td width="19%"><input type="text" class="form_input" /></td>
-                            </tr>
-                            <tr>
-                                <td width="33%">Flooring Lamp</td>
-                                <td width="33%">Tom</td>
-                                <td class="text-right" width="15%">3000</td>
-                                <td width="19%"><input type="text" class="form_input" /></td>
-                            </tr>
-                            <tr>
-                                <td width="33%">Wooden Table</td>
-                                <td width="33%">Jes</td>
-                                <td class="text-right" width="15%">3000</td>
-                                <td width="19%"><input type="text" class="form_input" /></td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="text-right">15000</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>11-11-2016</td>
-                    <td></td>
-                    <td></td>
-
-                    <td width="43%">
-                        <table class="table_in">
-                            <thead>
-                                <tr class="grid_heading">
-                                    <th width="40%"><b>Work</b></th>
-                                    <th width="35%"><b>Sub Contractor</b></th>
-                                    <th class="text-right" width="15%"><b>Amount</b></th>
-                                    <th class="text-right" width="10%"><b>%Complete</b></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td width="33%">Fabric IronTable</td>
-                                    <td width="33%">Jose</td>
-                                    <td class="text-right" width="15%">3000</td>
-                                    <td width="19%"><input type="text" class="form_input" /></td>
-                                </tr>
-                                <tr>
-                                    <td width="33%">Flooring Lamp</td>
-                                    <td width="33%">Rim</td>
-                                    <td class="text-right" width="15%">3000</td>
-                                    <td width="19%"><input type="text" class="form_input" /></td>
-                                </tr>
-                                <tr>
-                                    <td width="33%">Wooden Table</td>
-                                    <td width="33%">Tim</td>
-                                    <td class="text-right" width="15%">3000</td>
-                                    <td width="19%"><input type="text" class="form_input" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td class="text-right">15000</td>
-
-
-
-                </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </tbody>
-
-        </table>
-
-    </div>
 
 
 
@@ -269,8 +69,7 @@
     <div class="row">
         <hr />
         <div class="col-md-offset-8 col-md-4">
-            <button type="button" class="form-button right" onclick="Proceed()">Save</button>
-            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        <button type="button" class="form-button right" onclick="Exit()">Exit</button>
         </div>
 
     </div>
@@ -279,10 +78,3 @@
 
 
 </div>
-<script>
-
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-        }
-</script>

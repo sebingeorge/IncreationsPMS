@@ -14,7 +14,7 @@ namespace IncreationsPMSWeb.Controllers
         // GET: BOQ
         public ActionResult Index()
         {
-            return View();
+            return View(); 
         }
         public ActionResult BOQPreparing(int Id)
         {
@@ -64,10 +64,10 @@ namespace IncreationsPMSWeb.Controllers
         {
             ViewBag.SubContractorList = new SelectList(new DropdownRepository().FillSubContractor(), "Id", "Name");
         }
-        public ActionResult PendingBOQPreparing(string ClientName = "")
+        public ActionResult PendingBOQPreparing(string TaskName = "")
         {
 
-            return PartialView("_PendingBOQPreparing", new BOQPreparingRepository().GetNewBOQPreparing(ClientName));
+            return PartialView("_PendingBOQPreparing", new BOQPreparingRepository().GetNewBOQPreparing(TaskName));
         }
         public ActionResult ListIndex()
         {
@@ -161,6 +161,41 @@ namespace IncreationsPMSWeb.Controllers
         public ActionResult WorkStatus()
         {
             return View();
+        }
+        public ActionResult PendingWorkStatus(string ProjectEnquiry = "",string TaskName = "", string ClientName="")
+        {
+
+            return PartialView("_PendingWorkStatus", new BOQPreparingRepository().GetWorkStatus(ProjectEnquiry,TaskName, ClientName));
+        }
+
+        public ActionResult WorkStatusCreate(int Id)
+        {
+            WorkStatus objWorkStatus = new BOQPreparingRepository().GetWorkStatusCreate(Id);
+           objWorkStatus.WorkStatusItem = new BOQPreparingRepository().GetWorkStatusItem(Id);
+           return View("WorkStatusCreate", objWorkStatus);
+        }
+        [HttpPost]
+        public ActionResult WorkStatusCreate(WorkStatus model)
+        {
+            //model.TranDate = System.DateTime.Now;
+            //model.CreatedDate = System.DateTime.Now;
+            //model.CreatedBy = UserID;
+            if (!ModelState.IsValid)
+            {
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return View(model);
+            }
+            Result res = new BOQPreparingRepository().UpdateWorkStatus(model);
+            if (res.Value)
+            {
+                TempData["Success"] = "Saved Successfully!";
+            }
+            else
+            {
+
+            }
+            return RedirectToAction("WorkStatus");
+
         }
     }
 }

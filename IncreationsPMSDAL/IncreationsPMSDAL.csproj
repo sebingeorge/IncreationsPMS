@@ -52,6 +52,7 @@
     <Compile Include="DistrictRepository.cs" />
     <Compile Include="DropdownRepository.cs" />
     <Compile Include="EnquiryBookingRepository.cs" />
+    <Compile Include="PaymentRepository.cs" />
     <Compile Include="PaymentScheduleItemRepository.cs" />
     <Compile Include="ProjectItemRepository.cs" />
     <Compile Include="ProjectsRepository.cs" />

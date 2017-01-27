@@ -1,22 +1,41 @@
-﻿
+﻿@model IncreationsPMSDomain.Payment
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
 @{
     ViewBag.Title = "Payment";
 }
+<script>
+  function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+  }
+    function Delete(id) {
+        var url = '@Url.Action("Delete")';
+        url += "/" + id
+        window.location = url;
+    }
+</script>
+
 
 <div class="container content-in">
     <div class="row">
         <h1>Payment</h1>
     </div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Payment" }))
+{
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-6">
                     <label>P No.</label>
-                    <input type="text" class="form_input" />
+                    @Html.HiddenFor(m => m.PaymentId)
+                    @Html.TextBoxFor(m => m.PaymentRefNo, new { @class = "form_input" })
                 </div>
                 <div class="col-md-6">
                     <label>Date</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form_input", @Value = Model.PaymentDate.ToString("dd-MMM-yyyy") })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,10 +48,9 @@
 
                 <div class="col-md-12">
                     <label>Sub Contractor</label>
-                    <select class="form_input">
-                        <option value="">Select Sub Contractor</option>
-                        <option value="">Sub Contractor 1</option>
-                    </select>
+                    @Html.HiddenFor(m => m.ProjectWorkDetailsId)
+                    @Html.HiddenFor(m => m.SubContractorId)
+                    @Html.TextBoxFor(m => m.SubName, new { @class = "form_input" })
                 </div>
 
             </div>
@@ -45,11 +63,11 @@
 
                 <div class="col-md-6">
                     <label>Total Amount</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.WorkAmount, new { @class = "form_input numbers-only text-right ClTotal" })
                 </div>
                 <div class="col-md-6">
                     <label>Accepted Amount</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.AcceptedAmount, new { @class = "form_input numbers-only text-right ClTotal" })
                 </div>
 
             </div>
@@ -62,33 +80,29 @@
 
                 <div class="col-md-6">
                     <label>Payment Mode</label>
-                    <select class="form_input">
-                        <option value="">Cheque</option>
-                        <option value="">Cash</option>
-                        <option value="">Neft</option>
-                    </select>
+                    @Html.DropDownListFor(m => Model.PaymentModeId, (SelectList)ViewBag.PaymentModeList, "Select Payment Mode", new { @class = "form_input", autocomplete = "off" })
                 </div>
                 <div class="col-md-6">
                     <label>Cheque No</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.ChequeNo, new { @class = "form_input" })
                 </div>
 
             </div>
 
         </div>
-
         
-
-
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <label>Special Remarks</label>
-            <textarea class="form_input text-area"></textarea>
-
-        </div>
+            @Html.TextAreaFor(m => m.SpecialRemarks, new { @class = "form_input text-area" })
+     </div>
     </div>
+
+
+
+
 
 
 
@@ -96,30 +110,30 @@
     <div class="row">
         <hr />
         <div class="col-md-12">
-            <button type="button" class="form-button" onclick="Previous()">Previous</button>
-            <button type="button" class="form-button right">Print</button>
-            <button type="button" class="form-button right">Save</button>
-            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+            @if (actionName == "Update")
+
+                {
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="Submit" class="form-button right">Update</button>
+                <button type="button" class="form-button left" onclick="Delete(@Model.PaymentId)">Delete</button>
+                <button type="button" class="form-button right">Print</button>
+            }
+            else
+
+            {
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="submit" class="form-button right">Save</button>
+            }
         </div>
 
     </div>
 
 
-
+}
 
 </div>
 
-<script>
-    function Previous() {
-        var url = '@Url.Action("PreviousPayment", "Payment")'
-        window.location = url;
-    }
 
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-    }
-</script>
 
 
 

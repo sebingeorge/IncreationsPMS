@@ -1,0 +1,39 @@
+﻿@model List<IncreationsPMSDomain.Payment>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="grid_heading">
+            <th width="14%">Ref No.</th>
+            <th width="30%">Date</th>
+            <th width="20%">Sub Contractor</th>
+            <th width="30%">Accepted Amount</th>
+            <th width="1%" class="text-center">Select</th>
+        </tr>
+    </thead>
+
+    <tbody class="grid_row">
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PaymentRefNo</td>
+                    <td>@item.PaymentDate.ToString("dd/MMM/yyyy")</td>
+                    <td>@item.SubName</td>
+                    <td>@item.AcceptedAmount</td>
+                    <td>
+                        <center><input type="button" class="form-button5" value="Select" title="Select to view details" onclick="Open(@item.PaymentId)" /></center>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">
+                    <center><em>No items found!</em></center>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
