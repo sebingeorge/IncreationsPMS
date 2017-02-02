@@ -98,9 +98,9 @@ namespace IncreationsPMSDAL
                                      
 
                     string sql = @"INSERT INTO ProjectWorkBOQ
-                                   (projectWorkRefNo,projectWorkDate,PreparedBy,ClientId)
+                                   (projectWorkRefNo,projectWorkDate,PreparedBy,ClientId,CreatedBy,CreatedDate)
                                     VALUES
-                                    (@projectWorkRefNo,@projectWorkDate,@PreparedBy,@ClientId);
+                                    (@projectWorkRefNo,@projectWorkDate,@PreparedBy,@ClientId,@CreatedBy,@CreatedDate);
                                     SELECT CAST(SCOPE_IDENTITY() as int);";
            
 
@@ -138,9 +138,10 @@ namespace IncreationsPMSDAL
                    
                     if (id > 0)
                     {
+                        InsertLoginHistory(dataConnection, model.CreatedBy, "Create", "BOQ", id.ToString(), "0");
                         return (new Result(true));
                     }
-                  
+                   
                 }
             }
             catch (Exception ex)
@@ -240,17 +241,17 @@ namespace IncreationsPMSDAL
                             item.ProjectWorkItemId = items.ProjectWorkItemId;
                             item.ProjectWorkId = items.ProjectWorkId;
                             sql = @"UPDATE   ProjectWorkBOQItemWork SET ProjectWorkId=@ProjectWorkId,ProjectWorkItemId=@ProjectWorkItemId,
-                                                         ProjectWorkDescription=@ProjectWorkDescription,SubContractorId=@SubContractorId,
+                                                      ProjectWorkDescription=@ProjectWorkDescription,SubContractorId=@SubContractorId,
                                                       PlanedStartDate=@PlanedStartDate,PlanedEndDate=@PlanedEndDate,WorkAmount=@WorkAmount
-                                                      WHERE ProjectWorkId = @ProjectWorkId";
+                                                    WHERE ProjectWorkId = @ProjectWorkId";
 
                             row = connection.Execute(sql, item, txn);
 
                         }
                         
                     }
-                                                        
-                    //InsertLoginHistory(dataConnection, model.CreatedBy, "Update", typeof(QuerySheet).Name, model.QuerySheetId.ToString(), model.OrganizationId.ToString());
+
+                    //InsertLoginHistory(dataConnection, model.CreatedBy, "Modify", "BOQ", model.ProjectWorkId.ToString(), "0");
                     txn.Commit();
                     return row;
 
@@ -276,8 +277,8 @@ namespace IncreationsPMSDAL
 
                     string ref_no = connection.Query<string>(query, new { ProjectWorkId = Id }, txn).First();
 
-                   
-                    //InsertLoginHistory(dataConnection, CreatedBy, "Delete", typeof(QuerySheet).Name, Id.ToString(), OrganizationId.ToString());
+
+                    //InsertLoginHistory(dataConnection, model.CreatedBy, "Delete", "BOQ", model.ProjectWorkId.ToString(), "0");
                     txn.Commit();
                     return ref_no;
                 }

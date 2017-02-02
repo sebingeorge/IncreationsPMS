@@ -18,7 +18,9 @@ namespace IncreationsPMSDomain
         public string ClientName { get; set; }
         public string ProjectEnquiry { get; set; }
         public List<BOQPreparingItem> BOQPreparingItem { get; set; }
-      
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+
     }
     public class BOQPreparingItem
     {

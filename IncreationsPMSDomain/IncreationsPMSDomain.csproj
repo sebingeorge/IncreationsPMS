@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BOQPreparing.cs" />
+    <Compile Include="Invoice.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="PendingBOQPreparing.cs" />
     <Compile Include="Client.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="EnquiryBooking.cs" />
     <Compile Include="EnquiryStatus.cs" />
     <Compile Include="LoginViewModel.cs" />
+    <Compile Include="PendingCustomerInvoice.cs" />
     <Compile Include="PendingEnquiryStatus.cs" />
     <Compile Include="PendingProjects.cs" />
     <Compile Include="PendingSubContractorPayment.cs" />

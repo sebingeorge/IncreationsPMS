@@ -55,12 +55,14 @@ namespace IncreationsPMSWeb.Controllers
                 return View(model);
             }
             model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
             model.OrganizationId = OrganizationId;
             
             Result res = new CustomerRepository().Insert(model);
             if (res.Value)
             {
                 TempData["success"] = "Saved Successfully!";
+              
             }
             else
             {
@@ -77,6 +79,11 @@ namespace IncreationsPMSWeb.Controllers
                 var allErrors = ModelState.Values.SelectMany(v => v.Errors);
                 return View(model);
             }
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
+            model.OrganizationId = OrganizationId;
+
+
             Result res = new CustomerRepository().Update(model);
 
 

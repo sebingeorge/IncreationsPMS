@@ -49,9 +49,9 @@ namespace IncreationsPMSDAL
                 IDbTransaction trn = connection.BeginTransaction();
 
                 string sql = @"INSERT INTO EnquiryBooking(EnquiryRef,EnquiryDate,EnquiryClient,ClientTypeId,ModeofContactId,ProjectTypeId, 
-                EnquiryReference,EnquiryContactNo,EnquiryEmail,EnquiryLocation,EnquiryDetails,EnquiryCancel)
+                EnquiryReference,EnquiryContactNo,EnquiryEmail,EnquiryLocation,EnquiryDetails,EnquiryCancel,CreatedBy,CreatedDate,OrganizationId)
                 VALUES(@EnquiryRef,@EnquiryDate,@EnquiryClient,@ClientTypeId,@ModeofContactId,@ProjectTypeId,@EnquiryReference,
-                @EnquiryContactNo,@EnquiryEmail,@EnquiryLocation,@EnquiryDetails,0);
+                @EnquiryContactNo,@EnquiryEmail,@EnquiryLocation,@EnquiryDetails,0,@CreatedBy,@CreatedDate,@OrganizationId);
                 SELECT CAST(SCOPE_IDENTITY() as int)";
                 try
                 {
@@ -60,19 +60,19 @@ namespace IncreationsPMSDAL
 
                     int id = connection.Query<int>(sql, objEnquiryBooking, trn).Single();
                     objEnquiryBooking.EnquiryId = id;
-                    //InsertLoginHistory(dataConnection, objEnquiryBooking.CreatedBy, "Create", "EnquiryBooking", id.ToString(), "0");
+                    InsertLoginHistory(dataConnection, objEnquiryBooking.CreatedBy, "Create", "EnquiryBooking", id.ToString(), "0");
                     trn.Commit();
                 }
                 catch (Exception ex)
                 {
-                    trn.Rollback();
+                    trn.Rollback(); 
                     objEnquiryBooking.EnquiryId = 0;
                     objEnquiryBooking.EnquiryRef = null;
                 }
                 return objEnquiryBooking;
             }
         }
-        public IEnumerable<PendingEnquiryStatus> GetPendingEnquiryStatus()
+        public IEnumerable<PendingEnquiryStatus> GetPendingEnquiryStatus(DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
@@ -84,9 +84,12 @@ namespace IncreationsPMSDAL
                                   inner join ModeOfContact MOC on MOC.ModeofContactId =HD.ModeofContactId
                                   inner join ProjectType PT on PT.ProjectTypeId =HD.ProjectTypeId
                                   where EnquiryCancel=0
+                                  and  cast(convert(varchar(20),EnquiryDate,106) as datetime) between @FromDate and @ToDate
+                                  AND EnquiryClient like '%'+@EnquiryClient+'%'
                                   order by EnquiryDate";
-	                                                                     
-                return connection.Query<PendingEnquiryStatus>(query);
+	                                                                    
+                return connection.Query<PendingEnquiryStatus>(query, new { FromDate = FromDate, ToDate = ToDate, EnquiryClient = EnquiryClient }).ToList();
+           
             }
         }
 

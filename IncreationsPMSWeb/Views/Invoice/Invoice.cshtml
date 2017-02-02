@@ -1,23 +1,51 @@
-﻿
+﻿@model IncreationsPMSDomain.Invoice 
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
 @{
     ViewBag.Title = "Invoice";
 }
 
+<script>
+    function Previous() {
+        var url = '@Url.Action("PreviousInvoice", "Invoice")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+    function Delete(id) {
+        var url = '@Url.Action("DeleteInvoice")';
+        url += "/" + id
+        window.location = url;
+    }
+    function Print(id) {
+        var url = '@Url.Action("InvoiceReport")';
+        url += "/" + id
+        window.location = url;
+    }
+</script>
 
 <div class="container content-in">
     <div class="row">
         <h1>Customer Invoice</h1>
     </div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Invoice" }))
+{
     <div class="row">
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-6">
                     <label>Invoice No.</label>
-                    <input type="text" class="form_input" />
+                    @Html.HiddenFor(m => m.CustInvoiceId)
+                    @Html.TextBoxFor(m => m.CustInvoiceRefNo, new { @class = "form_input" })
                 </div>
                 <div class="col-md-6">
                     <label>Date</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.CustInvoiceDate, new { @class = "form_input", @Value = Model.CustInvoiceDate.ToString("dd-MMM-yyyy") })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +58,8 @@
 
                 <div class="col-md-12">
                     <label>Customer</label>
-                    <input type="text" class="form_input" />
+                    @Html.HiddenFor(m => m.ClientId)
+                    @Html.TextBoxFor(m => m.ClientName, new { @class = "form_input" })
                 </div>
 
             </div>
@@ -43,7 +72,7 @@
 
                 <div class="col-md-6">
                     <label> Customer Order Ref</label>
-                    <input type="text" class="form_input" />
+                   @Html.TextBoxFor(m => m.ProjectOrderRefNo, new { @class = "form_input" })
                 </div>
 
 
@@ -65,7 +94,7 @@
 
                 <div class="col-md-12">
                     <label>Customer address 1</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Address1, new { @class = "form_input" })
                 </div>
 
 
@@ -78,7 +107,7 @@
 
                 <div class="col-md-12">
                     <label>Customer address 2</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Address2, new { @class = "form_input" })
                 </div>
 
 
@@ -90,7 +119,7 @@
 
                 <div class="col-md-12">
                     <label>Customer address 3</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.Address3, new { @class = "form_input" })
                 </div>
 
             </div>
@@ -120,88 +149,48 @@
                     <th width="7%">Date</th>
                     <th width="31%">Project</th>
                     <th width="20%">Type Of Task</th>
-                    <th width="7%" class="text-right">Qty</th>
-                    <th width="7%">UoM</th>
-                    <th width="7%" class="text-right">Rate</th>
-                    <th width="7%" class="text-right">Discount</th>
                     <th width="7%" class="text-right">Amount</th>
-
-                </tr>
+                    <th width="7%" class="text-right">Received Amount</th>
+             </tr>
             </thead>
             <tbody>
 
-                <tr>
+                @for (int i = 0; i < Model.CustomerInvoiceItem.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(m => m.CustomerInvoiceItem[i].ProjectId)
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].ProjectRefNo, new { @class = "form_input", @style = "text-align:left" })
+                        </td>
+                        <td>
+                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                @Html.TextBoxFor(model => Model.CustomerInvoiceItem[i].ProjectDate, new { @class = "form_input", @Value = Model.CustomerInvoiceItem[i].ProjectDate.ToString("dd-MMM-yyyy") })
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
 
-                    <td>10001</td>
-                    <td>11-11-2016</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td class="text-right">5</td>
-                    <td>Nos</td>
-                    <td class="text-right">1000</td>
-                    <td class="text-right">5%</td>
-                    <td class="text-right">10000</td>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].ProjectEnquiry, new { @class = "form_input", @style = "text-align:left" })
+                        </td>
+                        <td>
+                            @Html.HiddenFor(m => @Model.CustomerInvoiceItem[i].Paymentid)
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].Description, new { @class = "form_input", @style = "text-align:left" })
 
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].Amount, new { @class = "form_input", @style = "text-align:left" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].ReceivedAmount, new { @class = "form_input", @style = "text-align:left" })
+                        </td>
 
-                </tr>
-
-
-
-                <tr>
-
-                    <td>10002</td>
-                    <td>11-11-2016</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td class="text-right">16</td>
-                    <td>Nos</td>
-                    <td class="text-right">10000</td>
-                    <td class="text-right">10%</td>
-                    <td class="text-right">10000</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>10001</td>
-                    <td>11-11-2016</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td class="text-right">45</td>
-                    <td>Nos</td>
-                    <td class="text-right">10000</td>
-                    <td class="text-right">10%</td>
-                    <td class="text-right">10000</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>10001</td>
-                    <td>11-11-2016</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td class="text-right">45</td>
-                    <td>Nos</td>
-                    <td class="text-right">10000</td>
-                    <td class="text-right">10%</td>
-                    <td class="text-right">10000</td>
-
-
-
-
-                </tr>
-
-
-
+                    </tr>
+                }
 
             </tbody>
 
         </table>
+
         <table class="table table-bordered" id="tab_logic">
             <tr class="grid_heading footer">
                 <th width="65%">&nbsp;</th>
@@ -220,11 +209,11 @@
 
                 <div class="col-md-12">
                     <label>Special Remarks</label>
-                    <textarea class="form_input text-area"></textarea>
+                    @Html.TextAreaFor(m => m.SpecialRemarks, new { @class = "form_input text-area" })
                 </div>
                 <div class="col-md-12">
                     <label>Payment Terms</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.PaymentTerms, new { @class = "form_input" })
                 </div>
 
             </div>
@@ -237,24 +226,27 @@
 
                 <div class="col-md-4">
                     <label>Additional Remarks</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.AdditionalRemarks, new { @class = "form_input" })
                 </div>
                 <div class="col-md-2">
                     <label class="text-right">Add.Amount</label>
-                    <input type="text" class="form_input text-right" />
+                    @Html.TextBoxFor(m => m.AddAmount, new { @class = "form_input" })
                 </div>
 
                 <div class="col-md-4">
                     <label>Deduction Remarks</label>
-                    <input type="text" class="form_input" />
+                    @Html.TextBoxFor(m => m.DeductionRemarks, new { @class = "form_input" })
                 </div>
                 <div class="col-md-2">
                     <label class="text-right">Ded.Amount</label>
-                    <input type="text" class="form_input text-right" />
+                   @Html.TextBoxFor(m => m.DedAmount, new { @class = "form_input" })
                 </div>
                 <div class="col-md-3">
                     <label>Bill Due Date</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.BillDueDate, new { @class = "form_input", @Value = Model.BillDueDate.ToString("dd-MMM-yyyy") })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                 </div>
 
 
@@ -267,27 +259,22 @@
     <div class="row">
         <hr />
         <div class="col-md-12">
-            <button type="button" class="form-button" onclick="Previous()">Previous</button>
-            <button type="button" class="form-button right">Print</button>
-            <button type="button" class="form-button right">Save</button>
+       @if (actionName == "Update")
+       {
             <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+            <button type="Submit" class="form-button right">Update</button>
+            <button type="button" class="form-button left" onclick="Delete(@Model.CustInvoiceId)">Delete</button>
+            <button type="button" class="form-button left" onclick="Print(@Model.CustInvoiceId)">Print</button>
+    }
+       else
+       {
+               <button type="submit" class="form-button right">Save</button>
+               <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+       }
         </div>
 
     </div>
-
-
-
+  }
 
 </div>
 
-<script>
-    function Previous() {
-        var url = '@Url.Action("PreviousInvoice", "Invoice")'
-        window.location = url;
-    }
-
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-        }
-</script>

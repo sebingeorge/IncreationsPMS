@@ -1,8 +1,36 @@
-﻿
+﻿@model IList<IncreationsPMSDomain.Invoice>
 @{
     ViewBag.Title = "PreviousInvoice";
 }
 
+<script>
+    function Proceed() {
+        var url = '@Url.Action("Invoice", "Invoice")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+
+    function Filter() {
+        $("#PreviousInvoice").addClass("fade");
+        var FromDate = $("#txtFrom").val().trim();
+        var ToDate = $("#txtTo").val().trim();
+        var ClientName = $("#ClientName").val().trim();
+        var url = '@Url.Action("PreviousInvoicePartial")';
+        url += "?FromDate=" + FromDate + "&ToDate=" + ToDate + "&ClientName=" + encodeURIComponent(ClientName);
+        $("#PreviousInvoice").load(url, function () {
+        $("#PreviousInvoice").removeClass("fade");
+        });
+    }
+    function Open(id) {
+        var url = '@Url.Action("Update")';
+        url += "?id=" + id;
+        window.location = url;
+    }
+</script>
 
 
 <div class="container content-in">
@@ -13,27 +41,33 @@
     <div class="row">
 
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="row">
 
                 <div class="col-md-6">
                     <label>From</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="txtFrom" value="@ViewBag.Fromdate.ToString("dd-MMMM-yyyy")" class=" form_input" onchange="Filter()" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <label>To</label>
-                    <input type="text" class="form_input" />
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="txtTo" value="@System.DateTime.Now.ToString("dd-MMMM-yyy")" class="form_input" onchange="Filter()" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                 </div>
 
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="row">
 
                 <div class="col-md-6">
                     <label>Customer</label>
-                    <input type="text" class="form_input" />
+                    <input id="ClientName" class="form_input" placeholder="Search for Customer" onkeyup="Filter()" />
                 </div>
 
             </div>
@@ -45,237 +79,14 @@
     </div>
 
 
-    <hr />
+    <br />
 
-
-
-    <div class="table-responsive scroll3">
-        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="2%">Invoice No</th>
-                    <th width="30%">Customer</th>
-                    <th width="40%">Project</th>
-                    <th width="7%" class="text-right">Quandity</th>
-                    <th width="7%" class="text-right">Amount</th>
-                    <th width="7%" class="text-center">Edit</th>
-                    <th width="7%" class="text-center">Delete</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-
-
-
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">2</td>
-                    <td class="text-right">15</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">10</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">208</td>
-                    <td class="text-right">150000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">10</td>
-                    <td class="text-right">150</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">80</td>
-                    <td class="text-right">85000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">1500</td>
-                    <td></td>
-                    <td></td>
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>Mv Britos</td>
-                    <td>interiors</td>
-                    <td class="text-right">20</td>
-                    <td class="text-right">15000</td>
-                    <td></td>
-                    <td></td>
-
-
-
-
-                </tr>
-
-
-
-
-
-            </tbody>
-
-        </table>
-
+    <div id="PreviousInvoice">
+        @Html.Action("PreviousInvoicePartial")
     </div>
+
+
+
 
 
 
@@ -283,7 +94,6 @@
     <div class="row">
         <hr />
         <div class="col-md-offset-8 col-md-4">
-            <button type="button" class="form-button right" onclick="Proceed()">Create</button>
             <button type="button" class="form-button right" onclick="Exit()">Exit</button>
         </div>
 
@@ -295,14 +105,3 @@
 </div>
 
 
-<script>
-    function Proceed() {
-        var url = '@Url.Action("Invoice", "Invoice")'
-        window.location = url;
-    }
-
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-        }
-</script>

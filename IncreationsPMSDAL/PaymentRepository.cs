@@ -76,10 +76,10 @@ namespace IncreationsPMSDAL
 
 
                     string sql = @"INSERT INTO Payment(PaymentRefNo,PaymentDate,SubContractorId,WorkAmount,AcceptedAmount,
-                                   PaymentModeId,ChequeNo,SpecialRemarks,ProjectWorkDetailsId)
+                                   PaymentModeId,ChequeNo,SpecialRemarks,ProjectWorkDetailsId,CreatedBy,CreatedDate)
                                     VALUES
                                     (@PaymentRefNo,@PaymentDate,@SubContractorId,@WorkAmount,@AcceptedAmount,
-                                    @PaymentModeId,@ChequeNo,@SpecialRemarks,@ProjectWorkDetailsId);
+                                    @PaymentModeId,@ChequeNo,@SpecialRemarks,@ProjectWorkDetailsId,@CreatedBy,@CreatedDate);
                                     SELECT CAST(SCOPE_IDENTITY() as int);";
                    model.PaymentId = connection.Query<int>(sql, model).Single();
               if (model.PaymentId > 0)
@@ -134,7 +134,8 @@ namespace IncreationsPMSDAL
                 {
                     string query = @"Update Payment Set PaymentRefNo=@PaymentRefNo,PaymentDate=@PaymentDate,SubContractorId=@SubContractorId,
                                    WorkAmount=@WorkAmount,AcceptedAmount=@AcceptedAmount,PaymentModeId=@PaymentModeId,
-                                   ChequeNo=@ChequeNo,SpecialRemarks=@SpecialRemarks,ProjectWorkDetailsId=@ProjectWorkDetailsId
+                                   ChequeNo=@ChequeNo,SpecialRemarks=@SpecialRemarks,ProjectWorkDetailsId=@ProjectWorkDetailsId,
+                                   CreatedBy=@CreatedBy,CreatedDate=@CreatedDate
                                    OUTPUT INSERTED.PaymentId WHERE PaymentId=@PaymentId";
                                    string ref_no = connection.Query<string>(query, model, txn).First();
                     //InsertLoginHistory(dataConnection, CreatedBy, "Delete", typeof(QuerySheet).Name, Id.ToString(), OrganizationId.ToString());
@@ -169,6 +170,27 @@ namespace IncreationsPMSDAL
                     txn.Rollback();
                     throw ex;
                 }
+            }
+        }
+        public Payment PaymentPrint(int PaymentId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+
+                string sql = @" select PaymentRefNo,PaymentDate,SubName,
+                                WorkAmount,AcceptedAmount,PaymentModeName,ChequeNo,SpecialRemarks
+                                from Payment 
+                                inner join SubContractor on SubContractor.SubContractorId=Payment.SubContractorId
+                                inner join PaymentMode on PaymentMode.PaymentModeId=Payment.PaymentModeId
+							    where PaymentId=@PaymentId";
+
+                var objPayment = connection.Query<Payment>(sql, new
+                {
+                    PaymentId = PaymentId,
+                   
+                }).First<Payment>();
+
+                return objPayment;
             }
         }
 

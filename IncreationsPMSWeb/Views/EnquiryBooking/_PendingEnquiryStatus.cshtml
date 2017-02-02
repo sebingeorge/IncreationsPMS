@@ -1,0 +1,50 @@
+﻿@model List<IncreationsPMSDomain.PendingEnquiryStatus>
+
+               <div class="table-responsive scroll3">
+                   <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+                   <table class="table table-bordered" id="tab_logic">
+                       <thead>
+                           <tr class="grid_heading">
+                               <th width="2%">En No</th>
+                               <th width="7%">Date</th>
+                               <th width="34%">Client</th>
+                               <th width="25%">Contact Type</th>
+                               <th width="25%">Project Type</th>
+                               <th width="1%"><center>Select</center></th>
+
+                           </tr>
+                       </thead>
+                       <tbody>
+
+
+                           @if (Model.Count > 0)
+                           {
+                               foreach (var item in Model)
+                               {
+                                   <tr>
+                                       <td>@item.EnquiryRef</td>
+                                       <td>@item.EnquiryDate.ToString("dd/MMM/yyyy")</td>
+                                       <td>@item.EnquiryClient</td>
+                                       <td>@item.ModeofContactName</td>
+                                       <td>@item.ProjectTypeName</td>
+
+                                       <td><center>@Html.ActionLink("Select", "EnquiryStatus", "EnquiryBooking", new { EnquiryId = @item.EnquiryId }, new { @class = "form-button5" })</center></td>
+
+                                   </tr>
+                               }
+                           }
+                           else
+                           {
+                               <tr>
+                                   <td colspan="6">
+                                       <center><em>No items found!</em></center>
+                                   </td>
+                               </tr>
+                           }
+
+
+                       </tbody>
+
+                   </table>
+
+               </div>

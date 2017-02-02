@@ -13,6 +13,11 @@
         url += "/" + id
         window.location = url;
     }
+    function Print(id) {
+        var url = '@Url.Action("paymentReport")';
+        url += "/" + id
+        window.location = url;
+    }
 </script>
 
 
@@ -116,7 +121,7 @@
                 <button type="button" class="form-button right" onclick="Exit()">Exit</button>
                 <button type="Submit" class="form-button right">Update</button>
                 <button type="button" class="form-button left" onclick="Delete(@Model.PaymentId)">Delete</button>
-                <button type="button" class="form-button right">Print</button>
+                 <button type="button" class="form-button left" onclick="Print(@Model.PaymentId)">Print</button>
             }
             else
 

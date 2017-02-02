@@ -25,6 +25,7 @@ namespace IncreationsPMSDomain
         public string Email { get; set; }
         [DataType(DataType.PostalCode)]
         public string Pin { get; set; }
+        [Required]
         public int District { get; set; }
         public string Street { get; set; }
         public string Address1 { get; set; }
@@ -34,7 +35,9 @@ namespace IncreationsPMSDomain
      
         public Decimal CreditLimit { get; set; }
         public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
         public int OrganizationId { get; set; }
+     
 
     }
 }

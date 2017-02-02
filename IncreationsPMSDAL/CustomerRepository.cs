@@ -60,10 +60,13 @@ namespace IncreationsPMSDAL
                                    ,@OrganizationId
                                    ,1);SELECT CAST(SCOPE_IDENTITY() as int);";
                     int id = connection.Query<int>(sql, model).Single();
+                    InsertLoginHistory(dataConnection, model.CreatedBy, "Create", "Client", id.ToString(), "0");
                     if (id > 0)
                     {
                         return (new Result(true));
+                        
                     }
+                    
                 }
             }
             catch (Exception ex)
@@ -121,12 +124,18 @@ namespace IncreationsPMSDAL
                                    ,Address2=@Address2
                                    ,Address3=@Address3
                                    ,CreditPeriod=@CreditPeriod
-                                   ,CreditLimit=@CreditLimit WHERE ClientId=@ClientId";
+                                   ,CreditLimit=@CreditLimit
+                                   ,CreatedBy=@CreatedBy
+                                   ,CreatedDate=@CreatedDate
+                                   ,OrganizationId=@OrganizationId
+                                   WHERE ClientId=@ClientId";
                     int id = connection.Execute(sql, model);
+                    InsertLoginHistory(dataConnection, model.CreatedBy, "Modify", "Client", id.ToString(), "0");
                     if (id > 0)
                     {
                         return (new Result(true));
                     }
+                    InsertLoginHistory(dataConnection, model.CreatedBy, "Modify", "Client", id.ToString(), "0");
                 }
             }
             catch (Exception ex)
@@ -148,6 +157,7 @@ namespace IncreationsPMSDAL
                     {
                         return (new Result(true));
                     }
+                    InsertLoginHistory(dataConnection, model.CreatedBy, "Delete", "Client", id.ToString(), "0");
                 }
             }
             catch (Exception ex)

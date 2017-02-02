@@ -30,5 +30,8 @@ namespace IncreationsPMSDomain
         public string Address3 { get; set; }
         public string Address4 { get; set; }
         public bool isUsed { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime  CreatedDate  { get; set; }
+         public int OrganizationId  { get; set; }
     }
     }

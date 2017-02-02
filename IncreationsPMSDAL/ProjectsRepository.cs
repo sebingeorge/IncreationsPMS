@@ -58,8 +58,8 @@ namespace IncreationsPMSDAL
 
                 IDbTransaction trn = connection.BeginTransaction();
 
-                string sql = @"INSERT INTO Project(ProjectRefNo,ProjectDate,ClientId,ProjectEnquiry)
-                             VALUES(@ProjectRefNo,@ProjectDate,@ClientId,@ProjectEnquiry);
+                string sql = @"INSERT INTO Project(ProjectRefNo,ProjectDate,ClientId,ProjectEnquiry,ProjectOrderRefNo,CreatedBy,CreatedDate)
+                             VALUES(@ProjectRefNo,@ProjectDate,@ClientId,@ProjectEnquiry,@ProjectOrderRefNo,@CreatedBy,@CreatedDate);
                              SELECT CAST(SCOPE_IDENTITY() as int)";
 
                 try
@@ -98,7 +98,7 @@ namespace IncreationsPMSDAL
                            }, connection, trn);
 
                     }
-                    //InsertLoginHistory(dataConnection, objEnquiryBooking.CreatedBy, "Create", "EnquiryBooking", id.ToString(), "0");
+                    InsertLoginHistory(dataConnection, objProjects.CreatedBy, "Create", "Project", id.ToString(), "0");
                     trn.Commit();
                 }
                 catch (Exception ex)
@@ -111,21 +111,22 @@ namespace IncreationsPMSDAL
             }
         }
 
-        public IEnumerable<PendingProjects> GetPendingProjects()
+        public IEnumerable<PendingProjects> GetPendingProjects(DateTime? FromDate, DateTime? ToDate, string ClientName = "")
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
 
                 string query = @"SELECT
                                  hd.ProjectId,ProjectRefNo,ProjectDate,ClientName,
-                                  Description,StartDate,EndDate
+                                  TaskName,StartDate,EndDate
                                   from Project hd
                                   inner join ProjectTask task on task.ProjectId =hd.ProjectId
-                                  inner join ProjectPaymentSchedule sh on sh.ProjectId =hd.ProjectId
                                   inner join Client c on c.ClientId =hd.ClientId
+                                  where cast(convert(varchar(20),ProjectDate,106) as datetime) between @FromDate and @ToDate
+                                  AND ClientName like '%'+@ClientName+'%'
                                   order by ProjectDate";
 
-                return connection.Query<PendingProjects>(query);
+                return connection.Query<PendingProjects>(query, new { FromDate = FromDate, ToDate = ToDate, ClientName = ClientName }).ToList();
             }
         }
 
@@ -134,7 +135,7 @@ namespace IncreationsPMSDAL
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
                 string qry = "select ProjectId,ProjectRefNo, convert (varchar(50), ProjectDate, 103)ProjectDate,";
-                       qry += " hd.ClientId ClientId,MobileNo,Email,Address1,Address2,Address3";
+                       qry += " hd.ClientId ClientId,MobileNo,Email,Address1,Address2,Address3,ProjectOrderRefNo,ProjectEnquiry";
                        qry += " from Project hd ";
                        qry += " inner join Client c on c.ClientId =hd.ClientId";
                        qry += " where ProjectId = " + ProjectId.ToString();
@@ -192,7 +193,7 @@ namespace IncreationsPMSDAL
 
                     output = InsertProjectDT(model, connection, txn);
 
-                    //InsertLoginHistory(dataConnection, model.CreatedBy, "Update", "Projects", id.ToString(), "0");
+                    InsertLoginHistory(dataConnection, model.CreatedBy, "Update", "Projects", model.ProjectId.ToString(), "0");
 
                     txn.Commit();
                     return model;

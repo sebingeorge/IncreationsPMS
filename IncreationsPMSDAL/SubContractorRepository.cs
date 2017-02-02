@@ -26,8 +26,10 @@ namespace IncreationsPMSDAL
 
                 IDbTransaction trn = connection.BeginTransaction();
 
-                string sql = @"INSERT INTO SubContractor(SubRefNo,SubName,ContactPerson,Designation,OfficeNo,MobileNo,Email,Address1,Address2,Address3,Address4)
-                VALUES(@SubRefNo,@SubName,@ContactPerson,@Designation,@OfficeNo,@MobileNo,@Email,@Address1,@Address2,@Address3,@Address4);
+                string sql = @"INSERT INTO SubContractor(SubRefNo,SubName,ContactPerson,Designation,OfficeNo,MobileNo,Email,
+                                Address1,Address2,Address3,Address4,CreatedBy,CreatedDate,OrganizationId)
+                VALUES(@SubRefNo,@SubName,@ContactPerson,@Designation,@OfficeNo,@MobileNo,@Email,@Address1,
+                     @Address2,@Address3,@Address4,@CreatedBy,@CreatedDate,@OrganizationId);
                 SELECT CAST(SCOPE_IDENTITY() as int)";
                 try
                 {
@@ -36,7 +38,7 @@ namespace IncreationsPMSDAL
 
                     int id = connection.Query<int>(sql, objSubContractor, trn).Single();
                     objSubContractor.SubContractorId = id;
-                   //InsertLoginHistory(dataConnection, objSubContractor.CreatedBy, "Create", "Designation", id.ToString(), "0");
+                    InsertLoginHistory(dataConnection, objSubContractor.CreatedBy, "Create", "Subcontractor", id.ToString(), "0");
                     trn.Commit();
                 }
                 catch (Exception ex)
@@ -80,7 +82,7 @@ namespace IncreationsPMSDAL
             {
                 string query = @"select SubContractorId,SubRefNo,SubName,ContactPerson,Email,OfficeNo,MobileNo
                 from SubContractor 
-                order by SubName";
+                order by SubContractorId";
                 return connection.Query<SubContractor>(query).ToList();
             }
         }
@@ -130,7 +132,8 @@ namespace IncreationsPMSDAL
                     string query = @"DELETE FROM SubContractor OUTPUT deleted.SubRefNo WHERE SubContractorId = @Id;";
                     
                     string ref_no = connection.Query<string>(query, new { Id = Id }, txn).First();
-                    //InsertLoginHistory(dataConnection, CreatedBy, "Delete", typeof(QuerySheet).Name, Id.ToString(), OrganizationId.ToString());
+                    //InsertLoginHistory(dataConnection, model.CreatedBy, "Delete", "Subcontractor", ref_no.ToString(), "0");
+
                     txn.Commit();
                     return ref_no;
                 }
@@ -151,11 +154,14 @@ namespace IncreationsPMSDAL
                 {
                     string query = @"Update SubContractor Set SubRefNo=@SubRefNo,SubName=@SubName,ContactPerson=@ContactPerson,
                                    Designation=@Designation,OfficeNo=@OfficeNo,MobileNo=@MobileNo,Email=@Email,Address1=@Address1,
-                                   Address2=@Address2,Address3=@Address3,Address4=@Address4  
+                                   Address2=@Address2,Address3=@Address3,Address4=@Address4,
+                                   CreatedBy=@CreatedBy,CreatedDate=@CreatedDate,OrganizationId=@OrganizationId
                                    OUTPUT INSERTED.SubContractorId WHERE SubContractorId=@SubContractorId";
                     
                     string ref_no = connection.Query<string>(query, model, txn).First();
-                    //InsertLoginHistory(dataConnection, CreatedBy, "Delete", typeof(QuerySheet).Name, Id.ToString(), OrganizationId.ToString());
+                    InsertLoginHistory(dataConnection, model.CreatedBy, "Modify", "Subcontractor", ref_no.ToString(), "0");
+
+              
                     txn.Commit();
                     return ref_no;
                 }

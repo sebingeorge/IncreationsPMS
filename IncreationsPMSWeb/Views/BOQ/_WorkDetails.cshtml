@@ -75,7 +75,7 @@
                             @Html.TextBoxFor(model => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].PlanedEndDate, new { @class = "form_input", @Value = Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].PlanedEndDate.ToString("dd-MMM-yyyy") })
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </td>
+                    </td> 
                     <td>@Html.TextBoxFor(m => Model.BOQPreparingItem[currentIndex].BOQPreparingItemWork[i].WorkAmount, new { @class = "form_input numbers-only text-right ClTotal", @onchange = "TextChanged(" + currentIndex + "," + i + ");", @onkeyup = "TextChanged(" + currentIndex + "," + i + ");", autocomplete = "off" })</td>
 
                     <td style="vertical-align:middle"><a id="add_row" class="glyphicon glyphicon-plus" style="top:0px" onclick="AddWork(@currentIndex)"></a></td>

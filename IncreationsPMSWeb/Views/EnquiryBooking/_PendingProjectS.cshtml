@@ -1,0 +1,54 @@
+﻿
+@model List<IncreationsPMSDomain.PendingProjects>
+
+
+<div class="table-responsive scroll3">
+    <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+    <table class="table table-bordered" id="tab_logic">
+        <thead>
+            <tr class="grid_heading">
+                <th width="2%">#</th>
+                <th width="7%">Date</th>
+                <th width="20%">Client</th>
+                <th width="50%">Task</th>
+                <th width="7%">Start</th>
+                <th width="7%">End</th>
+                <th width="7%" class="text-center">Select</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProjectRefNo</td>
+                        <td>@item.ProjectDate.ToString("dd/MMM/yyyy")</td>
+                        <td>@item.ClientName</td>
+                        <td>@item.TaskName</td>
+                        <td>@item.StartDate.ToString("dd/MMM/yyyy")</td>
+                        <td>@item.EndDate.ToString("dd/MMM/yyyy")</td>
+
+                        <td><center>@Html.ActionLink("Select", "ProjectsDisplay", "EnquiryBooking", new { ProjectId = @item.ProjectId }, new { @class = "form-button5" })</center></td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <center><em>No items found!</em></center>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+
+</div>

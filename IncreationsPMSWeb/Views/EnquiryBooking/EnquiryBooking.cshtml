@@ -51,6 +51,7 @@
                 <div class="col-md-12">
                     <label>Client</label>
                     @Html.TextBoxFor(m => m.EnquiryClient, new { @class = "form_input" })
+                    @Html.ValidationMessageFor(m => m.EnquiryClient, "", new { @class = "text-danger" })
               </div>
             </div>
         </div>
@@ -60,6 +61,7 @@
                 <div class="col-md-12">
                     <label>Client Type</label>
                     @Html.DropDownListFor(m => Model.ClientTypeId, (SelectList)ViewBag.ClientType, "Select Client Type", new { @class = "form_input", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.ClientTypeId, "", new { @class = "text-danger" })
                  </div>
             </div>
         </div>
@@ -69,7 +71,8 @@
                 <div class="col-md-12">
                     <label>Project Type</label>
                   @Html.DropDownListFor(m => Model.ProjectTypeId, (SelectList)ViewBag.ProjectType, "Select Project Type", new { @class = "form_input", autocomplete = "off" })
-              </div>
+                    @Html.ValidationMessageFor(m => m.ProjectTypeId, "", new { @class = "text-danger" })
+                 </div>
             </div>
         </div>
 
@@ -78,6 +81,7 @@
                 <div class="col-md-12">
                     <label>Mode of Contact</label>
                     @Html.DropDownListFor(m => Model.ModeofContactId, (SelectList)ViewBag.ModeOfContact, "Select Mode Of Contact", new { @class = "form_input", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.ModeofContactId, "", new { @class = "text-danger" })
                  </div>
 
                 @*<div class="col-md-6">
@@ -127,9 +131,8 @@
 
 
                 <div class="col-md-12">
-                    <label>Enquiry Details</label>
-                    @*<textarea class="form_input text-area"></textarea>*@
-                    @Html.TextAreaFor(m => m.EnquiryDetails, new { @class = "form_input text-area" })
+                    <label>Enquiry Description</label>
+              @Html.TextAreaFor(m => m.EnquiryDetails, new { @class = "form_input text-area" })
                 </div>
 
             </div>

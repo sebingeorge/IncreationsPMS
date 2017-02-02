@@ -40,9 +40,10 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
         public ActionResult BOQPreparing(BOQPreparing model)
         {
-            //model.TranDate = System.DateTime.Now;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID;
+
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
+          
             if (!ModelState.IsValid)
             {
                 var allErrors = ModelState.Values.SelectMany(v => v.Errors);
@@ -96,9 +97,8 @@ namespace IncreationsPMSWeb.Controllers
         public ActionResult ShowDetails(BOQPreparing model)
         {
             //ViewBag.Title = "Edit";
-            //model.OrganizationId = OrganizationId;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID.ToString();
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
 
             var repo = new BOQPreparingRepository();
 

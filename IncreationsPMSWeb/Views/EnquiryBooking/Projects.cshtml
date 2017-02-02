@@ -163,7 +163,19 @@
         $(".numbers-only").keypress(function (e) {
             if (e.which == 8 || (e.which == 46 && $(this).val().indexOf('.') == -1) || (e.which > 47 && e.which < 58)) { } else { return false; }
         });
+        Append_Date();
+       resetValuesPaymentSchedule(i);
     }
+    function resetValuesPaymentSchedule(i)
+    {
+        $("#ProjectPaymentSchedule_" + i + "__Paymentid").val('');
+        $("#ProjectPaymentSchedule_" + i + "__Description").val('');
+        $("#ProjectPaymentSchedule_" + i + "__Percentage").val('');
+        $("#ProjectPaymentSchedule_" + i + "__Amount").val('');
+        $("#del_" + i).removeClass('hide');
+
+    }
+  
     function PaymentScheduleDelete(index) {
 
         var i = 0;
@@ -218,7 +230,7 @@
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-4">
-                    <label>P No</label>
+                    <label>Project No</label>
                     @Html.HiddenFor(m => m.ProjectId)
                     @Html.TextBoxFor(m => m.ProjectRefNo, new { @class = "form_input" })
                     @Html.ValidationMessageFor(m => m.ProjectRefNo, "", new { @class = "text-danger" })
@@ -237,12 +249,13 @@
     </div>
 
     <div class="row">
-
+               
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-12">
                     <label>Client</label>
                     @Html.DropDownListFor(m => Model.ClientId, (SelectList)ViewBag.Client, "Select Client", new { @class = "form_input", autocomplete = "off", @onchange = "ClientChanged(this)" })
+                    @Html.ValidationMessageFor(m => m.ClientId, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -299,6 +312,27 @@
         </div>
 
     </div>
+
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Client Order Ref</label>
+                    @Html.TextBoxFor(m => m.ProjectOrderRefNo, new { @class = "form_input"})
+                    @Html.ValidationMessageFor(m => m.ProjectOrderRefNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
 
 
     <div class="row">
@@ -410,7 +444,7 @@
                                         @Html.HiddenFor(m => m.ProjectPaymentSchedule[i].ProjectId)
                                         <input type="hidden" id="Row_Schedule_@i" />
                                         <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            @Html.TextBoxFor(model => Model.ProjectPaymentSchedule[i].Date, new { @class = "form_input" })
+                                            @Html.TextBoxFor(model => Model.ProjectPaymentSchedule[i].Date, new { @class = "form_input", @Value = Model.ProjectPaymentSchedule[i].Date.ToString("dd-MMM-yyyy") })
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </td>
@@ -454,7 +488,7 @@
             <hr />
             <div class="col-md-12">
               @if (actionName == "ProjectsDisplay")
-              {
+                                            {
                 <button type="button" class="form-button right" onclick="Exit()">Exit</button>
                 <button type="submit" class="form-button right">Update</button>
                 @*<button type="button" class="form-button right" onclick="Update('@Model.ProjectId')">Update</button>*@

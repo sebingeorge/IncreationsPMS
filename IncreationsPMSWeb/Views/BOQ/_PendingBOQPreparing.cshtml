@@ -4,7 +4,7 @@
 <div class="table-responsive scroll3">
     @Html.Grid(Model).Columns(columns =>
 {
-columns.Add(m => m.ProjectRefNo).Titled("PtNo").SetWidth(5);
+columns.Add(m => m.ProjectRefNo).Titled("Project No").SetWidth(5);
 columns.Add(m => m.ProjectDate).Format("{0:dd/MM/yyyy}").Titled("Date").SetWidth(5);
 columns.Add(m => m.ClientName).Titled("Client").SetWidth(20);
 columns.Add(m => m.ProjectEnquiry).Titled("Description").SetWidth(15);

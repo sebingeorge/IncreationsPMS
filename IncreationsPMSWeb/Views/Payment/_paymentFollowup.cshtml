@@ -1,0 +1,48 @@
+﻿@model List<IncreationsPMSDomain.PendingCustomerInvoice>
+
+<div class="table-responsive scroll3">
+    <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+    <table class="table table-bordered" id="tab_logic">
+        <thead>
+            <tr class="grid_heading">
+                <th width="5%">#</th>
+                <th width="7%">Date</th>
+                <th width="30%">Client</th>
+                <th width="30%">Project</th>
+                <th width="42%">Description</th>
+                <th width="7%" class="text-right">Schedule Amount</th>
+                <th width="7%" class="text-right">Received Amount</th>
+                <th width="7%">Payment</th>
+            </tr>
+        </thead>
+     
+        <tbody class="grid_row">
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProjectRefNo</td>
+                        <td>@item.ProjectDate.ToString("dd/MMM/yyyy")</td>
+                        <td>@item.ClientName</td>
+                        <td>@item.ProjectEnquiry</td>
+                        <td>@item.Description</td>
+                        <td>@item.Amount</td>
+                        <td>0</td>
+                       <td><center>@Html.ActionLink("Select", "Invoice", "Invoice", new { Paymentid = @item.Paymentid }, new { @class = "form-button5" })</center></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <center><em>No items found!</em></center>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>

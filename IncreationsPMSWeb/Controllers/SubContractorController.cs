@@ -25,9 +25,9 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
                public ActionResult Create(SubContractor model)
         {
-            //model.OrganizationId = OrganizationId;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID.ToString();
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
+            model.OrganizationId = OrganizationId;
 
             var repo = new SubContractorRepository();
             bool isexists = repo.IsFieldExists(repo.ConnectionString(), "SubContractor", "SubName", model.SubName, null, null);
@@ -129,7 +129,9 @@ namespace IncreationsPMSWeb.Controllers
         public ActionResult Edit(SubContractor model)
         {
             //ViewBag.Title = "Update";
-
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
+            model.OrganizationId = OrganizationId;
             {
 
                 try

@@ -58,11 +58,11 @@
                 </div>
                 <div class="col-md-6">
                     <label>Date</label>
-                    @*<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        @Html.TextBoxFor(m => m.EnquiryDate, new { @class = "form_input", @Value = Model.EnquiryDate.Value.ToString("dd-MMM-yyyy") })
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(m => m.EnquiryDate, new { @class = "form_input", @Value = Model.EnquiryDate.ToString("dd-MMM-yyyy") })
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>*@
-                    @Html.TextBoxFor(m => m.EnquiryDate, new { @class = "form_input", autocomplete = "off", @readonly = "readonly", @tabindex = "-1" })
+                    </div> 
+                   
               </div>
             </div>
         </div>

@@ -1,18 +1,5 @@
 ﻿@model List<IncreationsPMSDomain.BOQPreparing>
 
-@*@using GridMvc.Html*@
-
-@*<div class="table-responsive scroll3">
-        @Html.Grid(Model).Columns(columns =>
-   {
-              columns.Add(m => m.projectWorkRefNo).Titled("Ref No.").SetWidth(12);
-              columns.Add(m => m.projectWorkDate).Titled("BOQ Date").SetWidth(7);
-              columns.Add(m => m.ClientName).Titled("Client").SetWidth(7);
-              columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Edit", new { Id = m.ProjectWorkId })">Edit</a>);
-              columns.Add().Encoded(false).Sanitized(false).SetWidth(30).Css("cent text-center").RenderValueAs(m => @<a href="@Url.Action("Delete", new { Id = m.ProjectWorkId })">Delete</a>);
-
-        }).WithPaging(15)
-    </div>*@
 <table class="table table-bordered table-hover">
     <thead>
         <tr class="grid_heading">
@@ -31,7 +18,7 @@
             {
                 <tr>
                     <td>@item.projectWorkRefNo</td>
-                    <td>@item.projectWorkDate</td>
+                    <td>@item.projectWorkDate.ToString("dd-MMM-yyyy")</td>
                     <td>@item.ClientName</td>
                     <td>@item.PreparedBy</td>
                     <td>

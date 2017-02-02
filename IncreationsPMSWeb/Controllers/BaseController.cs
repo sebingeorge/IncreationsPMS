@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IncreationsPMSDAL;
+using IncreationsPMSDomain;
 
 namespace IncreationsPMSWeb.Controllers
 {
@@ -44,6 +46,19 @@ namespace IncreationsPMSWeb.Controllers
         {
             get { return 1; }
             set { }
+        }
+        public DateTime FYStartdate
+        {
+            get
+            {
+                FinancialYearRepository repo = new FinancialYearRepository();
+                return repo.GetFinStartDate();
+
+            }
+            set
+            {
+
+            }
         }
 
     }

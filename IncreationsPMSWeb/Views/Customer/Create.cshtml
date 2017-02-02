@@ -135,9 +135,8 @@
                                 <option value="">Iddukki</option>
                             </select>*@
                         @Html.DropDownListFor(m => m.District, new SelectList(ViewBag.District, "Value", "Text", Model.District), "Select District", new { @class = "form_input" })
-
-                       @* @Html.DropDownListFor(m => Model.SalesMgId, (SelectList)ViewBag.SalesManager, "Select Manager", new { @class = "form_input", autocomplete = "off" })*@
-                    </div>
+                        @Html.ValidationMessageFor(m => m.District, "", new { @class = "text-danger" })
+             </div>
 
 
                 </div>

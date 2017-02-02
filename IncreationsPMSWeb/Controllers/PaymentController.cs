@@ -1,10 +1,16 @@
-﻿using System;
+﻿using IncreationsPMSDAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using IncreationsPMSDAL;
 using IncreationsPMSDomain;
+using System.Collections;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+//using IncreationsPMSWeb.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace IncreationsPMSWeb.Controllers
 {
@@ -29,9 +35,8 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
         public ActionResult Payment(Payment model)
         {
-            //model.TranDate = System.DateTime.Now;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID;
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
             if (!ModelState.IsValid)
             {
                 var allErrors = ModelState.Values.SelectMany(v => v.Errors);
@@ -93,7 +98,8 @@ namespace IncreationsPMSWeb.Controllers
         public ActionResult Update(Payment model)
         {
             //ViewBag.Title = "Update";
-
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
             {
 
                 try
@@ -137,6 +143,66 @@ namespace IncreationsPMSWeb.Controllers
         public ActionResult paymentFollowup()
         {
             return View();
+        }
+        public ActionResult paymentFollowupPartial(string ProjectEnquiry = "", string ClientName = "")
+        {
+            return PartialView("_paymentFollowup", new CustomerInvoiceRepository ().PendingCustomerInvoice(ProjectEnquiry, ClientName));
+        }
+
+         public ActionResult paymentReport(int Id)
+        {
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "paymentReport.rpt"));
+
+            DataSet ds = new DataSet();
+            ds.Tables.Add("Head");
+                      
+            #region creating Head table
+            ds.Tables["Head"].Columns.Add("PaymentRefNo");
+            ds.Tables["Head"].Columns.Add("PaymentDate");
+            ds.Tables["Head"].Columns.Add("SubName");
+            ds.Tables["Head"].Columns.Add("WorkAmount");
+            ds.Tables["Head"].Columns.Add("AcceptedAmount");
+            ds.Tables["Head"].Columns.Add("PaymentModeName");
+            ds.Tables["Head"].Columns.Add("ChequeNo");
+            ds.Tables["Head"].Columns.Add("SpecialRemarks");
+            #endregion
+            
+            #region store data to Head table
+            PaymentRepository repo = new PaymentRepository();
+            var Head = repo.PaymentPrint(Id);
+            DataRow dr = ds.Tables["Head"].NewRow();
+            dr["PaymentRefNo"] = Head.PaymentRefNo;
+            dr["PaymentDate"] = Head.PaymentDate.ToString("dd-MMM-yyyy");
+            dr["SubName"] = Head.SubName;
+            dr["WorkAmount"] = Head.WorkAmount;
+            dr["AcceptedAmount"] = Head.AcceptedAmount;
+            dr["PaymentModeName"] = Head.PaymentModeName;
+            dr["ChequeNo"] = Head.ChequeNo;
+            dr["SpecialRemarks"] = Head.SpecialRemarks;
+           ds.Tables["Head"].Rows.Add(dr);
+            #endregion
+            
+            ds.WriteXml(Path.Combine(Server.MapPath("~/XML"), "paymentReport.xml"), XmlWriteMode.WriteSchema);
+
+            rd.SetDataSource(ds);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            try
+            {
+                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stream.Seek(0, SeekOrigin.Begin);
+                return File(stream, "application/pdf");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

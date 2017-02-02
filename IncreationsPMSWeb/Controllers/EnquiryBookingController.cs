@@ -27,10 +27,15 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
         public ActionResult EnquiryBooking(EnquiryBooking model)
         {
-            //model.OrganizationId = OrganizationId;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID.ToString();
-
+           if (!ModelState.IsValid)
+            {
+                FillDropdowns();
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return View(model);
+            }
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
+            model.OrganizationId = OrganizationId;
             var repo = new EnquiryBookingRepository();
             //bool isexists = repo.IsFieldExists(repo.ConnectionString(), "EnquiryBooking", "SubName", model.SubName, null, null);
             //if (!isexists)
@@ -88,12 +93,23 @@ namespace IncreationsPMSWeb.Controllers
 
         public ActionResult PendingEnquiryStatus()
         {
-            //return View();
-            var repo = new EnquiryBookingRepository();
-            IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus();
-           return View(PendingEnquiryStatus);
+
+            ViewBag.Fromdate = FYStartdate;
+            //var repo = new EnquiryBookingRepository();
+            //IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus();
+            return View();
         }
-    
+
+        public ActionResult PendingEnquiryStatusPartial(DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
+        {
+
+            FromDate = FromDate ?? FYStartdate;
+            ToDate = ToDate ?? DateTime.Now;
+            var repo = new EnquiryBookingRepository();
+            IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus(FromDate, ToDate, EnquiryClient);
+            return PartialView("_PendingEnquiryStatus", PendingEnquiryStatus);
+        }
+
 
         public ActionResult EnquiryStatus(int? EnquiryId)
         {
@@ -206,10 +222,14 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
         public ActionResult Projects(Projects model)
         {
-            //model.OrganizationId = OrganizationId;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID.ToString();
-
+            if (!ModelState.IsValid)
+            {
+                FillDropdownsProject();
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return View(model);
+            }
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
             var repo = new ProjectsRepository();
             //bool isexists = repo.IsFieldExists(repo.ConnectionString(), "Projects", "SubName", model.SubName, null, null);
             //if (!isexists)
@@ -243,11 +263,27 @@ namespace IncreationsPMSWeb.Controllers
 
         public ActionResult PendingProjects()
         {
-            
-            var repo = new ProjectsRepository();
-            IEnumerable<PendingProjects> PendingProjects = repo.GetPendingProjects();
-            return View(PendingProjects);
+            ViewBag.Fromdate = FYStartdate;
+            return View();
+            //var repo = new ProjectsRepository();
+            //IEnumerable<PendingProjects> PendingProjects = repo.GetPendingProjects();
+            //return View(PendingProjects);
         }
+
+
+        public ActionResult PendingProjectsPartial(DateTime? FromDate, DateTime? ToDate, string ClientName = "")
+        {
+
+            FromDate = FromDate ?? FYStartdate;
+            ToDate = ToDate ?? DateTime.Now;
+
+
+            var repo = new ProjectsRepository();
+            IEnumerable<PendingProjects> PendingProjects = repo.GetPendingProjects(FromDate, ToDate, ClientName);
+            return PartialView("_PendingProjects", PendingProjects);
+        }
+
+
         public ActionResult ProjectsDisplay(int ProjectId)
             //(int? ProjectId)
         {
@@ -280,9 +316,8 @@ namespace IncreationsPMSWeb.Controllers
         public ActionResult ProjectsDisplay(Projects model)
         {
             //ViewBag.Title = "Edit";
-            //model.OrganizationId = OrganizationId;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID.ToString();
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
 
             FillDropdownsProject();
 

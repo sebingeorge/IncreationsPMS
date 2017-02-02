@@ -1,176 +1,11 @@
-﻿@{
+﻿@model List<IncreationsPMSDomain.PendingCustomerInvoice>
+@{
     ViewBag.Title = "PaymentFollowup";
 }
 
-
-<div class="container content-in">
-    <div class="row">
-        <h1>Client Payment Follow up</h1>
-    </div>
-
-
-    <div class="row">
-
-
-        <div class="col-md-4">
-            <div class="row">
-
-                <div class="col-md-6">
-                    <label>Client</label>
-                    <input type="text" class="form_input" />
-                </div>
-                <div class="col-md-6">
-                    <label>Project</label>
-                    <input type="text" class="form_input" />
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="col-md-4">
-            <div class="row">
-
-
-                <div class="col-md-6">
-                    <label>Task</label>
-                    <input type="text" class="form_input" />
-                </div>
-
-            </div>
-        </div>
-
-
-
-
-    </div>
-
-
-    <hr />
-
-
-
-    <div class="table-responsive scroll3">
-        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="7%">Date</th>
-                    <th width="30%">Client</th>
-                    <th width="42%">Description</th>
-                    <th width="7%" class="text-right">Received Amount</th>
-                    <th width="7%" class="text-right">Schedule Amount</th>
-                    <th width="7%">Payment</th>
-
-
-
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-
-                    <td>11-11-2016</td>
-                    <td>iHits</td>
-                    <td>Design and Drawing Submission</td>
-                    <td class="text-right">150</td>
-                    <td class="text-right">15000</td>
-                    <td class="text-center"><input type="checkbox" name="" value=""></td>
-
-
-
-
-
-
-                </tr>
-
-
-
-                <tr>
-
-
-                    <td>11-11-2016</td>
-                    <td>iHits</td>
-                    <td>Covering of Floor </td>
-                    <td class="text-right">7888</td>
-                    <td class="text-right">780</td>
-                    <td class="text-center"><input type="checkbox" name="" value=""></td>
-
-
-
-
-                </tr>
-                <tr>
-
-
-                    <td>11-11-2016</td>
-                    <td>iHits</td>
-                    <td>Gypsum board fixing</td>
-                    <td class="text-right">300</td>
-                    <td class="text-right">5000</td>
-                    <td class="text-center"><input type="checkbox" name="" value=""></td>
-
-
-
-
-                </tr>
-                <tr>
-
-
-                    <td>11-11-2016</td>
-                    <td>iHits</td>
-                    <td></td>
-                    <td class="text-right">450</td>
-                    <td class="text-right">450</td>
-                    <td class="text-center"><input type="checkbox" name="" value=""></td>
-
-
-
-
-                </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-
-
-    <div class="row">
-        <hr />
-        <div class="col-md-offset-6 col-md-6">
-            <button type="button" class="form-button right" onclick="bill()">Bill to Client</button>
-            <button type="button" class="form-button right" onclick="Proceed()">Save</button>
-            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
-        </div>
-
-    </div>
-
-
-
-
-</div>
 <script>
-    function bill() {
-        var url = '@Url.Action("Invoice", "Invoice")'
+    function Previous() {
+        var url = '@Url.Action("PreviousInvoice", "Invoice")'
         window.location = url;
     }
     function Payment() {
@@ -180,5 +15,61 @@
     function Exit() {
         var url = '@Url.Action("index", "home")'
         window.location = url;
-        }
+    }
+    function Filter() {
+        $("#paymentFollowupPartial").addClass("fade");
+        var ProjectEnquiry = $("#ProjectEnquiry").val().trim();
+        var ClientName = $("#ClientName").val().trim();
+        var url = '@Url.Action("paymentFollowupPartial")';
+        url += "?ProjectEnquiry=" + encodeURIComponent(ProjectEnquiry) + "&ClientName=" + encodeURIComponent(ClientName);
+        $("#paymentFollowupPartial").load(url, function () {
+            $("#paymentFollowupPartial").removeClass("fade");
+        });
+    }
 </script>
+
+<div class="container content-in">
+    <div class="row">
+        <h1>INVOICE</h1>
+    </div>
+
+
+    <div class="row"> 
+
+
+        <div class="col-md-4">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Client</label>
+                    <input id="ClientName" class="form_input" placeholder="Search for Client" onkeyup="Filter()" />
+                </div>
+                <div class="col-md-6">
+                    <label>Project</label>
+                    <input id="ProjectEnquiry" class="form_input" placeholder="Search for Project." onkeyup="Filter()" />
+                </div>
+
+            </div>
+        </div>
+
+            </div>
+
+
+    <br />
+
+    <div id="paymentFollowupPartial">
+        @Html.Action("paymentFollowupPartial")
+    </div>
+        <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>

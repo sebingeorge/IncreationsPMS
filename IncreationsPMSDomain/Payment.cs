@@ -17,8 +17,11 @@ namespace IncreationsPMSDomain
      public decimal WorkAmount { get; set; }
      public decimal AcceptedAmount { get; set; }
      public int PaymentModeId { get; set; }
+     public string PaymentModeName { get; set; }
      public string ChequeNo { get; set; }
      public string SpecialRemarks { get; set; }
      public int ProjectWorkDetailsId { get; set; }
+     public string CreatedBy { get; set; }
+     public DateTime CreatedDate { get; set; }
     }
 }
