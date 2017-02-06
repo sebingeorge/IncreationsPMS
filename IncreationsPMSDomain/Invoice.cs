@@ -26,7 +26,9 @@ namespace IncreationsPMSDomain
         public decimal DedAmount { get; set; }
         public DateTime BillDueDate { get; set; }
         public string ProjectEnquiry { get; set; }
-        public decimal ReceivedAmount { get; set; }
+        public decimal InvoiceAmount { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
         public List<CustomerInvoiceItem> CustomerInvoiceItem { get; set; }
 
     }
@@ -42,7 +44,8 @@ namespace IncreationsPMSDomain
         public int Paymentid { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
-        public decimal ReceivedAmount { get; set; }
+        public decimal Balance { get; set; }
+        public decimal InvoiceAmount { get; set; }
 
     }
 }

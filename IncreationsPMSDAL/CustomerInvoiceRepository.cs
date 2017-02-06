@@ -22,12 +22,18 @@ namespace IncreationsPMSDAL
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
                 string query = @"select Project.ProjectId,ProjectRefNo,ProjectDate,ProjectEnquiry,
-                                 Description,Amount,ClientName,Paymentid 
+                                 Description,Amount,ClientName,Paymentid,
+                                 isnull(Amount,0)-isnull (sum(InvoiceAmount),0)Balance 
                                  from Project
                                  inner join Client on Client.ClientId=Project.ClientId 
                                  inner join ProjectPaymentSchedule on ProjectPaymentSchedule.ProjectId=Project.ProjectId 
+                                 left join CustomerInvoiceItem on PaymentScheduleid=Paymentid 
                                  where  ClientName LIKE '%'+@ClientName+'%'
                                  and Project.ProjectEnquiry like '%'+@ProjectEnquiry+'%'
+                                 GROUP BY Project.ProjectId,ProjectRefNo,ProjectDate,ProjectEnquiry,Description,
+                                 Amount,ClientName,Paymentid
+                                 HAVING isnull(Amount,0)-isnull ((select sum(isnull(InvoiceAmount,0)) 
+                                 from CustomerInvoiceItem where PaymentScheduleid=Paymentid),0)>0
                                  order by ProjectRefNo ";
                 return connection.Query<PendingCustomerInvoice>(query, new { ProjectEnquiry = ProjectEnquiry, ClientName = ClientName}).ToList();
             }
@@ -65,10 +71,15 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string qry = "SELECT Project.ProjectId,ProjectRefNo,ProjectDate,ProjectEnquiry,Paymentid,Description,Amount";
-                       qry += " FROM Project ";
-                       qry += " inner join ProjectPaymentSchedule on Project.ProjectId=ProjectPaymentSchedule.ProjectId";
-                       qry += " where Paymentid = " + Paymentid.ToString();
+                string qry = "SELECT Project.ProjectId,ProjectRefNo,ProjectDate,ProjectEnquiry,Paymentid,";
+                              qry += " Description,Amount,isnull(Amount,0)-isnull (sum(InvoiceAmount),0)Balance";
+                              qry += " FROM Project ";
+                              qry += " inner join ProjectPaymentSchedule on Project.ProjectId=ProjectPaymentSchedule.ProjectId";
+                              qry += " left join CustomerInvoiceItem on PaymentScheduleid=Paymentid";
+                              qry += " where Paymentid = " + Paymentid.ToString();
+                              qry += " GROUP BY  Project.ProjectId,ProjectRefNo,ProjectDate,ProjectEnquiry,Paymentid,Description,Amount";
+                              qry += " HAVING isnull(Amount,0)-isnull ((select sum(isnull(InvoiceAmount,0)) ";
+                              qry += " from CustomerInvoiceItem where PaymentScheduleid=Paymentid),0)>0 ";
                 return connection.Query<CustomerInvoiceItem>(qry).ToList();
             }
         }
@@ -86,10 +97,10 @@ namespace IncreationsPMSDAL
 
                     string sql = @"INSERT INTO CustomerInvoice
                                               (CustInvoiceRefNo,CustInvoiceDate,ClientId,SpecialRemarks,PaymentTerms, 
-                                              AdditionalRemarks,AddAmount,DeductionRemarks,DedAmount,BillDueDate)
+                                              AdditionalRemarks,AddAmount,DeductionRemarks,DedAmount,BillDueDate,CreatedBy,CreatedDate )
                                         VALUES
                                          (@CustInvoiceRefNo,@CustInvoiceDate,@ClientId,@SpecialRemarks,@PaymentTerms,
-                                         @AdditionalRemarks,@AddAmount,@DeductionRemarks,@DedAmount,@BillDueDate);
+                                         @AdditionalRemarks,@AddAmount,@DeductionRemarks,@DedAmount,@BillDueDate,@CreatedBy,@CreatedDate );
                                          SELECT CAST(SCOPE_IDENTITY() as int);";
 
 
@@ -101,9 +112,9 @@ namespace IncreationsPMSDAL
                     {
                         items.CustInvoiceId = model.CustInvoiceId;
                         sql = @"INSERT INTO CustomerInvoiceItem
-                                   (CustInvoiceId,ProjectId,PaymentScheduleid,ScheduledAmount,ReceivedAmount)
+                                   (CustInvoiceId,ProjectId,PaymentScheduleid,ScheduledAmount,InvoiceAmount)
                                    VALUES
-                                  (@CustInvoiceId,@ProjectId,@Paymentid,@Amount,@ReceivedAmount);
+                                  (@CustInvoiceId,@ProjectId,@Paymentid,@Balance,@InvoiceAmount);
                                   SELECT CAST(SCOPE_IDENTITY() as int);";
 
                         id = connection.Query<int>(sql, items).Single();
@@ -128,7 +139,8 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string query = @"select hd.CustInvoiceId,CustInvoiceRefNo,CustInvoiceDate,ClientName,ProjectEnquiry,ReceivedAmount 
+                string query = @"select hd.CustInvoiceId,CustInvoiceRefNo,CustInvoiceDate,ClientName,
+                ProjectEnquiry,InvoiceAmount
                 from CustomerInvoice hd
                 inner join CustomerInvoiceItem dt on dt.CustInvoiceId=hd.CustInvoiceId
                 inner join Client on Client.ClientId =hd.ClientId
@@ -157,12 +169,13 @@ namespace IncreationsPMSDAL
                                      and project.ProjectId =CustomerInvoiceItem.ProjectId
                                      WHERE CustomerInvoice.CustInvoiceId = @id";
                 Invoice model = connection.Query<Invoice>(query, new { @id = id }, txn).FirstOrDefault();
-                string sql = @"SELECT CustInvoiceItemId,CustInvoiceId,CustomerInvoiceItem.ProjectId,ProjectEnquiry,Description,
-                               ProjectRefNo,ProjectDate,PaymentScheduleid Paymentid,Amount,ReceivedAmount
+                string sql = @"SELECT CustInvoiceItemId,CustomerInvoice.CustInvoiceId,CustomerInvoiceItem.ProjectId,ProjectEnquiry,Description,
+                               ProjectRefNo,ProjectDate,PaymentScheduleid Paymentid,ScheduledAmount Balance,InvoiceAmount
                                FROM CustomerInvoiceItem
+                               inner join CustomerInvoice on CustomerInvoice.CustInvoiceId=CustomerInvoiceItem.CustInvoiceId
                                inner join Project on CustomerInvoiceItem.ProjectId=Project.ProjectId
                                inner join ProjectPaymentSchedule on Paymentid=PaymentScheduleid
-                               WHERE CustInvoiceId = @id;";
+                               WHERE CustomerInvoice.CustInvoiceId = @id;";
                 model.CustomerInvoiceItem = connection.Query<CustomerInvoiceItem>(sql, new { id = id }, txn).ToList();
 
       
@@ -186,7 +199,9 @@ namespace IncreationsPMSDAL
                          AddAmount=@AddAmount,
                          DeductionRemarks=@DeductionRemarks,
                          DedAmount=@DedAmount,
-                         BillDueDate=@BillDueDate
+                         BillDueDate=@BillDueDate,
+                         CreatedBy=@CreatedBy,
+                         CreatedDate=@CreatedDate
                          WHERE CustInvoiceId = @CustInvoiceId";
                     int id = connection.Execute(query, model, txn);
                     if (id <= 0) throw new Exception();
@@ -251,7 +266,7 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string sql = @"SELECT ProjectRefNo,ProjectDate,ProjectEnquiry,Description,Amount,ReceivedAmount
+                string sql = @"SELECT ProjectRefNo,ProjectDate,ProjectEnquiry,Description,Amount,InvoiceAmount
                                FROM CustomerInvoiceItem
                                inner join Project on CustomerInvoiceItem.ProjectId=Project.ProjectId
                                inner join ProjectPaymentSchedule on Paymentid=PaymentScheduleid

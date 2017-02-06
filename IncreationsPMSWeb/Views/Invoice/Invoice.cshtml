@@ -146,11 +146,11 @@
             <thead>
                 <tr class="grid_heading">
                     <th width="7%">#</th>
-                    <th width="7%">Date</th>
+                    <th width="8%">Date</th>
                     <th width="31%">Project</th>
-                    <th width="20%">Type Of Task</th>
-                    <th width="7%" class="text-right">Amount</th>
-                    <th width="7%" class="text-right">Received Amount</th>
+                    <th width="20%">Description</th>
+                    <th width="7%" class="text-right">Project Amount</th>
+                    <th width="7%" class="text-right">Invoice Amount</th>
              </tr>
             </thead>
             <tbody>
@@ -178,10 +178,10 @@
 
                         </td>
                         <td>
-                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].Amount, new { @class = "form_input", @style = "text-align:left" })
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].Balance, new { @class = "form_input", @style = "text-align:right" })
                         </td>
                         <td>
-                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].ReceivedAmount, new { @class = "form_input", @style = "text-align:left" })
+                            @Html.TextBoxFor(m => @Model.CustomerInvoiceItem[i].InvoiceAmount, new { @class = "form_input", @style = "text-align:right" })
                         </td>
 
                     </tr>
@@ -191,12 +191,12 @@
 
         </table>
 
-        <table class="table table-bordered" id="tab_logic">
+        @*<table class="table table-bordered" id="tab_logic">
             <tr class="grid_heading footer">
                 <th width="65%">&nbsp;</th>
                 <th width="35%">Total</th>
             </tr>
-        </table>
+        </table>*@
     </div>
     <hr />
     <div class="row">
@@ -230,7 +230,7 @@
                 </div>
                 <div class="col-md-2">
                     <label class="text-right">Add.Amount</label>
-                    @Html.TextBoxFor(m => m.AddAmount, new { @class = "form_input" })
+                    @Html.TextBoxFor(m => m.AddAmount, new { @class = "form_input", @style = "text-align:right" })
                 </div>
 
                 <div class="col-md-4">
@@ -239,7 +239,7 @@
                 </div>
                 <div class="col-md-2">
                     <label class="text-right">Ded.Amount</label>
-                   @Html.TextBoxFor(m => m.DedAmount, new { @class = "form_input" })
+                   @Html.TextBoxFor(m => m.DedAmount, new { @class = "form_input" , @style = "text-align:right" })
                 </div>
                 <div class="col-md-3">
                     <label>Bill Due Date</label>
@@ -265,11 +265,12 @@
             <button type="Submit" class="form-button right">Update</button>
             <button type="button" class="form-button left" onclick="Delete(@Model.CustInvoiceId)">Delete</button>
             <button type="button" class="form-button left" onclick="Print(@Model.CustInvoiceId)">Print</button>
-    }
+       }
        else
        {
-               <button type="submit" class="form-button right">Save</button>
                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+               <button type="submit" class="form-button right">Save</button>
+           
        }
         </div>
 

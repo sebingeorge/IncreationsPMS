@@ -10,9 +10,9 @@
                 <th width="30%">Client</th>
                 <th width="30%">Project</th>
                 <th width="42%">Description</th>
-                <th width="7%" class="text-right">Schedule Amount</th>
-                <th width="7%" class="text-right">Received Amount</th>
-                <th width="7%">Payment</th>
+                <th width="7%" class="text-right">Project Amount</th>
+                <th width="7%" class="text-right">Balance Amount</th>
+                <th width="7%"></th>
             </tr>
         </thead>
      
@@ -27,8 +27,8 @@
                         <td>@item.ClientName</td>
                         <td>@item.ProjectEnquiry</td>
                         <td>@item.Description</td>
-                        <td>@item.Amount</td>
-                        <td>0</td>
+                        <td class="text-right">@item.Amount</td>
+                        <td class="text-right">@item.Balance</td>
                        <td><center>@Html.ActionLink("Select", "Invoice", "Invoice", new { Paymentid = @item.Paymentid }, new { @class = "form-button5" })</center></td>
                     </tr>
                 }

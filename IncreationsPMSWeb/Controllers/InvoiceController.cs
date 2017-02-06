@@ -8,7 +8,6 @@ using IncreationsPMSDomain;
 using System.Collections;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
-//using IncreationsPMSWeb.Models;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -39,9 +38,8 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
         public ActionResult Invoice(Invoice model)
         {
-            //model.TranDate = System.DateTime.Now;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID;
+            model.CreatedBy = UserID.ToString();
+            model.CreatedDate = System.DateTime.Now;
             if (!ModelState.IsValid)
             {
                 var allErrors = ModelState.Values.SelectMany(v => v.Errors);
@@ -108,8 +106,8 @@ namespace IncreationsPMSWeb.Controllers
         {
             try
             {
-                //model.CreatedBy = UserID.ToString();
-                //model.CreatedDate = DateTime.Today;
+                model.CreatedBy = UserID.ToString();
+                model.CreatedDate = System.DateTime.Now;
                 var success = new CustomerInvoiceRepository().UpdateInvoice(model);
                 if (success <= 0) throw new Exception();
                 TempData["success"] = "Updated successfully (" + model.CustInvoiceRefNo + ")";
@@ -169,7 +167,7 @@ namespace IncreationsPMSWeb.Controllers
             ds.Tables["Items"].Columns.Add("ProjectEnquiry");
             ds.Tables["Items"].Columns.Add("Description");
             ds.Tables["Items"].Columns.Add("Amount");
-            ds.Tables["Items"].Columns.Add("ReceivedAmount");
+            ds.Tables["Items"].Columns.Add("InvoiceAmount");
             #endregion
 
 
@@ -205,7 +203,7 @@ namespace IncreationsPMSWeb.Controllers
                 dri["ProjectEnquiry"] = item.ProjectEnquiry;
                 dri["Description"] = item.Description;
                 dri["Amount"] = item.Amount;
-                dri["ReceivedAmount"] = item.ReceivedAmount;
+                dri["InvoiceAmount"] = item.InvoiceAmount;
                 ds.Tables["Items"].Rows.Add(dri);
             }
             #endregion

@@ -1,114 +1,151 @@
-﻿
+﻿@model IncreationsPMSDomain.Receipt
+@{string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString(); }
 @{
-    ViewBag.Title = "AdvanceCollecting";
+    ViewBag.Title = "Receipt";
 }
+<script>
+  function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+  }
+    function Delete(id) {
+        var url = '@Url.Action("Delete")';
+        url += "/" + id
+        window.location = url;
+    }
+    @*function Print(id) {
+        var url = '@Url.Action("paymentReport")';
+        url += "/" + id
+        window.location = url;
+    }*@
+    function AmountChanged() {
+        var InvoiceAmount = $("#InvoiceAmount").val();
+        var ReceiptAmount = $("#ReceivedAmount").val();
+        ReceivableAmount = InvoiceAmount - ReceiptAmount;
+        $("#ReceivableAmount").val(ReceivableAmount.toFixed(2));
+    }
 
+</script>
 
 
 <div class="container content-in">
     <div class="row">
         <h1>Receipt</h1>
     </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-6">
-                    <label>Date</label>
-                    <input type="text" class="form_input" />
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Receipt" }))
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Receipt No.</label>
+                        @Html.HiddenFor(m => m.ReceiptId)
+                        @Html.TextBoxFor(m => m.ReceiptRefNo, new { @class = "form_input" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>Date</label>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            @Html.TextBoxFor(m => m.ReceiptDate, new { @class = "form_input", @Value = Model.ReceiptDate.ToString("dd-MMM-yyyy") })
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
+        <div class="row">
 
-        
+            <div class="col-md-3">
+                <div class="row form-group">
 
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Customer</label>
-                    <input type="text" class="form_input" />
+                    <div class="col-md-12">
+                        <label>Customer</label>
+                        @Html.HiddenFor(m => m.CustInvoiceId)
+                        @Html.HiddenFor(m => m.ClientId)
+                        @Html.TextBoxFor(m => m.ClientName, new { @class = "form_input" })
+                    </div>
+
                 </div>
             </div>
+
+
+            <div class="col-md-3">
+
+                <div class="row form-group">
+
+                    <div class="col-md-6">
+                        <label>Invoice Amount</label>
+                        @Html.TextBoxFor(m => m.InvoiceAmount, new { @class = "form_input numbers-only text-right" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>Receipt Amount</label>
+                        @Html.TextBoxFor(m => m.ReceivedAmount, new { @class = "form_input numbers-only text-right", @onchange = "AmountChanged()" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label> Receivable Amount</label>
+                        @Html.TextBoxFor(m => m.ReceivableAmount, new { @class = "form_input numbers-only text-right", @readonly = "readonly" })
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="row form-group">
+
+                    <div class="col-md-6">
+                        <label>Payment Mode</label>
+                        @Html.DropDownListFor(m => Model.PaymentModeId, (SelectList)ViewBag.PaymentModeList, "Select Payment Mode", new { @class = "form_input", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Cheque No</label>
+                        @Html.TextBoxFor(m => m.ChequeNo, new { @class = "form_input" })
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-6">
-                    <label>Rate</label>
-                    <input type="text" class="form_input" />
-                </div>
-                <div class="col-md-6">
-                    <label>Amount</label>
-                    <input type="text" class="form_input" />
-                </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>Special Remarks</label>
+                @Html.TextAreaFor(m => m.SpecialRemarks, new { @class = "form_input text-area" })
             </div>
         </div>
-        
-
-
-
-    </div>
-    <hr />
-    <div class="row">
-        <div class="table-responsive scroll2 col-md-6">
-            <table class="table table-bordered" id="tab_logic">
-                <thead>
-                    <tr class="grid_heading cheque">
-                        <th>Cheque No</th>
-                        <th>Cheque Date</th>
-                        <th>Bank Name</th>
-                        <th>Cheque Amount</th>
-                        <th>PDC Date</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <tr>
-
-                        <td><input type="text" class="form_input" /></td>
-                        <td><input type="text" class="form_input" /></td>
-                        <td><input type="text" class="form_input" /></td>
-                        <td><input type="text" class="form_input" /></td>
-                        <td><input type="text" class="form_input" /></td>
-                        <td><img src="../Content/images/Plus.png" /></td>
-
-                    </tr>
 
 
 
 
-                </tbody>
 
-            </table>
+
+
+
+        <div class="row">
+            <hr />
+            <div class="col-md-12">
+                @if (actionName == "Update")
+
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="Submit" class="form-button right">Update</button>
+                    <button type="button" class="form-button left" onclick="Delete(@Model.ReceiptId)">Delete</button>
+                    @*<button type="button" class="form-button left" onclick="Print(@Model.ReceiptId)">Print</button>*@
+                }
+                else
+
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="submit" class="form-button right">Save</button>
+                }
+            </div>
+
         </div>
 
-    </div>
 
+    }
 
-
-
-    <div class="row">
-        <hr />
-        <div class="col-md-12">
-            <button type="button" class="form-button" onclick="Previous()">Previous</button>
-            <button type="button" class="form-button right">Save</button>
-            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
-        </div>
-
-    </div>
 </div>
-<script>
-    function Previous() {
-        var url = '@Url.Action("PreviousReceipt", "Receipt")'
-        window.location = url;
-    }
-
-
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-    }
-</script>

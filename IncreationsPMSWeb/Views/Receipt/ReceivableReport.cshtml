@@ -3,7 +3,30 @@
     ViewBag.Title = "ReceivableReport";
 }
 
+<script>
+       function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+       }
 
+    function Print() {
+        var ClientName = $("#cboCustomer option:selected").text();
+        var ClientId = $("#cboCustomer").val();
+         var url = '@Url.Action("Print")';
+        url += "?ClientName=" + (ClientName == '' ? 0 : ClientName) + "&ClientId=" + ClientId;
+        window.location = url;
+    }
+    function Filter() {
+        $("#ReceivableReport").addClass("fade");
+        var ClientId = $("#cboCustomer").val();
+        var url = '@Url.Action("ReceivableReportPartial")';
+        url += "?ClientId=" + ClientId;
+        $("#ReceivableReport").load(url, function () {
+            $("#ReceivableReport").removeClass("fade");
+        });
+    }
+
+</script>
 
 <div class="container content-in">
     <div class="row">
@@ -18,227 +41,33 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    <label>Customer</label>
-                    <input type="text" class="form_input" />
+                    <label for="cboCustomer">Customer</label>
+                    @Html.DropDownList("cboCustomer", (SelectList)ViewBag.CustomerList, "Any", new { @class = "form_input", @onchange = "Filter()" })
                 </div>
-
-
-            </div>
+        </div>
         </div>
 
-
-
-
     </div>
 
 
-    <hr />
-
-
-
-    <div class="table-responsive scroll3">
-        <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
-        <table class="table table-bordered" id="tab_logic">
-            <thead>
-                <tr class="grid_heading">
-                    <th width="2%">#</th>
-                    <th width="7%">Date</th>
-                    <th width="36%">Customer</th>
-                    <th width="50%">Address</th>
-                    <th width="7%" class="text-right">Amount</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-                </tr>
-
-
-
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-                <tr>
-
-                    <td>101</td>
-                    <td>01-10-2016</td>
-                    <td>ETex</td>
-                    <td>ben</td>
-                    <td class="text-right">5500</td>
-
-
-
-
-                </tr>
-
-
-
-
-
-            </tbody>
-
-        </table>
-
+    <br />
+
+    <div class="row">
+            <div class="table-responsive" id="ReceivableReport">
+            @Html.Action("ReceivableReportPartial")
+        </div>
     </div>
+
+ 
 
 
 
 
     <div class="row">
         <hr />
-        <div class="col-md-offset-8 col-md-4">
-            @*<button type="button" class="form-button right" onclick="Proceed()">Create</button>*@
-            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        <div class="col-md-12 hrpart">
+             <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+            <input type="button" value="Print" onclick="Print()" class="form-button right" />
         </div>
 
     </div>
@@ -249,17 +78,7 @@
 </div>
 
 
-<script>
-    function Proceed() {
-        var url = '@Url.Action("Receipt", "Receipt")'
-        window.location = url;
-    }
 
-    function Exit() {
-        var url = '@Url.Action("index", "home")'
-        window.location = url;
-    }
-</script>
 
 
 

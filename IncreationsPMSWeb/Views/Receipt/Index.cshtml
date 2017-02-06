@@ -1,0 +1,104 @@
+﻿
+@model IList<IncreationsPMSDomain.Receipt>
+@{
+    ViewBag.Title = "View";
+}
+
+<script>
+    function Previous() {
+        var url = '@Url.Action("PreviousReceipt", "Receipt")'
+        window.location = url;
+    }
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
+
+    function Filter() {
+        $("#Receipt").addClass("fade");
+        var FromDate = $("#txtFrom").val().trim();
+        var ToDate = $("#txtTo").val().trim();
+        var ClientName = $("#ClientName").val().trim();
+        var url = '@Url.Action("PendingReceiptPartial")';
+        url += "?FromDate=" + FromDate + "&ToDate=" + ToDate + "&ClientName=" + encodeURIComponent(ClientName);
+        $("#Receipt").load(url, function () {
+            $("#Receipt").removeClass("fade");
+        });
+    }
+  </script>
+
+
+<div class="container content-in">
+    <div class="row">
+        <h1>Pending Receipt</h1>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-md-3">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>From</label>
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="txtFrom" value="@ViewBag.Fromdate.ToString("dd-MMMM-yyyy")" class=" form_input" onchange="Filter()" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>To</label>
+                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="txtTo" value="@System.DateTime.Now.ToString("dd-MMMM-yyy")" class="form_input" onchange="Filter()" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Customer</label>
+                    <input id="ClientName" class="form_input" placeholder="Search for Customer" onkeyup="Filter()" />
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <br />
+
+    <div id="Receipt">
+        @Html.Action("PendingReceiptPartial")
+    </div>
+
+
+
+
+
+
+
+    <div class="row">
+        <hr />
+        <div class="col-md-12">
+            <button type="button" class="form-button" onclick="Previous()">Previous</button>
+            <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+

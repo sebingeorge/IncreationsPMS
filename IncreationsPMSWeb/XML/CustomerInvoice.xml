@@ -42,25 +42,26 @@
   </xs:schema>
   <Head>
     <CustInvoiceRefNo>1</CustInvoiceRefNo>
-    <CustInvoiceDate>31-Jan-2017</CustInvoiceDate>
-    <ClientName>testadmin</ClientName>
-    <Address1>cvcv</Address1>
-    <Address2>cvc</Address2>
-    <Address3>cbvcb</Address3>
-    <SpecialRemarks>special remarks</SpecialRemarks>
-    <PaymentTerms>payment terms</PaymentTerms>
-    <AdditionalRemarks>addtitional</AdditionalRemarks>
-    <AddAmount>3.00</AddAmount>
-    <DeductionRemarks>deduction</DeductionRemarks>
-    <DedAmount>5.00</DedAmount>
-    <BillDueDate>04-Jan-2017</BillDueDate>
+    <CustInvoiceDate>03-Feb-2017</CustInvoiceDate>
+    <ClientName>R Rahim</ClientName>
+    <ProjectOrderRefNo>Rahim order1</ProjectOrderRefNo>
+    <Address1>Rahim villa1</Address1>
+    <Address2>Rahim villa2</Address2>
+    <Address3>Rahim villa3</Address3>
+    <SpecialRemarks>half invoiced</SpecialRemarks>
+    <PaymentTerms>cash payment</PaymentTerms>
+    <AdditionalRemarks>nill</AdditionalRemarks>
+    <AddAmount>0.00</AddAmount>
+    <DeductionRemarks>nill</DeductionRemarks>
+    <DedAmount>0.00</DedAmount>
+    <BillDueDate>03-Feb-2017</BillDueDate>
   </Head>
   <Items>
-    <ProjectRefNo>6</ProjectRefNo>
-    <ProjectDate>11-Jan-2017</ProjectDate>
-    <ProjectEnquiry>Sdfjhk</ProjectEnquiry>
-    <Description>dfghjkkoko</Description>
-    <Amount>50.000</Amount>
-    <ReceivedAmount>20.00</ReceivedAmount>
+    <ProjectRefNo>1</ProjectRefNo>
+    <ProjectDate>02-Feb-2017</ProjectDate>
+    <ProjectEnquiry>Floor conversion</ProjectEnquiry>
+    <Description>Task 1 and task 2</Description>
+    <Amount>10000.000</Amount>
+    <ReceivedAmount>5000.00</ReceivedAmount>
   </Items>
 </NewDataSet>

@@ -169,6 +169,12 @@
       <DependentUpon>CustomerInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ReceivableReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceivableReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datepicker3.min.css" />
@@ -354,6 +360,10 @@
     <Content Include="Views\Invoice\_PreviousInvoiceList.cshtml" />
     <Content Include="Views\EnquiryBooking\_PendingEnquiryStatus.cshtml" />
     <Content Include="Views\EnquiryBooking\_PendingProjectS.cshtml" />
+    <Content Include="Views\Receipt\Index.cshtml" />
+    <Content Include="Views\Receipt\_PendingReceipt.cshtml" />
+    <Content Include="Views\Receipt\_PreviousReceipt.cshtml" />
+    <Content Include="Views\Receipt\_ReceivableReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -390,6 +400,10 @@
     <EmbeddedResource Include="Reports\CustomerInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerInvoice1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReceivableReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReceivableReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

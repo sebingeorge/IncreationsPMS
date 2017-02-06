@@ -1,0 +1,37 @@
+﻿@model IList<IncreationsPMSDomain.Receipt>
+
+<div class="main-grid main-grid-top scroll1">
+    <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+    <table class="table table-bordered" id="tab_logic">
+        <thead>
+            <tr class="grid_heading">
+                <th width="2%">#</th>
+                <th width="7%">Date</th>
+                <th width="36%">Customer</th>
+                <th width="50%">Address</th>
+                <th width="7%" class="text-right">Receivable Amount</th>
+
+
+            </tr>
+        </thead>
+        <tbody class="grid_row">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="grid-cell">@item.ReceiptRefNo</td>
+                    <td class="grid-cell">@item.ReceiptDate.ToString("dd/MMM/yyyy")</td>
+                    <td class="grid-cell">@item.ClientName</td>
+                    <td class="grid-cell">@item.Address</td>
+                    <td class="grid-cell text-right">@item.ReceivableAmount</td>
+              </tr>
+
+            }
+
+        </tbody>
+
+
+
+    </table>
+
+</div>

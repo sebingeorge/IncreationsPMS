@@ -39,8 +39,8 @@ namespace IncreationsPMSDAL
         {
             try
             {
-                string sql = @"insert  into CustomerInvoiceItem(CustInvoiceId,ProjectId,PaymentScheduleid,ScheduledAmount,ReceivedAmount)
-                                           Values (@CustInvoiceId,@ProjectId,@Paymentid,@Amount,@ReceivedAmount);
+                string sql = @"insert  into CustomerInvoiceItem(CustInvoiceId,ProjectId,PaymentScheduleid,ScheduledAmount,InvoiceAmount)
+                                           Values (@CustInvoiceId,@ProjectId,@Paymentid,@Amount,@InvoiceAmount);
                 SELECT CAST(SCOPE_IDENTITY() as int)";
                 var id = connection.Query<int>(sql, item, txn).FirstOrDefault();
                 return id;

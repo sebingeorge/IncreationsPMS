@@ -1,0 +1,48 @@
+﻿@model List<IncreationsPMSDomain.Receipt>
+
+<div class="table-responsive scroll3">
+    <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+    <table class="table table-bordered" id="tab_logic">
+        <thead>
+            <tr class="grid_heading">
+                <th width="2%">Receipt No</th>
+                <th width="7%">Date</th>
+                <th width="63%">Customer</th>
+                <th width="7%" class="text-right">Receipt Amount</th>
+                <th width="7%" class="text-right">Receivable Amount</th>
+                <th width="1%" class="text-center"></th>
+
+
+            </tr>
+        </thead>
+
+        <tbody class="grid_row">
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ReceiptRefNo</td>
+                        <td>@item.ReceiptDate.ToString("dd/MMM/yyyy")</td>
+                        <td>@item.ClientName</td>
+                        <td>@item.ReceivedAmount</td>
+                        <td>@item.ReceivableAmount</td>
+                        <td>
+                            <center><input type="button" class="form-button5" value="Select" title="Select to view details" onclick="Open(@item.ReceiptId)" /></center>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <center><em>No items found!</em></center>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
