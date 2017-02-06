@@ -154,27 +154,6 @@
     </Compile>
     <Compile Include="Helpers\AuthorizeUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\paymentReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>paymentReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\CustomerInvoice.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\CustomerInvoice1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerInvoice.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\ReceivableReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReceivableReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datepicker3.min.css" />
@@ -216,6 +195,7 @@
     <Content Include="Content\images\icon\projects.png" />
     <Content Include="Content\images\icon\purchaseindent.png" />
     <Content Include="Content\images\icon\purchaseorder.png" />
+    <Content Include="Content\images\icon\receipt.png" />
     <Content Include="Content\images\icon\receivable.png" />
     <Content Include="Content\images\icon\receivablereport.png" />
     <Content Include="Content\images\icon\sales-Manager.png" />
@@ -368,6 +348,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Reports\" />
     <Folder Include="Views\Collecting\" />
     <Folder Include="XML\" />
   </ItemGroup>
@@ -391,20 +372,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Reports\paymentReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>paymentReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CustomerInvoice.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CustomerInvoice1.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReceivableReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReceivableReport.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
