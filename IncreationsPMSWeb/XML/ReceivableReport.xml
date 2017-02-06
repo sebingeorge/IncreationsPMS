@@ -20,6 +20,20 @@
     </xs:element>
   </xs:schema>
   <Items>
+    <ReceiptRefNo>1</ReceiptRefNo>
+    <ReceiptDate>06-Feb-2017</ReceiptDate>
+    <ClientName>R Rahim</ClientName>
+    <Address>Rahim villa1 / Rahim villa2/Rahim villa3</Address>
+    <ReceivableAmount>1000.00</ReceivableAmount>
+  </Items>
+  <Items>
+    <ReceiptRefNo>2</ReceiptRefNo>
+    <ReceiptDate>06-Feb-2017</ReceiptDate>
+    <ClientName>R Rahim</ClientName>
+    <Address>Rahim villa1 / Rahim villa2/Rahim villa3</Address>
+    <ReceivableAmount>2000.00</ReceivableAmount>
+  </Items>
+  <Items>
     <ReceiptRefNo>3</ReceiptRefNo>
     <ReceiptDate>06-Feb-2017</ReceiptDate>
     <ClientName>M N Jose</ClientName>
