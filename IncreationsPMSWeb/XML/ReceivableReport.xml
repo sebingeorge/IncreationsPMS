@@ -7,8 +7,8 @@
           <xs:element name="Items">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="CustInvoiceRefNo" type="xs:string" minOccurs="0" />
-                <xs:element name="CustInvoiceDate" type="xs:string" minOccurs="0" />
+                <xs:element name="ReceiptRefNo" type="xs:string" minOccurs="0" />
+                <xs:element name="ReceiptDate" type="xs:string" minOccurs="0" />
                 <xs:element name="ClientName" type="xs:string" minOccurs="0" />
                 <xs:element name="Address" type="xs:string" minOccurs="0" />
                 <xs:element name="ReceivableAmount" type="xs:string" minOccurs="0" />
@@ -20,17 +20,24 @@
     </xs:element>
   </xs:schema>
   <Items>
-    <CustInvoiceRefNo>1</CustInvoiceRefNo>
-    <CustInvoiceDate>08-Feb-2017</CustInvoiceDate>
+    <ReceiptRefNo>1</ReceiptRefNo>
+    <ReceiptDate>06-Feb-2017</ReceiptDate>
     <ClientName>R Rahim</ClientName>
     <Address>Rahim villa1 / Rahim villa2/Rahim villa3</Address>
-    <ReceivableAmount>5000.00</ReceivableAmount>
+    <ReceivableAmount>1000.00</ReceivableAmount>
   </Items>
   <Items>
-    <CustInvoiceRefNo>2</CustInvoiceRefNo>
-    <CustInvoiceDate>08-Feb-2017</CustInvoiceDate>
+    <ReceiptRefNo>2</ReceiptRefNo>
+    <ReceiptDate>06-Feb-2017</ReceiptDate>
     <ClientName>R Rahim</ClientName>
     <Address>Rahim villa1 / Rahim villa2/Rahim villa3</Address>
-    <ReceivableAmount>20.00</ReceivableAmount>
+    <ReceivableAmount>2000.00</ReceivableAmount>
+  </Items>
+  <Items>
+    <ReceiptRefNo>3</ReceiptRefNo>
+    <ReceiptDate>06-Feb-2017</ReceiptDate>
+    <ClientName>M N Jose</ClientName>
+    <Address>vettavil / kaloor/ernakulam</Address>
+    <ReceivableAmount>9000.00</ReceivableAmount>
   </Items>
 </NewDataSet>

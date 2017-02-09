@@ -224,6 +224,7 @@
     <Content Include="Content\images\icon\projects.png" />
     <Content Include="Content\images\icon\purchaseindent.png" />
     <Content Include="Content\images\icon\purchaseorder.png" />
+    <Content Include="Content\images\icon\receipt.png" />
     <Content Include="Content\images\icon\receivable.png" />
     <Content Include="Content\images\icon\receivablereport.png" />
     <Content Include="Content\images\icon\sales-Manager.png" />
@@ -381,6 +382,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Reports\" />
     <Folder Include="Views\Collecting\" />
     <Folder Include="XML\" />
   </ItemGroup>
@@ -406,10 +408,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\PayableReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PayableReport.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\paymentReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>paymentReport.cs</LastGenOutput>
