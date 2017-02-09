@@ -20,12 +20,16 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string query = @"select hd.CustInvoiceId,CustInvoiceRefNo,CustInvoiceDate,ClientName,InvoiceAmount
-                from CustomerInvoice hd
-                inner join CustomerInvoiceItem dt on dt.CustInvoiceId=hd.CustInvoiceId
-                inner join Client on Client.ClientId =hd.ClientId
+                string query = @"select CustomerInvoice.CustInvoiceId,CustInvoiceRefNo,CustInvoiceDate,ClientName,
+                isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) as InvoiceAmount
+                from CustomerInvoice
+                inner join CustomerInvoiceItem on CustomerInvoiceItem.CustInvoiceId=CustomerInvoice.CustInvoiceId
+                inner join Client on Client.ClientId =CustomerInvoice.ClientId 
+                left join Receipt on CustomerInvoiceItem.CustInvoiceId=Receipt.CustInvoiceId
                 where cast(convert(varchar(20),CustInvoiceDate,106) as datetime) between @FromDate and @ToDate
                 AND Client.ClientName like '%'+@ClientName+'%'
+                group by CustomerInvoice.CustInvoiceId,CustInvoiceRefNo,CustInvoiceDate,ClientName,CustomerInvoiceItem.InvoiceAmount
+				having  isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) > 0
                 order by CustInvoiceRefNo";
                 return connection.Query<Receipt>(query, new { FromDate = FromDate, ToDate = ToDate, ClientName = ClientName }).ToList();
             }
@@ -44,11 +48,15 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string sql = @"select hd.CustInvoiceId,CustInvoiceRefNo,Client.ClientId,ClientName,InvoiceAmount
-                               from CustomerInvoice hd 
-                               inner join CustomerInvoiceItem dt on dt.CustInvoiceId=hd.CustInvoiceId
-				               inner join Client on Client.ClientId =hd.ClientId
-                               where hd.CustInvoiceId=@CustInvoiceId";
+                string sql = @"select CustomerInvoice.CustInvoiceId,CustInvoiceRefNo,Client.ClientId,ClientName,
+                              isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) as InvoiceAmount
+                              from CustomerInvoice
+                              inner join CustomerInvoiceItem on CustomerInvoiceItem.CustInvoiceId=CustomerInvoice.CustInvoiceId
+                              inner join Client on Client.ClientId =CustomerInvoice.ClientId 
+                              left join Receipt on CustomerInvoiceItem.CustInvoiceId=Receipt.CustInvoiceId
+                              where CustomerInvoice.CustInvoiceId=@CustInvoiceId
+                              group by CustomerInvoice.CustInvoiceId,CustInvoiceRefNo,CustInvoiceDate,ClientName,
+                              Client.ClientId,CustomerInvoiceItem.InvoiceAmount ";
                 var objReceipt = connection.Query<Receipt>(sql, new
                 {
                     CustInvoiceId = CustInvoiceId
@@ -171,13 +179,18 @@ namespace IncreationsPMSDAL
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
                 //              
-                string qry = @"  SELECT ReceiptRefNo,ReceiptDate,ClientName,Receipt.ClientId,ReceivableAmount,
+                string qry = @"  SELECT CustInvoiceRefNo,CustInvoiceDate,ClientName,CustomerInvoice.ClientId,
+                                isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) as ReceivableAmount,
                                  Address1   + ' / ' +Address2   + '/' +Address3 as Address
-                                 FROM Receipt
-                                inner join Client on Client.ClientId=Receipt.ClientId
-                                WHERE ReceivableAmount >0
-                                AND Receipt.ClientId = ISNULL(NULLIF(@ClientId, 0), Receipt.ClientId) 
-                                ORDER BY ReceiptDate";
+                                from CustomerInvoice
+                                inner join CustomerInvoiceItem on CustomerInvoiceItem.CustInvoiceId=CustomerInvoice.CustInvoiceId
+                                inner join Client on Client.ClientId =CustomerInvoice.ClientId 
+                                left join Receipt on CustomerInvoiceItem.CustInvoiceId=Receipt.CustInvoiceId
+                                WHERE CustomerInvoice.ClientId = ISNULL(NULLIF(@ClientId, 0), CustomerInvoice.ClientId) 
+                                group by CustInvoiceRefNo,CustInvoiceDate,ClientName,
+                                CustomerInvoice.ClientId,Address1,Address2,Address3,CustomerInvoiceItem.InvoiceAmount
+                                having isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) >0
+                                ORDER BY CustInvoiceDate";
                 
                 return connection.Query<Receipt>(qry, new { ClientId = ClientId }).ToList();
             }
@@ -187,13 +200,18 @@ namespace IncreationsPMSDAL
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
                 //              
-                string qry = @" SELECT ReceiptRefNo,ReceiptDate,ClientName,Receipt.ClientId,ReceivableAmount,
+                string qry = @" SELECT CustInvoiceRefNo,CustInvoiceDate,ClientName,CustomerInvoice.ClientId,
+                               isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) as ReceivableAmount,
                                 Address1   + ' / ' +Address2   + '/' +Address3 as Address
-                                FROM Receipt
-                                inner join Client on Client.ClientId=Receipt.ClientId
-                                WHERE ReceivableAmount >0
-                                AND Receipt.ClientId = ISNULL(NULLIF(@ClientId, 0), Receipt.ClientId) 
-                                ORDER BY ReceiptDate";
+                                from CustomerInvoice
+                                inner join CustomerInvoiceItem on CustomerInvoiceItem.CustInvoiceId=CustomerInvoice.CustInvoiceId
+                                inner join Client on Client.ClientId =CustomerInvoice.ClientId 
+                                left join Receipt on CustomerInvoiceItem.CustInvoiceId=Receipt.CustInvoiceId
+                                WHERE  CustomerInvoice.ClientId = ISNULL(NULLIF(@ClientId, 0), CustomerInvoice.ClientId) 
+                                group by CustInvoiceRefNo,CustInvoiceDate,ClientName,
+                                CustomerInvoice.ClientId,Address1,Address2,Address3,CustomerInvoiceItem.InvoiceAmount
+                                having isnull(CustomerInvoiceItem.InvoiceAmount,0)-sum(isnull(ReceivedAmount,0)) >0
+                                ORDER BY CustInvoiceDate";
            return connection.Query<Receipt>(qry, new { ClientId = ClientId, ClientName = ClientName}).ToList();
             }
         }

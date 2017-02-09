@@ -134,9 +134,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AgeingSummaryReportController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BOQController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\OverDueTaskReportController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\EnquiryBookingController.cs" />
     <Compile Include="Controllers\EstimateController.cs" />
@@ -154,6 +156,12 @@
     </Compile>
     <Compile Include="Helpers\AuthorizeUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\PayableReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayableReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\paymentReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -364,6 +372,11 @@
     <Content Include="Views\Receipt\_PendingReceipt.cshtml" />
     <Content Include="Views\Receipt\_PreviousReceipt.cshtml" />
     <Content Include="Views\Receipt\_ReceivableReport.cshtml" />
+    <Content Include="Views\Payment\_PayableReport.cshtml" />
+    <Content Include="Views\AgeingSummaryReport\Index.cshtml" />
+    <Content Include="Views\AgeingSummaryReport\_AgeingSummary.cshtml" />
+    <Content Include="Views\OverDueTaskReport\Index.cshtml" />
+    <Content Include="Views\OverDueTaskReport\_OverDueTaskSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +406,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\PayableReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PayableReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\paymentReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>paymentReport.cs</LastGenOutput>

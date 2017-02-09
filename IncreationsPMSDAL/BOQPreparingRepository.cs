@@ -124,10 +124,10 @@ namespace IncreationsPMSDAL
                             item.ProjectWorkItemId = items.ProjectWorkItemId;
                             item.ProjectWorkId = items.ProjectWorkId;
                             sql = @"insert  into ProjectWorkBOQItemWork(ProjectWorkId,ProjectWorkItemId,ProjectWorkDescription,
-                                                SubContractorId,PlanedStartDate,PlanedEndDate,WorkAmount) 
+                                                SubContractorId,PlanedStartDate,PlanedEndDate,WorkAmount,PercentageComplete) 
                                                 Values 
                                                (@ProjectWorkId,@ProjectWorkItemId,@ProjectWorkDescription,@SubContractorId,
-                                                @PlanedStartDate,@PlanedEndDate,@WorkAmount)";
+                                                @PlanedStartDate,@PlanedEndDate,@WorkAmount,0)";
                                                 
                                id = connection.Execute(sql, item);
 

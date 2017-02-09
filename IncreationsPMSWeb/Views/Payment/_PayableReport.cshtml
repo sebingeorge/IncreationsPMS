@@ -1,0 +1,36 @@
+﻿@model IList<IncreationsPMSDomain.Payment>
+
+
+<div class="table-responsive scroll3">
+    <span class="filter"><img src="~/Content/images/icon/filter.png" /></span>
+    <table class="table table-bordered" id="tab_logic">
+        <thead>
+            <tr class="grid_heading">
+                <th width="2%">#</th>
+                <th width="7%">Date</th>
+                <th width="42%">Sub Contractor</th>
+                <th width="42%">Address</th>
+                <th width="7%" class="text-right">Payable Amount</th>
+
+
+            </tr>
+        </thead>
+        <tbody class="grid_row">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="grid-cell">@item.PaymentRefNo</td>
+                    <td class="grid-cell">@item.PaymentDate.ToString("dd/MMM/yyyy")</td>
+                    <td class="grid-cell">@item.SubName</td>
+                    <td class="grid-cell">@item.Address</td>
+                    <td class="grid-cell text-right">@item.PayableAmount</td>
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

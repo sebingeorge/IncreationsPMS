@@ -1,0 +1,48 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    function Exit() {
+        var url = '@Url.Action("Index","Home")';
+        window.location = url;
+    }
+    
+    function Filter() {
+        $("#OverDueTask_Summary").addClass("fade");
+
+        var Client = $("#client").val().trim();
+
+        var url = '@Url.Action("OverDueTaskSummary")';
+        url += "?Client=" + encodeURIComponent(Client);
+        $("#OverDueTask_Summary").load(url, function () {
+            $("#OverDueTask_Summary").removeClass("fade");
+        });
+    }
+</script>
+<div class="container content-in">
+    <div class="row">
+        <h1>Over Due Task Report</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Customer</label>
+            <input id="client" class="form_input" placeholder="Search for Customer" onkeyup="Filter()" />
+        </div>
+        
+    </div>
+
+    <br />
+    <div id="OverDueTask_Summary">
+        @Html.Action("OverDueTaskSummary")
+    </div>
+    <div class="row">
+        <hr />
+        <div class="col-md-12 hrpart">
+
+            <input type="button" class=" form-button right" onclick="Exit()" value="Exit" />
+        </div>
+    </div>
+</div>
+

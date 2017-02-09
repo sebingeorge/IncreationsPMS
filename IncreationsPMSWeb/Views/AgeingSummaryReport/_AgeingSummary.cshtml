@@ -1,0 +1,90 @@
+﻿
+@model List<IncreationsPMSDomain.AgeingSummary>
+
+
+<style type="text/css">
+    .colour-Red {
+        color: red !important;
+    }
+</style>
+<script>
+    function MoreDetails(id, cusName) {
+
+        var url = '@Url.Action("DetailsPopup")';
+        url += "?id=" + id;
+        $("#div-details").text('Loading...');
+        $("#div-details").load(url);
+        $('#myModalLabel').text(cusName);
+        $('#details-modal').modal('show');
+    }
+
+    @*function ExportAgeingSummary() {
+        var CusName = $('#myModalLabel').text();
+        var url = '@Url.Action("ExportAgeingSummaryPopup", "AgeingSummaryReport")';
+        url += '?cusname=' + CusName;
+        window.location = url;
+    }*@
+</script>
+
+<!-- modal to show details -->
+<div id="details-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:1250px">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="modal-header">
+                        <strong><h4 class="modal-title" id="myModalLabel">Customer</h4></strong>
+                    </div>
+                </div>
+                @*<div class="col-md-9">
+
+                    <input type="button" class="export form-button right" onclick="ExportAgeingSummary()" value="ExportToExcel" />
+                </div>*@
+            </div>
+            <div class="modal-body" id="div-details">
+                Loading...
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div>
+    <table class="table table-bordered" id="aaa" data-placement="bottom">
+        <thead>
+            <tr class="grid_heading">
+                  <th width="30%">Customer</th>
+                <th width="26%">Project</th>
+                <th width="10%" class="text-right">Total Receivable</th>
+                <th width="10%" class="text-right">0-15</th>
+                <th width="10%" class="text-right">15-30</th>
+                <th width="10%" class="text-right">30-60</th>
+                <th width="10%" class="text-right">60-90</th>
+                <th width="10%" class="text-right">>90</th>
+            </tr>
+        </thead>
+        <tbody class="grid_row">
+            @{
+
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].ClientName </td>
+                        @*<td>
+                            <a onclick="MoreDetails(@Model[i].CusId, '@Model[i].CusName')">@Model[i].CusName</a>
+                      
+                        </td>*@
+                        <td>@Model[i].ProjectEnquiry </td>
+                        <td> @Model[i].TotalReceivable </td>
+                        <td>@Model[i].Amount1 </td>
+                        <td>@Model[i].Amount2 </td>
+                        <td>@Model[i].Amount3 </td>
+                        <td>@Model[i].Amount4 </td>
+                        <td>@Model[i].Amount5 </td>
+                  </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

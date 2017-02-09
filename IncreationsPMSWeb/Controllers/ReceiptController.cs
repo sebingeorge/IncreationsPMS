@@ -163,8 +163,8 @@ namespace IncreationsPMSWeb.Controllers
                     
 
             //-------DT
-            ds.Tables["Items"].Columns.Add("ReceiptRefNo");
-            ds.Tables["Items"].Columns.Add("ReceiptDate");
+            ds.Tables["Items"].Columns.Add("CustInvoiceRefNo");
+            ds.Tables["Items"].Columns.Add("CustInvoiceDate");
             ds.Tables["Items"].Columns.Add("ClientName");
             ds.Tables["Items"].Columns.Add("Address");
             ds.Tables["Items"].Columns.Add("ReceivableAmount");
@@ -176,8 +176,8 @@ namespace IncreationsPMSWeb.Controllers
             foreach (var item in Items)
             {
                 DataRow dri = ds.Tables["Items"].NewRow();
-                dri["ReceiptRefNo"] = item.ReceiptRefNo;
-                dri["ReceiptDate"] = item.ReceiptDate.ToString("dd-MMM-yyyy");
+                dri["CustInvoiceRefNo"] = item.CustInvoiceRefNo;
+                dri["CustInvoiceDate"] = item.CustInvoiceDate.ToString("dd-MMM-yyyy");
                 dri["ClientName"] = item.ClientName;
                 dri["Address"] = item.Address;
                 dri["ReceivableAmount"] = item.ReceivableAmount;

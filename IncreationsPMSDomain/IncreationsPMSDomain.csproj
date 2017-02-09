@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgeingSummary.cs" />
     <Compile Include="BOQPreparing.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="OverDueTaskReport.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="PendingBOQPreparing.cs" />
     <Compile Include="Client.cs" />

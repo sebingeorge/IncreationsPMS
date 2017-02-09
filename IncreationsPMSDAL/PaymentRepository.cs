@@ -193,6 +193,45 @@ namespace IncreationsPMSDAL
                 return objPayment;
             }
         }
+        public IEnumerable<Payment> GetPaymentReport(int SubContractorId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                //              
+                string qry = @"  SELECT PaymentRefNo,PaymentDate,SubName, 
+                               isnull(Payment.WorkAmount,0)-isnull (sum(AcceptedAmount),0)PayableAmount,
+                               Address1   + ' / ' +Address2   + '/' +Address3 as Address 
+                               FROM Payment
+                               inner join SubContractor on SubContractor.SubContractorId=Payment.SubContractorId
+                               inner join ProjectWorkBOQItemWork on  ProjectWorkBOQItemWork.ProjectWorkDetailsId=Payment.ProjectWorkDetailsId
+                               WHERE PercentageComplete=100
+                               AND SubContractor.SubContractorId = ISNULL(NULLIF(@SubContractorId, 0), SubContractor.SubContractorId)  
+                               GROUP BY PaymentRefNo,PaymentDate,SubName,Address1,Address2,Address3,Payment.WorkAmount
+                               Having  isnull(Payment.WorkAmount,0)-isnull (sum(AcceptedAmount),0) >0
+                               ORDER BY PaymentDate";
+
+                return connection.Query<Payment>(qry, new { SubContractorId = SubContractorId }).ToList();
+            }
+        }
+        public IEnumerable<Payment> GetPaymentPrint(int SubContractorId, string SubName)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                //              
+                string qry = @" SELECT PaymentRefNo,PaymentDate,SubName, 
+                                isnull(Payment.WorkAmount,0)-isnull (sum(AcceptedAmount),0)PayableAmount,
+                                Address1   + ' / ' +Address2   + '/' +Address3 as Address 
+                                FROM Payment
+                               inner join SubContractor on SubContractor.SubContractorId=Payment.SubContractorId
+                               inner join ProjectWorkBOQItemWork on  ProjectWorkBOQItemWork.ProjectWorkDetailsId=Payment.ProjectWorkDetailsId
+                               WHERE PercentageComplete=100
+                               AND SubContractor.SubContractorId = ISNULL(NULLIF(@SubContractorId, 0), SubContractor.SubContractorId)  
+                               GROUP BY PaymentRefNo,PaymentDate,SubName,Address1,Address2,Address3,Payment.WorkAmount
+                               Having  isnull(Payment.WorkAmount,0)-isnull (sum(AcceptedAmount),0) >0
+                               ORDER BY PaymentDate";
+                return connection.Query<Payment>(qry, new { SubContractorId = SubContractorId, SubName = SubName }).ToList();
+            }
+        }
 
     }
 }

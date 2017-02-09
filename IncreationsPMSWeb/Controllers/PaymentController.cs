@@ -136,10 +136,7 @@ namespace IncreationsPMSWeb.Controllers
                 }
             }
         }
-        public ActionResult PayableReport()
-        {
-            return View();
-        }
+      
         public ActionResult paymentFollowup()
         {
             return View();
@@ -204,5 +201,75 @@ namespace IncreationsPMSWeb.Controllers
                 throw;
             }
         }
+        public ActionResult PayableReport()
+        {
+            FillSubContracor();
+            return View();
+        }
+        public ActionResult PayableReportPartial(int SubContractorId = 0)
+        {
+            return PartialView("_PayableReport", new PaymentRepository().GetPaymentReport(SubContractorId));
+        }
+        public void FillSubContracor()
+        {
+            DropdownRepository repo = new DropdownRepository();
+            var result = repo.FillSubContractor();
+            ViewBag.SubContracorList = new SelectList(result, "Id", "Name");
+        }
+        public ActionResult Print(int SubContractorId = 0, string SubName = "")
+        {
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "PayableReport.rpt"));
+
+            DataSet ds = new DataSet();
+            ds.Tables.Add("Items");
+
+            //    //-------HEAD
+
+
+            //-------DT
+            ds.Tables["Items"].Columns.Add("PaymentRefNo");
+            ds.Tables["Items"].Columns.Add("PaymentDate");
+            ds.Tables["Items"].Columns.Add("SubName");
+            ds.Tables["Items"].Columns.Add("Address");
+            ds.Tables["Items"].Columns.Add("PayableAmount");
+
+
+            PaymentRepository repo1 = new PaymentRepository();
+            var Items = repo1.GetPaymentPrint(SubContractorId, SubName);
+
+            foreach (var item in Items)
+            {
+                DataRow dri = ds.Tables["Items"].NewRow();
+                dri["PaymentRefNo"] = item.PaymentRefNo;
+                dri["PaymentDate"] = item.PaymentDate.ToString("dd-MMM-yyyy");
+                dri["SubName"] = item.SubName;
+                dri["Address"] = item.Address;
+                dri["PayableAmount"] = item.PayableAmount;
+                ds.Tables["Items"].Rows.Add(dri);
+            }
+
+            ds.WriteXml(Path.Combine(Server.MapPath("~/XML"), "PayableReport.xml"), XmlWriteMode.WriteSchema);
+
+            rd.SetDataSource(ds);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            try
+            {
+                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stream.Seek(0, SeekOrigin.Begin);
+                return File(stream, "application/pdf", String.Format("PayableReport.pdf"));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
-}
+    }

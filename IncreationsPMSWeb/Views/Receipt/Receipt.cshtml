@@ -82,10 +82,7 @@
                         @Html.TextBoxFor(m => m.ReceivedAmount, new { @class = "form_input numbers-only text-right", @onchange = "AmountChanged()" })
                     </div>
 
-                    <div class="col-md-6">
-                        <label> Receivable Amount</label>
-                        @Html.TextBoxFor(m => m.ReceivableAmount, new { @class = "form_input numbers-only text-right", @readonly = "readonly" })
-                    </div>
+
 
                 </div>
 
@@ -95,11 +92,27 @@
 
                 <div class="row form-group">
 
-                    <div class="col-md-6">
+                    <div class="col-md-5">
+                        <label> Receivable Amount</label>
+                        @Html.TextBoxFor(m => m.ReceivableAmount, new { @class = "form_input numbers-only text-right", @readonly = "readonly" })
+                    </div>
+
+                    <div class="col-md-7">
                         <label>Payment Mode</label>
                         @Html.DropDownListFor(m => Model.PaymentModeId, (SelectList)ViewBag.PaymentModeList, "Select Payment Mode", new { @class = "form_input", autocomplete = "off" })
                     </div>
-                    <div class="col-md-4">
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <div class="row form-group">
+
+
+                    <div class="col-md-8">
                         <label>Cheque No</label>
                         @Html.TextBoxFor(m => m.ChequeNo, new { @class = "form_input" })
                     </div>
@@ -107,6 +120,7 @@
                 </div>
 
             </div>
+
 
         </div>
 

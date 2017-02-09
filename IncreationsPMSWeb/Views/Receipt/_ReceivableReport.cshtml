@@ -19,8 +19,8 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="grid-cell">@item.ReceiptRefNo</td>
-                    <td class="grid-cell">@item.ReceiptDate.ToString("dd/MMM/yyyy")</td>
+                    <td class="grid-cell">@item.CustInvoiceRefNo</td>
+                    <td class="grid-cell">@item.CustInvoiceDate.ToString("dd/MMM/yyyy")</td>
                     <td class="grid-cell">@item.ClientName</td>
                     <td class="grid-cell">@item.Address</td>
                     <td class="grid-cell text-right">@item.ReceivableAmount</td>

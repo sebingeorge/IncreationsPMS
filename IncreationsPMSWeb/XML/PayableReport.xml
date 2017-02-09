@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Items">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="PaymentRefNo" type="xs:string" minOccurs="0" />
+                <xs:element name="PaymentDate" type="xs:string" minOccurs="0" />
+                <xs:element name="SubName" type="xs:string" minOccurs="0" />
+                <xs:element name="Address" type="xs:string" minOccurs="0" />
+                <xs:element name="PayableAmount" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Items>
+    <PaymentRefNo>2</PaymentRefNo>
+    <PaymentDate>07-Feb-2017</PaymentDate>
+    <SubName>S D Das</SubName>
+    <Address> Das Villa1 /  Das Villa2/ Das Villa3</Address>
+    <PayableAmount>5.00</PayableAmount>
+  </Items>
+</NewDataSet>
