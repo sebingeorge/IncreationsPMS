@@ -93,56 +93,31 @@ namespace IncreationsPMSWeb.Controllers
 
         public ActionResult PendingEnquiryStatus()
         {
-
+            FillEnquiryStatus();
+            FillProjectType();
             ViewBag.Fromdate = FYStartdate;
             //var repo = new EnquiryBookingRepository();
             //IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus();
             return View();
         }
 
-        public ActionResult PendingEnquiryStatusPartial(DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
+        public ActionResult PendingEnquiryStatusPartial(int? ProjectTypeId, int? EnquiryStatusId, DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
         {
 
             FromDate = FromDate ?? FYStartdate;
             ToDate = ToDate ?? DateTime.Now;
             var repo = new EnquiryBookingRepository();
-            IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus(FromDate, ToDate, EnquiryClient);
+            IEnumerable<PendingEnquiryStatus> PendingEnquiryStatus = repo.GetPendingEnquiryStatus(ProjectTypeId, EnquiryStatusId, FromDate, ToDate, EnquiryClient);
             return PartialView("_PendingEnquiryStatus", PendingEnquiryStatus);
         }
 
 
         public ActionResult EnquiryStatus(int? EnquiryId)
         {
+            FillEnquiryStatus();
             EnquiryBookingRepository repo = new EnquiryBookingRepository();
-
             EnquiryStatus model = repo.GetEnquiryStatusDetails(EnquiryId ?? 0);
-
-           
-            //string internalId = "";
-            //try
-            //{
-            //    internalId = DatabaseCommonRepository.GetNextDocNo(8);
-
-            //}
-            //catch (NullReferenceException nx)
-            //{
-            //    TempData["success"] = "";
-            //    TempData["error"] = "Some required data was missing. Please try again.|" + nx.Message;
-            //}
-            //catch (Exception ex)
-            //{
-            //    TempData["success"] = "";
-            //    TempData["error"] = "Some error occurred. Please try again.|" + ex.Message;
-            //}
-
-            //model.PurchaseRequestNo = internalId;
-            //model.PurchaseRequestDate = System.DateTime.Today;
-            //model.RequiredDate = System.DateTime.Today;
-            //model.OrganizationId = OrganizationId;
-            //model.CreatedDate = System.DateTime.Now;
-            //model.CreatedBy = UserID.ToString();
-
-            return View(model);
+           return View(model);
         }
 
 
@@ -150,7 +125,12 @@ namespace IncreationsPMSWeb.Controllers
         [HttpPost]
         public ActionResult EnquiryStatus(EnquiryStatus model)
         {
-           
+            if (!ModelState.IsValid)
+            {
+                FillEnquiryStatus();
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                return View(model);
+            }
 
             var repo = new EnquiryBookingRepository();
          
@@ -158,8 +138,10 @@ namespace IncreationsPMSWeb.Controllers
                 var result = new EnquiryBookingRepository().UpdateEnquiryStatus(model);
                 if (result.EnquiryId > 0)
                 {
-
-                    return RedirectToAction("Projects", "EnquiryBooking");
+                    TempData["Success"] = "Updated Successfully!";
+                    ////TempData["EnquiryRef"] = result.EnquiryRef;
+                    return RedirectToAction("PendingEnquiryStatus");
+                    //return RedirectToAction("Projects", "EnquiryBooking");
                 }
 
                 else
@@ -169,6 +151,12 @@ namespace IncreationsPMSWeb.Controllers
 
             }
             
+
+        }
+        void FillEnquiryStatus()
+        {
+
+            ViewBag.StatusType = new SelectList((new DropdownRepository()).GetStatusType(), "Id", "Name");
 
         }
 

@@ -6,6 +6,11 @@
 
 
 <script>
+
+    function Exit() {
+        var url = '@Url.Action("index", "home")'
+        window.location = url;
+    }
     function Accept() {
         
         location.href = '@Url.Action("EnquiryStatus")';
@@ -128,6 +133,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-3">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label>Status Update</label>
+                    @Html.DropDownListFor(m => Model.EnquiryStatusUpdate, (SelectList)ViewBag.StatusType, "Select Status", new { @class = "form_input", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.EnquiryStatusUpdate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -140,8 +155,8 @@
      </div>
 
     </div>
-    <hr />
-    <div class="row">
+    @*<hr />*@
+    @*<div class="row">
         <div class="table-responsive  col-md-offset-5 col-md-7">
             <table class="table table-bordered" id="tab_logic">
 
@@ -151,16 +166,13 @@
 
                         <td><br /><h2>Status Update</h2></td>
                         <td class="main-check">
-                            @*<input type="checkbox" name="" value="" class="check"> Profile Sending
-                            <input type="checkbox" name="" value="" class="check"> Offer Sending
-                            <input type="checkbox" name="" value="" class="check"> Layout Receiving*@
+                            
                           
                                <div class="row">
                                 <div class="col-md-4">
                                     <table>
                                         <tr>
                                             <td>@Html.CheckBoxFor(model => model.EnquiryProfileSending)</td>
-                                            @* @Html.CheckBoxFor(m => m.EnquiryProfileSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
                                             <td><label for="name">Profile Sending</label></td>
 </tr>
                                     </table>
@@ -171,7 +183,6 @@
                                                <td>
                                                    @Html.CheckBoxFor(model => model.EnquiryOfferSending)
                                                </td>
-                                                   @*   @Html.CheckBoxFor(m => m.EnquiryOfferSending, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
                                                <td><label for="name">Offer Sending</label></td>
 </tr>
                                        </table>
@@ -182,11 +193,37 @@
                                                <td>
                                                    @Html.CheckBoxFor(model => model.EnquiryLayoutReceiving)
                                                    </td>
-                                               @* @Html.CheckBoxFor(m => m.EnquiryLayoutReceiving, new { autocomplete = "off", @class = "subject-list", @onclick = "Tick()" })*@
                                                <td><label for="name">Layout Receiving</label></td>
 </tr>
                                        </table>
                                    </div>
+
+
+
+                                   <div class="col-md-4">
+                                       <table>
+                                           <tr>
+                                               <td>
+                                                   @Html.CheckBoxFor(model => model.EnquiryLayoutReceiving)
+                                           </td>
+                                               <td><label for="name">Cancel Enquiry</label></td>
+                                           </tr>
+                                       </table>
+                                   </div>
+
+                                   <div class="col-md-4">
+                                       <table>
+                                           <tr>
+                                               <td>
+                                                   @Html.CheckBoxFor(model => model.EnquiryLayoutReceiving)
+                                               </td>
+                                               <td><label for="name">Create Project</label></td>
+                                           </tr>
+                                       </table>
+                                   </div>
+
+
+
                             </div>
                             
 
@@ -198,20 +235,22 @@
             </table>
         </div>
 
-        </div>
+        </div>*@
 
 
         <div class="row">
             <hr />
             <div class="col-md-12">
-               
-                <button type="button" class="form-button right" onclick="EnquiryCancel('@Model.EnquiryId')">Enquiry Cancel</button>
-                <button type="submit" class="form-button right" onclick="Accept()">Accept Offer</button>
+                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                <button type="submit" class="form-button right" onclick="Accept()">Update</button>
+
+                @*<button type="button" class="form-button right" onclick="EnquiryCancel('@Model.EnquiryId')">Enquiry Cancel</button>
+                <button type="submit" class="form-button right" onclick="Accept()">Accept Offer</button>*@
                
 
             </div>
 
-        </div>
+        </div> 
 }
     </div>
 

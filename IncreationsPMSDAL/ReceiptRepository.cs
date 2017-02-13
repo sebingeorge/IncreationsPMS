@@ -79,10 +79,11 @@ namespace IncreationsPMSDAL
 
 
                     string sql = @"INSERT INTO Receipt(ReceiptRefNo,ReceiptDate,ClientId,CustInvoiceId,InvoiceAmount,
-                                  ReceivedAmount,ReceivableAmount,PaymentModeId,ChequeNo,SpecialRemarks,CreatedBy,CreatedDate)
+                                  ReceivedAmount,ReceivableAmount,PaymentModeId,ChequeNo,VoucherNo,
+                                  SpecialRemarks,CreatedBy,CreatedDate)
                                     VALUES
                                     (@ReceiptRefNo,@ReceiptDate,@ClientId,@CustInvoiceId,@InvoiceAmount,
-                                    @ReceivedAmount,@ReceivableAmount,@PaymentModeId,@ChequeNo,@SpecialRemarks,
+                                    @ReceivedAmount,@ReceivableAmount,@PaymentModeId,@ChequeNo,@VoucherNo,@SpecialRemarks,
                                     @CreatedBy,@CreatedDate);
                                     SELECT CAST(SCOPE_IDENTITY() as int);";
                     model.ReceiptId = connection.Query<int>(sql, model).Single();
@@ -116,7 +117,7 @@ namespace IncreationsPMSDAL
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
                 string sql = @"select ReceiptId, ReceiptRefNo,ReceiptDate,Receipt.ClientId,CustInvoiceId,ClientName,
-                              InvoiceAmount,ReceivedAmount,ReceivableAmount,PaymentModeId,ChequeNo,SpecialRemarks
+                              InvoiceAmount,ReceivedAmount,ReceivableAmount,PaymentModeId,ChequeNo,VoucherNo,SpecialRemarks
                               from Receipt
                               inner join Client on Client.ClientId=Receipt.ClientId
                               where ReceiptId=@ReceiptId";
@@ -138,7 +139,7 @@ namespace IncreationsPMSDAL
                 {
                     string query = @"Update Receipt Set ReceiptRefNo=@ReceiptRefNo,ReceiptDate=@ReceiptDate,ClientId=@ClientId,
                                    CustInvoiceId=@CustInvoiceId,InvoiceAmount=@InvoiceAmount,ReceivedAmount=@ReceivedAmount,
-                                   ReceivableAmount=@ReceivableAmount,PaymentModeId=@PaymentModeId,ChequeNo=@ChequeNo,
+                                   ReceivableAmount=@ReceivableAmount,PaymentModeId=@PaymentModeId,ChequeNo=@ChequeNo,VoucherNo=@VoucherNo,
                                    SpecialRemarks=@SpecialRemarks,CreatedBy=@CreatedBy,CreatedDate=@CreatedDate
                                    OUTPUT INSERTED.ReceiptId WHERE ReceiptId=@ReceiptId";
                     string ref_no = connection.Query<string>(query, model, txn).First();

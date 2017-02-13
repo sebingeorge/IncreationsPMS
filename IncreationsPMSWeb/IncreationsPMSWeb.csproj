@@ -139,6 +139,7 @@
     <Compile Include="Controllers\BOQController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\OverDueTaskReportController.cs" />
+    <Compile Include="Controllers\PendingPaymentScheduleController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\EnquiryBookingController.cs" />
     <Compile Include="Controllers\EstimateController.cs" />
@@ -378,11 +379,12 @@
     <Content Include="Views\AgeingSummaryReport\_AgeingSummary.cshtml" />
     <Content Include="Views\OverDueTaskReport\Index.cshtml" />
     <Content Include="Views\OverDueTaskReport\_OverDueTaskSummary.cshtml" />
+    <Content Include="Views\PendingPaymentSchedule\Index.cshtml" />
+    <Content Include="Views\PendingPaymentSchedule\_PendingPaymentSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Reports\" />
     <Folder Include="Views\Collecting\" />
     <Folder Include="XML\" />
   </ItemGroup>

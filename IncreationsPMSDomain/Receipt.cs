@@ -26,6 +26,7 @@ namespace IncreationsPMSDomain
        public decimal ReceivableAmount { get; set; }
        public int PaymentModeId { get; set; }
        public string ChequeNo { get; set; }
+       public string VoucherNo { get; set; }
        public string SpecialRemarks { get; set; }
        public string CreatedBy { get; set; }
        public DateTime  CreatedDate { get; set; }

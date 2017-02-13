@@ -20,6 +20,7 @@ namespace IncreationsPMSDomain
         public int PaymentModeId { get; set; }
         public string PaymentModeName { get; set; }
         public string ChequeNo { get; set; }
+        public string VoucherNo { get; set; }
         public string SpecialRemarks { get; set; }
         public int ProjectWorkDetailsId { get; set; }
         public string CreatedBy { get; set; }

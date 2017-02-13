@@ -1,0 +1,49 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    function Exit() {
+        var url = '@Url.Action("Index","Home")';
+        window.location = url;
+    }
+
+    function Filter() {
+        $("#PendingPaymentSchedule").addClass("fade");
+
+        var Client = $("#client").val().trim();
+
+        var url = '@Url.Action("PendingPaymentSchedule")';
+        url += "?Client=" + encodeURIComponent(Client);
+        $("#PendingPaymentSchedule").load(url, function () {
+            $("#PendingPaymentSchedule").removeClass("fade");
+        });
+    }
+</script>
+<div class="container content-in">
+    <div class="row">
+        <h1>Pending Payment Schedule Report</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Customer</label>
+            <input id="client" class="form_input" placeholder="Search for Customer" onkeyup="Filter()" />
+        </div>
+
+    </div>
+
+    <br />
+    <div id="PendingPaymentSchedule">
+        @Html.Action("PendingPaymentSchedule")
+    </div>
+    <div class="row">
+        <hr />
+        <div class="col-md-12 hrpart">
+
+            <input type="button" class=" form-button right" onclick="Exit()" value="Exit" />
+        </div>
+    </div>
+</div>
+

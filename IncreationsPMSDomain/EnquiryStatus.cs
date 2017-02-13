@@ -19,10 +19,15 @@ namespace IncreationsPMSDomain
         public string EnquiryContactNo { get; set; }
         public string EnquiryEmail { get; set; }
         public string EnquiryLocation { get; set; }
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Enquiry Status is Required")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Enquiry Status")]
+        public int EnquiryStatusUpdate { get; set; }
         public string EnquiryDetails { get; set; }
         public Boolean EnquiryProfileSending { get; set; }
         public Boolean EnquiryOfferSending { get; set; }
         public Boolean EnquiryLayoutReceiving { get; set; }
-       
+      
+
+
  }
 }

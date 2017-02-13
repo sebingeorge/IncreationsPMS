@@ -1,0 +1,59 @@
+﻿
+@model List<IncreationsPMSDomain.PendingPaymentSchedule>
+
+
+<style type="text/css">
+    .colour-Red {
+        color: red !important;
+    }
+</style>
+
+
+<!-- modal to show details -->
+<div id="details-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width:1250px">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="modal-header">
+                        <strong><h4 class="modal-title" id="myModalLabel">Customer</h4></strong>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" id="div-details">
+                Loading...
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <table class="table table-bordered" id="aaa" data-placement="bottom">
+        <thead>
+            <tr class="grid_heading">
+                <th width="10%">Client</th>
+                <th width="30%">Project</th>
+                <th width="20%">Date</th>
+                <th width="20%">Payment Schedule Description</th>
+                <th width="20%" class="text-right">Amount</th>
+             </tr>
+        </thead>
+        <tbody class="grid_row">
+            @{
+
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].ClientName </td>
+                        <td>@Model[i].ProjectEnquiry </td>
+                        <td>@Model[i].date.ToString("dd/MMM/yyyy") </td>
+                        <td>@Model[i].Description </td>
+                        <td class="text-right">@Model[i].Amount </td>
+                     </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

@@ -18,7 +18,7 @@ namespace IncreationsPMSWeb.Controllers
         }
         public ActionResult AgeingSummary(string Client = "")
         {
-            var list = new ReportRepository().GetAgeingSummaryBasedCommittedDate(Client);
+           var list = new ReportRepository().GetAgeingSummaryBasedCommittedDate(Client);
 
             Session["ageingdata"] = list;
 

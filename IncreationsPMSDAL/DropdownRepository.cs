@@ -43,6 +43,15 @@ namespace IncreationsPMSDAL
         }
 
 
+        public List<Dropdown> GetStatusType()
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                return connection.Query<Dropdown>("SELECT EnquiryStatusId Id, EnquiryStatusName Name FROM EnquiryBookingStatus").ToList();
+            }
+        }
+
+
         public List<Dropdown> GetClient()
         {
             using (IDbConnection connection = OpenConnection(dataConnection))

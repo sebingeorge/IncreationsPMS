@@ -76,10 +76,10 @@ namespace IncreationsPMSDAL
 
 
                     string sql = @"INSERT INTO Payment(PaymentRefNo,PaymentDate,SubContractorId,WorkAmount,AcceptedAmount,
-                                   PaymentModeId,ChequeNo,SpecialRemarks,ProjectWorkDetailsId,CreatedBy,CreatedDate)
+                                   PaymentModeId,ChequeNo,VoucherNo,SpecialRemarks,ProjectWorkDetailsId,CreatedBy,CreatedDate)
                                     VALUES
                                     (@PaymentRefNo,@PaymentDate,@SubContractorId,@WorkAmount,@AcceptedAmount,
-                                    @PaymentModeId,@ChequeNo,@SpecialRemarks,@ProjectWorkDetailsId,@CreatedBy,@CreatedDate);
+                                    @PaymentModeId,@ChequeNo,@VoucherNo,@SpecialRemarks,@ProjectWorkDetailsId,@CreatedBy,@CreatedDate);
                                     SELECT CAST(SCOPE_IDENTITY() as int);";
                    model.PaymentId = connection.Query<int>(sql, model).Single();
               if (model.PaymentId > 0)
@@ -112,7 +112,7 @@ namespace IncreationsPMSDAL
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
                 string sql = @"select PaymentId,PaymentRefNo,PaymentDate,Payment.SubContractorId,SubName,
-                               WorkAmount,AcceptedAmount,PaymentModeId,ChequeNo,SpecialRemarks,ProjectWorkDetailsId
+                               WorkAmount,AcceptedAmount,PaymentModeId,ChequeNo,VoucherNo,SpecialRemarks,ProjectWorkDetailsId
                                from Payment 
                               inner join SubContractor on SubContractor.SubContractorId=Payment.SubContractorId
                                where PaymentId=@PaymentId";
@@ -134,7 +134,7 @@ namespace IncreationsPMSDAL
                 {
                     string query = @"Update Payment Set PaymentRefNo=@PaymentRefNo,PaymentDate=@PaymentDate,SubContractorId=@SubContractorId,
                                    WorkAmount=@WorkAmount,AcceptedAmount=@AcceptedAmount,PaymentModeId=@PaymentModeId,
-                                   ChequeNo=@ChequeNo,SpecialRemarks=@SpecialRemarks,ProjectWorkDetailsId=@ProjectWorkDetailsId,
+                                   ChequeNo=@ChequeNo,VoucherNo=@VoucherNo,SpecialRemarks=@SpecialRemarks,ProjectWorkDetailsId=@ProjectWorkDetailsId,
                                    CreatedBy=@CreatedBy,CreatedDate=@CreatedDate
                                    OUTPUT INSERTED.PaymentId WHERE PaymentId=@PaymentId";
                                    string ref_no = connection.Query<string>(query, model, txn).First();

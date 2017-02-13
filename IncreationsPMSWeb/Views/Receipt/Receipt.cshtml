@@ -125,6 +125,13 @@
         </div>
 
         <div class="row">
+            <div class="col-md-2">
+                <label>Voucher No</label>
+                @Html.TextBoxFor(m => m.VoucherNo, new { @class = "form_input" })
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-12">
                 <label>Special Remarks</label>
                 @Html.TextAreaFor(m => m.SpecialRemarks, new { @class = "form_input text-area" })

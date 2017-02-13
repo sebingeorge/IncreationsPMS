@@ -19,63 +19,67 @@
         window.location = url;
     }
     function Filter() {
+
         $("#PendingEnquiryStatus").addClass("fade");
         var FromDate = $("#txtFrom").val().trim();
         var ToDate = $("#txtTo").val().trim();
         var EnquiryClient = $("#EnquiryClient").val().trim();
+        var ProjectTypeId = $("#cboProjectType").val();
+        var EnquiryStatusId = $("#cboEnquiryStatus").val();
         var url = '@Url.Action("PendingEnquiryStatusPartial")';
-        url += "?FromDate=" + FromDate + "&ToDate=" + ToDate + "&EnquiryClient=" + encodeURIComponent(EnquiryClient);
+        url += "?&ProjectTypeId=" + ProjectTypeId + "&EnquiryStatusId=" + EnquiryStatusId + "&FromDate=" + FromDate + "&ToDate=" + ToDate + "&EnquiryClient=" + encodeURIComponent(EnquiryClient);
         $("#PendingEnquiryStatus").load(url, function () {
-            $("#PendingEnquiryStatus").removeClass("fade");
+        $("#PendingEnquiryStatus").removeClass("fade");
         });
     }
+
 </script>
 
 <div class="container content-in">
     <div class="row">
-        <h1>Pending Enquiry Status</h1>
+        <h1>Enquiry Status</h1>
     </div>
 
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <label>From</label>
                     <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                         <input id="txtFrom" value="@ViewBag.Fromdate.ToString("dd-MMMM-yyyy")" class=" form_input" onchange="Filter()" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <label>To</label>
                     <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                         <input id="txtTo" value="@System.DateTime.Now.ToString("dd-MMMM-yyy")" class="form_input" onchange="Filter()" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="row">
-
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <label>Client</label>
                     <input id="EnquiryClient" class="form_input" placeholder="Search for Client" onkeyup="Filter()" />
                 </div>
+                <div class="col-md-2">
+                    <label for="cboProjectType">Project Type</label>
+                    @Html.DropDownList("cboProjectType", (SelectList)ViewBag.ProjectType, "Any", new { @class = "form_input", @onchange = "Filter()" })
 
+                </div>
 
+                <div class="col-md-2">
+                    <label for="cboEnquiryStatus">Enquiry Status</label>
+                    @Html.DropDownList("cboEnquiryStatus", (SelectList)ViewBag.StatusType, "Any", new { @class = "form_input", @onchange = "Filter()" })
+                </div>
             </div>
+
+
+
         </div>
 
-
-
-
     </div>
-
 
     <br />
 

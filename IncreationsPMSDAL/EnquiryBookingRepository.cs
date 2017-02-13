@@ -72,23 +72,27 @@ namespace IncreationsPMSDAL
                 return objEnquiryBooking;
             }
         }
-        public IEnumerable<PendingEnquiryStatus> GetPendingEnquiryStatus(DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
+        public IEnumerable<PendingEnquiryStatus> GetPendingEnquiryStatus(int? ProjectTypeId,int? EnquiryStatusId, DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "" )
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
 
                 string query = @"SELECT
                                   EnquiryId,EnquiryRef,convert (varchar(50),EnquiryDate,103)EnquiryDate,EnquiryClient,ModeofContactName,
-                                  ProjectTypeName from EnquiryBooking HD
+                                  ProjectTypeName,EnquiryStatusName 
+                                  from EnquiryBooking HD
                                   inner join ClientType CT on CT.ClientTypeId =HD.ClientTypeId
                                   inner join ModeOfContact MOC on MOC.ModeofContactId =HD.ModeofContactId
                                   inner join ProjectType PT on PT.ProjectTypeId =HD.ProjectTypeId
+                                  left join EnquiryBookingStatus on EnquiryStatus=EnquiryStatusId
                                   where EnquiryCancel=0
                                   and  cast(convert(varchar(20),EnquiryDate,106) as datetime) between @FromDate and @ToDate
                                   AND EnquiryClient like '%'+@EnquiryClient+'%'
+                                  and PT.ProjectTypeId = ISNULL(NULLIF(@ProjectTypeId, 0), PT.ProjectTypeId)  
+                                  and  isnull(EnquiryBookingStatus.EnquiryStatusId,0)=isnull(EnquiryStatusId,0)
                                   order by EnquiryDate";
 	                                                                    
-                return connection.Query<PendingEnquiryStatus>(query, new { FromDate = FromDate, ToDate = ToDate, EnquiryClient = EnquiryClient }).ToList();
+                return connection.Query<PendingEnquiryStatus>(query, new { FromDate = FromDate, ToDate = ToDate, EnquiryClient = EnquiryClient, EnquiryStatusId = EnquiryStatusId, ProjectTypeId= ProjectTypeId }).ToList();
            
             }
         }
@@ -99,7 +103,7 @@ namespace IncreationsPMSDAL
             {
                 string qry = "select EnquiryId, EnquiryRef, convert (varchar(50), EnquiryDate, 103)EnquiryDate,EnquiryClient,";
                 qry += " ModeofContactName,ClientTypeName,ProjectTypeName,EnquiryReference,EnquiryContactNo,";
-                qry += " EnquiryEmail,EnquiryLocation,EnquiryDetails";
+                qry += " EnquiryEmail,EnquiryLocation,EnquiryDetails,EnquiryStatus EnquiryStatusUpdate";
                 qry += " from EnquiryBooking HD";
                 qry += " inner join ClientType CT on CT.ClientTypeId = HD.ClientTypeId";
                 qry += " inner join ModeOfContact MOC on MOC.ModeofContactId = HD.ModeofContactId";
@@ -111,20 +115,42 @@ namespace IncreationsPMSDAL
             }
         }
 
-                           
-      public EnquiryStatus UpdateEnquiryStatus(EnquiryStatus model)
+
+        //public EnquiryStatus UpdateEnquiryStatus(EnquiryStatus model)
+        //  {
+        //      using (IDbConnection connection = OpenConnection(dataConnection))
+        //      {
+        //          string sql = @"UPDATE EnquiryBooking SET EnquiryProfileSending = @EnquiryProfileSending ,EnquiryOfferSending = @EnquiryOfferSending, 
+        //                           EnquiryLayoutReceiving = @EnquiryLayoutReceiving  
+        //                           OUTPUT INSERTED.EnquiryId WHERE EnquiryId = EnquiryId";
+
+        //          try
+        //          {
+        //              var id = connection.Execute(sql, model);
+        //              model.EnquiryId = id;
+        //      }
+        //          catch (Exception ex)
+        //          {
+
+        //              model.EnquiryId = 0;
+
+        //          }
+        //          return model;
+        //      }
+        //  }
+
+        public EnquiryStatus UpdateEnquiryStatus(EnquiryStatus model)
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string sql = @"UPDATE EnquiryBooking SET EnquiryProfileSending = @EnquiryProfileSending ,EnquiryOfferSending = @EnquiryOfferSending, 
-                                 EnquiryLayoutReceiving = @EnquiryLayoutReceiving  
-                                 OUTPUT INSERTED.EnquiryId WHERE EnquiryId = EnquiryId";
+                string sql = @"UPDATE EnquiryBooking SET EnquiryStatus = @EnquiryStatusUpdate 
+                             OUTPUT INSERTED.EnquiryId WHERE EnquiryId = @EnquiryId";
 
                 try
                 {
                     var id = connection.Execute(sql, model);
                     model.EnquiryId = id;
-            }
+                }
                 catch (Exception ex)
                 {
 

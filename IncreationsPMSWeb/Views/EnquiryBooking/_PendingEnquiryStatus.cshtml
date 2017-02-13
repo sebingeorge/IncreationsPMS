@@ -8,8 +8,9 @@
                                <th width="2%">En No</th>
                                <th width="7%">Date</th>
                                <th width="34%">Client</th>
-                               <th width="25%">Contact Type</th>
-                               <th width="25%">Project Type</th>
+                               <th width="20%">Contact Type</th>
+                               <th width="20%">Project Type</th>
+                               <th width="20%">Project Status</th>
                                <th width="1%"><center>Select</center></th>
 
                            </tr>
@@ -27,7 +28,7 @@
                                        <td>@item.EnquiryClient</td>
                                        <td>@item.ModeofContactName</td>
                                        <td>@item.ProjectTypeName</td>
-
+                                       <td>@item.EnquiryStatusName</td>
                                        <td><center>@Html.ActionLink("Select", "EnquiryStatus", "EnquiryBooking", new { EnquiryId = @item.EnquiryId }, new { @class = "form-button5" })</center></td>
 
                                    </tr>
