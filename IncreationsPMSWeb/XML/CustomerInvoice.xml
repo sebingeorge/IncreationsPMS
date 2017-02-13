@@ -32,7 +32,7 @@
                 <xs:element name="ProjectEnquiry" type="xs:string" minOccurs="0" />
                 <xs:element name="Description" type="xs:string" minOccurs="0" />
                 <xs:element name="Amount" type="xs:string" minOccurs="0" />
-                <xs:element name="ReceivedAmount" type="xs:string" minOccurs="0" />
+                <xs:element name="InvoiceAmount" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -62,6 +62,6 @@
     <ProjectEnquiry>Floor conversion</ProjectEnquiry>
     <Description>Task 1 and task 2</Description>
     <Amount>10000.000</Amount>
-    <ReceivedAmount>5000.00</ReceivedAmount>
+    <InvoiceAmount>5000.00</InvoiceAmount>
   </Items>
 </NewDataSet>
