@@ -58,8 +58,8 @@ namespace IncreationsPMSDAL
 
                 IDbTransaction trn = connection.BeginTransaction();
 
-                string sql = @"INSERT INTO Project(ProjectRefNo,ProjectDate,ClientId,ProjectEnquiry,ProjectOrderRefNo,CreatedBy,CreatedDate)
-                             VALUES(@ProjectRefNo,@ProjectDate,@ClientId,@ProjectEnquiry,@ProjectOrderRefNo,@CreatedBy,@CreatedDate);
+                string sql = @"INSERT INTO Project(ProjectRefNo,ProjectDate,ClientId,ProjectEnquiry,ProjectOrderRefNo,CreatedBy,CreatedDate,EnquiryId)
+                             VALUES(@ProjectRefNo,@ProjectDate,@ClientId,@ProjectEnquiry,@ProjectOrderRefNo,@CreatedBy,@CreatedDate,@EnquiryId);
                              SELECT CAST(SCOPE_IDENTITY() as int)";
 
                 try
@@ -134,7 +134,7 @@ namespace IncreationsPMSDAL
         {
             using (IDbConnection connection = OpenConnection(dataConnection))
             {
-                string qry = "select ProjectId,ProjectRefNo, convert (varchar(50), ProjectDate, 103)ProjectDate,";
+                string qry = "select ProjectId,EnquiryId,ProjectRefNo, convert (varchar(50), ProjectDate, 103)ProjectDate,";
                        qry += " hd.ClientId ClientId,MobileNo,Email,Address1,Address2,Address3,ProjectOrderRefNo,ProjectEnquiry";
                        qry += " from Project hd ";
                        qry += " inner join Client c on c.ClientId =hd.ClientId";

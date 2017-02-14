@@ -10,6 +10,7 @@ namespace IncreationsPMSDomain
     public class Projects
     {
         public int ProjectId { get; set; }
+        public int EnquiryId { get; set; }
         public string ProjectRefNo { get; set; }
         public DateTime ProjectDate { get; set; }
         [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Client Name is Required")]

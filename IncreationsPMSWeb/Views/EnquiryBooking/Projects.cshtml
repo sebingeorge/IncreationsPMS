@@ -222,139 +222,140 @@
     <div class="row">
         <h1>Projects</h1>
     </div>
-@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Projects" }))
-  
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "createFrom", @id = "Projects" }))
+
 
     {
-    <div class="row">
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-4">
-                    <label>Project No</label>
-                    @Html.HiddenFor(m => m.ProjectId)
-                    @Html.TextBoxFor(m => m.ProjectRefNo, new { @class = "form_input" })
-                    @Html.ValidationMessageFor(m => m.ProjectRefNo, "", new { @class = "text-danger" })
-                  </div>
-                <div class="col-md-6">
-                    <label>Date</label>
-                           <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>Project No</label>
+                        @Html.HiddenFor(m => m.ProjectId)
+                        @Html.HiddenFor(m => m.EnquiryId)
+                        @Html.TextBoxFor(m => m.ProjectRefNo, new { @class = "form_input" })
+                        @Html.ValidationMessageFor(m => m.ProjectRefNo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>Date</label>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                             @Html.TextBoxFor(m => m.ProjectDate, new { @class = "form_input", @Value = Model.ProjectDate.ToString("dd-MMM-yyyy") })
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 
 
                         </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-               
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Client</label>
-                    @Html.DropDownListFor(m => Model.ClientId, (SelectList)ViewBag.Client, "Select Client", new { @class = "form_input", autocomplete = "off", @onchange = "ClientChanged(this)" })
-                    @Html.ValidationMessageFor(m => m.ClientId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
 
-       <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Contact No</label>
-                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input", @readonly = "readonly" })
-                   </div>
-            </div>
-        </div> 
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Email</label>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form_input", @readonly = "readonly" })
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Client</label>
+                        @Html.DropDownListFor(m => Model.ClientId, (SelectList)ViewBag.Client, "Select Client", new { @class = "form_input", autocomplete = "off", @onchange = "ClientChanged(this)" })
+                        @Html.ValidationMessageFor(m => m.ClientId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Address 1</label>
-                    @Html.TextBoxFor(m => m.Address1, new { @class = "form_input", @readonly = "readonly" })
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Contact No</label>
+                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form_input", @readonly = "readonly" })
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Address 2</label>
-                    @Html.TextBoxFor(m => m.Address2, new { @class = "form_input", @readonly = "readonly" })
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form_input", @readonly = "readonly" })
+                    </div>
                 </div>
             </div>
+
+
+
+
         </div>
 
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Address 3</label>
-                    @Html.TextBoxFor(m => m.Address3, new { @class = "form_input", @readonly = "readonly" })
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Address 1</label>
+                        @Html.TextBoxFor(m => m.Address1, new { @class = "form_input", @readonly = "readonly" })
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-
-
-    <div class="row">
-
-        <div class="col-md-3">
-            <div class="row form-group">
-                <div class="col-md-12">
-                    <label>Client Order Ref</label>
-                    @Html.TextBoxFor(m => m.ProjectOrderRefNo, new { @class = "form_input"})
-                    @Html.ValidationMessageFor(m => m.ProjectOrderRefNo, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Address 2</label>
+                        @Html.TextBoxFor(m => m.Address2, new { @class = "form_input", @readonly = "readonly" })
+                    </div>
                 </div>
             </div>
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Address 3</label>
+                        @Html.TextBoxFor(m => m.Address3, new { @class = "form_input", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label>Client Order Ref</label>
+                        @Html.TextBoxFor(m => m.ProjectOrderRefNo, new { @class = "form_input" })
+                        @Html.ValidationMessageFor(m => m.ProjectOrderRefNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
         </div>
 
 
 
 
-
-    </div>
-
+        <div class="row">
 
 
+            <div class="col-md-12">
+                <label>Project Enquiry</label>
+                @Html.TextAreaFor(m => m.ProjectEnquiry, new { @class = "form_input text-area" })
+            </div>
 
-    <div class="row">
-
-
-        <div class="col-md-12">
-            <label>Project Enquiry</label>
-            @Html.TextAreaFor(m => m.ProjectEnquiry, new { @class = "form_input text-area" })
         </div>
+        <hr />
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Task</a></li>
+            <li><a data-toggle="tab" href="#menu1">Payment Schedule</a></li>
+        </ul>
 
-    </div>
-    <hr />
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Task</a></li>
-        <li><a data-toggle="tab" href="#menu1">Payment Schedule</a></li>
-    </ul>
-
-    <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
-            <div class="table-responsive scroll2">
-                <table class="table table-bordered lightblue" id="tab_ProjectTask">
-                    @*<table class="table table-bordered lightblue" id="tab_logic">*@
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <div class="table-responsive scroll2">
+                    <table class="table table-bordered lightblue" id="tab_ProjectTask">
+                        @*<table class="table table-bordered lightblue" id="tab_logic">*@
                         <thead>
                             <tr class="grid_heading">
                                 <th width="2%"></th>
@@ -394,7 +395,7 @@
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
 
-                                      </td>
+                                    </td>
                                     <td>
                                         <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                                             @Html.TextBoxFor(model => Model.ProjectTask[i].EndDate, new { @class = "form_input", @Value = Model.ProjectTask[i].EndDate.ToString("dd-MMM-yyyy") })
@@ -413,13 +414,13 @@
 
                     </table>
 
+                </div>
+
             </div>
-            
-        </div>
-        <div id="menu1" class="tab-pane fade">
-            <div class="table-responsive scroll2">
-                <table class="table table-bordered" id="tab_ProjectPaymentSchedule">
-                    @*<table class="table table-bordered" id="tab_logic">*@
+            <div id="menu1" class="tab-pane fade">
+                <div class="table-responsive scroll2">
+                    <table class="table table-bordered" id="tab_ProjectPaymentSchedule">
+                        @*<table class="table table-bordered" id="tab_logic">*@
                         <thead>
                             <tr class="grid_heading">
                                 <th width="2%"></th>
@@ -454,9 +455,9 @@
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(m => m.ProjectPaymentSchedule[i].Percentage, new { @class = "form_input numbers-only", autocomplete = "off", @style = "text-align:right" })
-                                     </td>
+                                    </td>
                                     <td>
-                                        
+
                                         @Html.TextBoxFor(m => m.ProjectPaymentSchedule[i].Amount, new { @class = "form_input numbers-only", autocomplete = "off", @style = "text-align:right" })
                                     </td>
 
@@ -469,40 +470,42 @@
 
                     </table>
 
+                </div>
             </div>
-    </div>
-</div>
+        </div>
 
 
 
 
 
 
-    <hr />
+        <hr />
 
-    <h3></h3>
+        <h3></h3>
 
 
 
         <div class="row">
             <hr />
             <div class="col-md-12">
-              @if (actionName == "ProjectsDisplay")
-                                            {
-                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
-                <button type="submit" class="form-button right">Update</button>
-                @*<button type="button" class="form-button right" onclick="Update('@Model.ProjectId')">Update</button>*@
-              }
-              else
-              {
-                <button type="button" class="form-button right" onclick="Exit()">Exit</button>
-                <button type="submit" class="form-button right">Save</button>
-              }
+                @if (actionName == "ProjectsDisplay")
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="submit" class="form-button right">Update</button>
+                    @*<button type="button" class="form-button right" onclick="Update('@Model.ProjectId')">Update</button>*@
+                }
+                else
+                {
+                    <button type="button" class="form-button right" onclick="Exit()">Exit</button>
+                    <button type="submit" class="form-button right">Save</button>
+                }
 
 
             </div>
 
         </div>
-}
-    </div>
+    }
+</div>
+
+
 

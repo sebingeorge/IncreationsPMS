@@ -382,6 +382,8 @@
     <Content Include="Views\OverDueTaskReport\_OverDueTaskSummary.cshtml" />
     <Content Include="Views\PendingPaymentSchedule\Index.cshtml" />
     <Content Include="Views\PendingPaymentSchedule\_PendingPaymentSchedule.cshtml" />
+    <Content Include="Views\EnquiryBooking\PendingListForProject.cshtml" />
+    <Content Include="Views\EnquiryBooking\_PendingListForProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

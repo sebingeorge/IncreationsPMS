@@ -56,6 +56,7 @@
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="PendingCustomerInvoice.cs" />
     <Compile Include="PendingEnquiryStatus.cs" />
+    <Compile Include="PendingListForProject.cs" />
     <Compile Include="PendingPaymentSchedule.cs" />
     <Compile Include="PendingProjects.cs" />
     <Compile Include="PendingSubContractorPayment.cs" />

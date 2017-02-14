@@ -179,6 +179,45 @@ namespace IncreationsPMSDAL
             }
         }
 
+        public IEnumerable<PendingListForProject> GetPendingListForProject(DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
 
+                string query = @"SELECT
+                                  EnquiryId,EnquiryRef,convert (varchar(50),EnquiryDate,103)EnquiryDate,EnquiryClient,ModeofContactName,
+                                  ProjectTypeName
+                                  from EnquiryBooking HD
+                                  inner join ClientType CT on CT.ClientTypeId =HD.ClientTypeId
+                                  inner join ModeOfContact MOC on MOC.ModeofContactId =HD.ModeofContactId
+                                  inner join ProjectType PT on PT.ProjectTypeId =HD.ProjectTypeId
+                                  where  EnquiryStatus=5 
+                                 and HD.EnquiryId not in(select isnull(Project.EnquiryId,0) from Project)
+                                  and  cast(convert(varchar(20),EnquiryDate,106) as datetime) between @FromDate and @ToDate
+                                  AND EnquiryClient like '%'+@EnquiryClient+'%'
+                                  order by EnquiryDate";
+
+                return connection.Query<PendingListForProject>(query, new { FromDate = FromDate, ToDate = ToDate, EnquiryClient = EnquiryClient }).ToList();
+
+            }
+        }
+
+        public Projects GetNewProject(int EnquiryId)
+        {
+            using (IDbConnection connection = OpenConnection(dataConnection))
+            {
+                string sql = @"select EnquiryId
+                              from EnquiryBooking
+                              where EnquiryId=@EnquiryId";
+                          var Projects = connection.Query<Projects>(sql, new
+                {
+                    EnquiryId = EnquiryId
+                }).First<Projects>();
+
+                return Projects;
+            }
+
+
+        }
     }
 }

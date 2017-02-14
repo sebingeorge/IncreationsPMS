@@ -173,13 +173,29 @@ namespace IncreationsPMSWeb.Controllers
             }
 
         }
+        public ActionResult PendingListForProject()
+        {
+         ViewBag.Fromdate = FYStartdate;
+         return View();
+        }
+
+        public ActionResult PendingListForProjectPartial(DateTime? FromDate, DateTime? ToDate, string EnquiryClient = "")
+        {
+
+            FromDate = FromDate ?? FYStartdate;
+            ToDate = ToDate ?? DateTime.Now;
+            var repo = new EnquiryBookingRepository();
+            IEnumerable<PendingListForProject> PendingListForProject = repo.GetPendingListForProject(FromDate, ToDate, EnquiryClient);
+            return PartialView("_PendingListForProject", PendingListForProject);
+        }
 
 
-
-        public ActionResult Projects()
+        public ActionResult Projects(int EnquiryId)
         {
             FillDropdownsProject();
-            Projects Projects = new Projects();
+            Projects Projects = new EnquiryBookingRepository().GetNewProject(EnquiryId);
+            //Projects Projects = new Projects();
+
             Projects.ProjectTask = new List<ProjectTask>();
             Projects.ProjectTask.Add(new ProjectTask());
             Projects.ProjectPaymentSchedule = new List<ProjectPaymentSchedule>();
@@ -228,7 +244,7 @@ namespace IncreationsPMSWeb.Controllers
 
                     TempData["Success"] = "Added Successfully!";
                     TempData["ProjectRefNo"] = result.ProjectRefNo;
-                    return RedirectToAction("Projects");
+                    return RedirectToAction("Projects",model);
                 }
 
                 else
